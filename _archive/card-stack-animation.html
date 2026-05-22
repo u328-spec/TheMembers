@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <title>카드 스택 애니메이션</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+
+  <style>
+    /* =============================================
+       카드 스택 섹션 레이아웃
+    ============================================= */
+    body {
+      font-family: "Pretendard", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+      margin: 0;
+    }
+
+    .goldspoon-cards-section {
+      background-color: #151515;
+      position: relative;
+      overflow: hidden;
+      padding: 4rem 2rem 4rem;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    @media (min-width: 768px) {
+      .goldspoon-cards-section {
+        padding: 7rem 4rem 8rem;
+      }
+    }
+    @media (min-width: 1024px) {
+      .goldspoon-cards-section {
+        padding: 9rem 6rem 10rem;
+      }
+    }
+
+    /* 섹션 하단 골드 그라데이션 오버레이 */
+    .goldspoon-cards-section::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 45%;
+      background: linear-gradient(to top, #645427 0%, rgba(100, 84, 39, 0) 100%);
+      pointer-events: none;
+    }
+
+    .goldspoon-cards-title {
+      color: white;
+      font-size: 1.5rem;
+      font-weight: 700;
+      text-align: center;
+      margin-bottom: 2.5rem;
+      position: relative;
+      z-index: 1;
+      line-height: 1.35;
+    }
+    @media (min-width: 768px) {
+      .goldspoon-cards-title { font-size: 1.875rem; margin-bottom: 3rem; }
+    }
+    @media (min-width: 1024px) {
+      .goldspoon-cards-title { font-size: 2.25rem; }
+    }
+
+    /* =============================================
+       카드 래퍼 (스택 위치 기준점)
+    ============================================= */
+    .goldspoon-cards-wrap {
+      position: relative;
+      z-index: 1;
+      max-width: 230px;
+      margin: 1.75rem auto 0;
+      aspect-ratio: 3 / 4;
+      min-height: 340px;
+      width: 100%;
+    }
+    @media (min-width: 768px) {
+      .goldspoon-cards-wrap {
+        max-width: 270px;
+        min-height: 400px;
+        margin-top: 2rem;
+      }
+    }
+    @media (min-width: 1024px) {
+      .goldspoon-cards-wrap {
+        max-width: 310px;
+        min-height: 460px;
+        margin-top: 2.25rem;
+      }
+    }
+    @media (max-width: 767px) {
+      .goldspoon-cards-wrap {
+        max-width: 260px;
+        min-height: 410px;
+      }
+    }
+
+    /* =============================================
+       카드 공통 스타일
+    ============================================= */
+    .goldspoon-card {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: 100%;
+      max-width: 100%;
+      height: 100%;
+      background: white;
+      border-radius: 1.5rem;
+      overflow: hidden;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.25);
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.5s ease, opacity 0.5s ease;
+    }
+
+    /* =============================================
+       카드 스택 초기 위치 (4단계)
+    ============================================= */
+
+    /* 4번 카드: 섹션 아래에서 대기 (숨김 상태, 9도) */
+    .goldspoon-card.card-stack-back2 {
+      z-index: 0;
+      transform: translate(-50%, 120%) rotate(9deg);
+      background: #C8C8C8;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    /* 3번 카드: 맨 뒤 (-19도, 좌측으로 치우침) */
+    .goldspoon-card.card-stack-back {
+      z-index: 1;
+      transform: translate(-50%, -50%) translate(-22px, -10px) rotate(-19deg);
+      background: #919191;
+    }
+
+    /* 2번 카드: 가운데 (-9도, 살짝 좌측) */
+    .goldspoon-card.card-stack-mid {
+      z-index: 2;
+      transform: translate(-50%, -50%) translate(-10px, -5px) rotate(-9deg);
+      background: #C8C8C8;
+    }
+
+    /* 1번 카드: 맨 앞 (0도, 정중앙) */
+    .goldspoon-card.card-stack-front {
+      z-index: 3;
+      transform: translate(-50%, -50%) rotate(0deg);
+    }
+
+    /* =============================================
+       카드 드롭 애니메이션 (1번 → 아래로 사라짐)
+    ============================================= */
+    @keyframes goldspoon-card-drop {
+      0% {
+        transform: translate(-50%, -50%) rotate(0deg);
+        opacity: 1;
+      }
+      80% {
+        transform: translate(-50%, 110%) rotate(-9deg);
+        opacity: 1;
+      }
+      100% {
+        transform: translate(-50%, 120%) rotate(-9deg);
+        opacity: 0;
+      }
+    }
+
+    .goldspoon-card.card-dropping {
+      animation: goldspoon-card-drop 2.7s cubic-bezier(0.16, 1, 0.3, 1);
+      z-index: 99; /* 드롭 중 항상 최상단 */
+    }
+
+    /* =============================================
+       카드 라이즈 애니메이션 (4번 → 3번 위치로 올라옴)
+    ============================================= */
+    @keyframes goldspoon-card-rise {
+      0% {
+        transform: translate(-50%, 120%) rotate(9deg);
+        opacity: 0;
+      }
+      20% {
+        transform: translate(-50%, 110%) rotate(0deg);
+        opacity: 1;
+      }
+      100% {
+        transform: translate(-50%, -50%) translate(-22px, -10px) rotate(-19deg);
+        opacity: 1;
+      }
+    }
+
+    .goldspoon-card.card-rising {
+      animation: goldspoon-card-rise 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    /* =============================================
+       카드 내부 콘텐츠 스타일
+    ============================================= */
+    .goldspoon-card .card-title {
+      padding: 1.6rem 1.25rem 0.75rem;
+      text-align: center;
+      font-weight: 700;
+      color: #151515;
+      font-size: 1.15rem;
+      line-height: 1.35;
+      flex-shrink: 0;
+    }
+    .goldspoon-card .card-img-wrap {
+      padding: 0.25rem 1rem 0.7rem;
+      border-radius: 0 0 1rem 1rem;
+      flex: 0 0 auto;
+      display: flex;
+      flex-direction: column;
+    }
+    .goldspoon-card .card-img-wrap img {
+      width: 100%;
+      aspect-ratio: 3 / 2;
+      object-fit: cover;
+      border-radius: 1rem;
+      display: block;
+    }
+    .goldspoon-card .card-img-wrap img[src$="img_profile01.png"],
+    .goldspoon-card .card-img-wrap img[src$="img_profile02.png"],
+    .goldspoon-card .card-img-wrap img[src$="img_profile03.png"],
+    .goldspoon-card .card-img-wrap img[src$="img_profile04.png"] {
+      aspect-ratio: 3 / 4;
+      object-fit: cover;
+      max-height: 220px;
+    }
+    .goldspoon-card .card-badge {
+      padding: 0.25rem 1.25rem 0.5rem;
+      margin-top: auto;
+      text-align: center;
+      flex-shrink: 0;
+    }
+    .goldspoon-card .card-badge img {
+      width: auto;
+      height: 40px;
+      margin: 0 auto 0.25rem;
+      display: block;
+      object-fit: contain;
+    }
+    .goldspoon-card .card-label {
+      font-weight: 700;
+      font-size: 0.9rem;
+      margin: 0;
+    }
+    .goldspoon-card .card-label.card-label-gold {
+      color: #EBBF59;
+    }
+    .goldspoon-card .card-desc {
+      padding: 0 1.25rem 2.5rem;
+      text-align: center;
+      font-size: 0.75rem;
+      line-height: 1.5;
+      color: #666;
+      flex-shrink: 0;
+      margin: 0;
+    }
+
+    @media (max-width: 767px) {
+      .goldspoon-card .card-title {
+        font-size: 1rem;
+      }
+      .goldspoon-card .card-img-wrap img[src$="img_profile01.png"],
+      .goldspoon-card .card-img-wrap img[src$="img_profile02.png"],
+      .goldspoon-card .card-img-wrap img[src$="img_profile03.png"],
+      .goldspoon-card .card-img-wrap img[src$="img_profile04.png"] {
+        max-height: 160px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- =============================================
+       HTML: 카드 스택 섹션
+  ============================================= -->
+  <section class="goldspoon-cards-section" id="goldspoon-cards" aria-label="골드스푼 인증 카드">
+    <h2 class="goldspoon-cards-title">엄격한 심사로<br />선별된 회원 퀄리티</h2>
+
+    <div class="goldspoon-cards-wrap" id="goldspoon-cards-wrap">
+
+      <!-- 4번 카드 (가장 뒤, 아래 대기): 부동산·주식 인증 사업가 -->
+      <article class="goldspoon-card card-stack-back2" role="group" aria-label="부동산, 주식 인증한 사업가">
+        <p class="card-title">부동산, 주식 인증한<br />사업가</p>
+        <div class="card-img-wrap">
+          <img src="assets/img_profile04.png" alt="" />
+        </div>
+        <div class="card-badge">
+          <img src="assets/img_badge04.png" alt="" />
+          <p class="card-label card-label-gold">100억+ 초고액자산</p>
+        </div>
+        <p class="card-desc">소유권을 증명할 수 있는 부동산 등기서류<br />등을 제출하여 자산을 인증했습니다</p>
+      </article>
+
+      <!-- 3번 카드 (맨 뒤): 엘리트 집안 아나운서 -->
+      <article class="goldspoon-card card-stack-back" role="group" aria-label="엘리트 집안 인증한 아나운서">
+        <p class="card-title">엘리트 집안 인증한<br />아나운서</p>
+        <div class="card-img-wrap">
+          <img src="assets/img_profile03.png" alt="" />
+        </div>
+        <div class="card-badge">
+          <img src="assets/img_badge03.png" alt="" />
+          <p class="card-label card-label-gold">엘리트 집안</p>
+        </div>
+        <p class="card-desc">법조계/의료계 부모님 직업 서류를 제출하여<br />엘리트 집안임을 인증했습니다</p>
+      </article>
+
+      <!-- 2번 카드 (가운데): 의사 면허증 전문직 -->
+      <article class="goldspoon-card card-stack-mid" role="group" aria-label="의사 면허증 인증한 전문직">
+        <p class="card-title">의사 면허증 인증한<br />전문직</p>
+        <div class="card-img-wrap">
+          <img src="assets/img_profile02.png" alt="" />
+        </div>
+        <div class="card-badge">
+          <img src="assets/img_badge02.png" alt="" />
+          <p class="card-label card-label-gold">전문직</p>
+        </div>
+        <p class="card-desc">본인 성명이 표기된 의사 면허증 자료를 통해<br />전문직종임을 인증했습니다</p>
+      </article>
+
+      <!-- 1번 카드 (맨 앞): 미스코리아 인증 모델 -->
+      <article class="goldspoon-card card-stack-front" role="group" aria-label="미스코리아 인증 현직 모델">
+        <p class="card-title">미스코리아 인증한<br />현직 모델</p>
+        <div class="card-img-wrap">
+          <img src="assets/img_profile01.png" alt="" />
+        </div>
+        <div class="card-badge">
+          <img src="assets/img_badge01.png" alt="" />
+          <p class="card-label card-label-gold">인플루언서</p>
+        </div>
+        <p class="card-desc">본인의 이름과 사진이 기재된 자료 제출하여<br />미스코리아 출신임을 인증했습니다</p>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- =============================================
+       JS: 카드 스택 자동 순환 애니메이션
+  ============================================= -->
+  <script>
+    (function initGoldspoonCardStack() {
+      var wrap = document.getElementById('goldspoon-cards-wrap');
+      if (!wrap) return;
+
+      var front = wrap.querySelector('.card-stack-front');
+      var mid   = wrap.querySelector('.card-stack-mid');
+      var back  = wrap.querySelector('.card-stack-back');
+      var back2 = wrap.querySelector('.card-stack-back2');
+      if (!front || !mid || !back || !back2) return;
+
+      // 순서: [0]=front, [1]=mid, [2]=back, [3]=back2
+      var cards = [front, mid, back, back2];
+      var stackClasses = ['card-stack-front', 'card-stack-mid', 'card-stack-back', 'card-stack-back2'];
+      var intervalId = null;
+
+      // 이전 프레임의 front/back2 참조 (드롭·라이즈 애니메이션 대상)
+      var previousFront = cards[0];
+      var previousBack2 = cards[3];
+
+      /* 모든 카드에서 스택·애니메이션 클래스 제거 */
+      function clearCardClasses() {
+        cards.forEach(function(card) {
+          stackClasses.forEach(function(cls) { card.classList.remove(cls); });
+          card.classList.remove('card-dropping', 'card-rising');
+        });
+      }
+
+      /* 새 스택 위치 적용 + (옵션) 드롭/라이즈 애니메이션 실행 */
+      function applyStack(withAnimation) {
+        clearCardClasses();
+
+        // 배열 순서대로 위치 클래스 부여
+        if (cards[0]) cards[0].classList.add('card-stack-front');  // 0° 정중앙
+        if (cards[1]) cards[1].classList.add('card-stack-mid');    // -9° 살짝 뒤
+        if (cards[2]) cards[2].classList.add('card-stack-back');   // -19° 맨 뒤
+        if (cards[3]) cards[3].classList.add('card-stack-back2');  // 아래 대기
+
+        if (withAnimation) {
+          // 직전 front → 아래로 드롭
+          if (previousFront) {
+            var dropped = previousFront;
+            dropped.classList.add('card-dropping');
+            dropped.addEventListener('animationend', function handleDropEnd() {
+              dropped.classList.remove('card-dropping');
+              dropped.removeEventListener('animationend', handleDropEnd);
+            });
+          }
+
+          // 직전 back2 → 위로 라이즈
+          if (previousBack2) {
+            var rising = previousBack2;
+            rising.classList.add('card-rising');
+            rising.addEventListener('animationend', function handleRiseEnd() {
+              rising.classList.remove('card-rising');
+              rising.removeEventListener('animationend', handleRiseEnd);
+            });
+          }
+        }
+
+        // 다음 루프를 위해 현재 front/back2 저장
+        previousFront = cards[0];
+        previousBack2 = cards[3];
+      }
+
+      // 최초 1회: 애니메이션 없이 정적 위치 세팅
+      applyStack(false);
+
+      /* 카드 배열을 한 칸씩 앞으로 회전 후 애니메이션 적용
+         front → back2 → back → mid → front 순환 */
+      function step() {
+        if (cards.length !== 4) return;
+        cards.push(cards.shift()); // 배열 회전
+        applyStack(true);
+      }
+
+      function startLoop() {
+        if (intervalId !== null) return;
+        step();                              // 로드 즉시 첫 모션 시작
+        intervalId = setInterval(step, 1700); // 이후 1.7초 간격 반복
+      }
+
+      startLoop();
+    })();
+  </script>
+
+</body>
+</html>

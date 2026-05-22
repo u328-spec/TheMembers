@@ -1,0 +1,1338 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>더멤버스 — 회원 리뷰</title>
+<link rel="preconnect" href="https://cdn.jsdelivr.net"/>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{font-size:16px;scroll-behavior:smooth}
+body{min-height:100vh;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+ul{list-style:none}
+a{text-decoration:none;color:inherit}
+button{cursor:pointer;border:none;background:none;font:inherit}
+
+:root{
+  --white:    #FFFFFF;
+  --bg:       #F7F7F7;
+  --bg2:      #F0F0F0;
+  --border:   #E8E8E8;
+  --border2:  #D4D4D4;
+  --headline: #111111;
+  --body:     #555555;
+  --muted:    #999999;
+  --light:    #C4C4C4;
+  --dark:     #111111;
+  --red:      #C12838;
+  --red-pale: #FDF2F3;
+  --blue-pale:#F0F4FF;
+  --blue:     #4A6FA5;
+  --font:'Pretendard',-apple-system,'Apple SD Gothic Neo',sans-serif;
+  --max:1200px;
+}
+body{font-family:var(--font);background:var(--white);color:var(--body)}
+
+/* ── NAV ── */
+.nav{
+  position:sticky;top:0;z-index:100;
+  background:var(--white);
+}
+.nav__inner{
+  max-width:var(--max);margin:0 auto;padding:0 48px;
+  height:60px;display:flex;align-items:center;justify-content:space-between;
+}
+.nav__logo{display:flex;align-items:center;height:100%}
+.nav__logo svg{display:block}
+.nav__links{display:flex;align-items:center;gap:32px}
+.nav__link{font-size:13px;font-weight:400;color:var(--muted);letter-spacing:-0.01em;transition:color .15s}
+.nav__link:hover{color:var(--headline)}
+.nav__link.active{color:var(--headline);font-weight:600}
+.nav__cta{
+  margin-left:8px;background:var(--headline);color:var(--white);
+  font-size:12px;font-weight:700;letter-spacing:0.04em;
+  padding:9px 22px;border-radius:999px;transition:opacity .15s;
+}
+.nav__cta:hover{opacity:.75}
+.nav__ham{display:none;flex-direction:column;gap:4px;padding:4px}
+.nav__ham span{display:block;width:20px;height:1.5px;background:var(--headline)}
+
+/* ── PAGE HEADER ── */
+.page-header{
+  background:var(--white);
+  padding:72px 48px 56px;
+  text-align:center;
+}
+.page-header__title{
+  font-size:48px;font-weight:800;letter-spacing:-0.04em;
+  line-height:1.18;color:var(--headline);
+}
+
+/* ── FILTER BAR ── */
+.filter-bar{
+  background:var(--white);
+  padding:0 48px 32px;
+  text-align:center;
+  position:sticky;top:60px;z-index:90;
+}
+.filter-tabs{
+  display:inline-flex;
+  background:#F2F2F2;
+  border-radius:999px;
+  padding:4px;
+  gap:2px;
+}
+.filter-tab{
+  display:flex;align-items:center;
+  padding:8px 22px;
+  font-size:13px;font-weight:500;color:var(--muted);
+  border-radius:999px;
+  border:none;background:none;
+  transition:background .18s,color .18s;
+  cursor:pointer;white-space:nowrap;letter-spacing:-0.01em;
+}
+.filter-tab:hover{color:var(--headline)}
+.filter-tab.on{
+  background:var(--headline);
+  color:var(--white);
+  font-weight:600;
+}
+
+/* ── MAIN LAYOUT ── */
+.page-body{
+  max-width:var(--max);margin:0 auto;
+  padding:48px 48px 120px;
+}
+
+/* ── MASONRY GRID ── */
+.reviews-grid{
+  column-count:3;
+  column-gap:16px;
+}
+/* ── CARD ── */
+.review-card{
+  border-radius:16px;
+  padding:28px;
+  display:flex;flex-direction:column;gap:14px;
+  break-inside:avoid;
+  margin-bottom:16px;
+  position:relative;
+}
+/* 파스텔 배경 순환 */
+.review-card:nth-child(6n+1){background:#F7FBFE}
+.review-card:nth-child(6n+2){background:#F5FBF8}
+.review-card:nth-child(6n+3){background:#FAF8FE}
+.review-card:nth-child(6n+4){background:#FFFDF6}
+.review-card:nth-child(6n+5){background:#FEF8F9}
+.review-card:nth-child(6n+6){background:#F6FCF7}
+
+/* 인증 뱃지 */
+.review-card__cert{
+  position:absolute;top:28px;right:28px;
+  font-size:10px;font-weight:700;letter-spacing:0.08em;
+  padding:3px 10px;
+  border:1px solid var(--border);
+  color:var(--muted);background:var(--bg);
+}
+.review-card__cert--black{
+  background:var(--dark);color:rgba(255,255,255,.7);
+  border-color:var(--dark);
+}
+
+/* 별점 */
+.review-card__stars{
+  font-size:15px;color:#F5A623;letter-spacing:2px;order:0;
+}
+/* 카드 내부 flex 순서 */
+.review-card__quote{order:1}
+.review-card__tags{order:2}
+.review-card__date{display:none}
+
+/* 프로필 영역 */
+.review-card__profile{
+  display:flex;align-items:center;gap:14px;
+  order:3;margin-top:auto;padding-top:14px;border-top:1px solid rgba(0,0,0,.08);
+}
+.profile-icon{
+  width:48px;height:48px;border-radius:50%;
+  overflow:hidden;
+  flex-shrink:0;
+}
+.profile-icon img{
+  width:100%;height:100%;object-fit:cover;display:block;
+}
+
+.profile-info{}
+.profile-info__name{
+  font-size:14px;font-weight:700;letter-spacing:-0.015em;
+  color:var(--headline);margin-bottom:3px;
+}
+.profile-info__meta{
+  font-size:12px;color:var(--muted);
+  display:flex;align-items:center;gap:6px;
+}
+.profile-info__meta-dot{
+  width:3px;height:3px;border-radius:50%;background:var(--border2);
+}
+
+/* 리뷰 본문 */
+.review-card__quote{
+  font-size:15px;font-weight:400;line-height:1.85;
+  letter-spacing:-0.01em;color:var(--body);order:1;
+}
+
+/* 태그 */
+.review-card__tags{
+  display:flex;gap:6px;flex-wrap:wrap;order:2;
+}
+.review-tag{
+  font-size:11px;font-weight:500;letter-spacing:0.04em;
+  padding:4px 10px;
+  background:var(--bg);border:1px solid var(--border);
+  color:var(--muted);
+}
+
+/* 날짜 */
+.review-card__date{
+  font-size:11px;color:var(--light);
+  border-top:1px solid var(--border);
+  padding-top:16px;margin-top:auto;
+}
+
+
+/* ── 매칭 성사 카드 (하이라이트) ── */
+.review-card--matched{
+  border-color:var(--border2);
+  background:var(--white);
+}
+.review-card--matched .review-card__quote::before{
+  background:var(--headline);
+}
+.matched-badge{
+  display:inline-flex;align-items:center;gap:5px;
+  font-size:10px;font-weight:700;letter-spacing:0.08em;
+  padding:4px 10px;
+  /* 레드 — 실제 매칭 성사 표시 (핵심) */
+  background:var(--red-pale);
+  border:1px solid rgba(193,40,56,.15);
+  color:var(--red);
+  margin-bottom:4px;
+}
+.matched-badge::before{
+  content:'';width:5px;height:5px;border-radius:50%;
+  background:var(--red);
+}
+
+/* ── SECTION DIVIDER ── */
+.section-divider{
+  display:flex;align-items:center;gap:16px;
+  margin:40px 0 24px;
+}
+.section-divider__label{
+  font-size:11px;font-weight:700;letter-spacing:0.14em;
+  text-transform:uppercase;color:var(--light);
+  white-space:nowrap;
+}
+.section-divider__line{flex:1;height:1px;background:var(--border)}
+
+/* ── LOAD MORE ── */
+.load-more{
+  text-align:center;margin-top:52px;
+}
+.load-more__btn{
+  display:inline-flex;align-items:center;gap:8px;
+  font-size:13px;font-weight:600;letter-spacing:-0.01em;
+  color:var(--headline);padding:13px 36px;
+  border:1px solid var(--border2);background:var(--white);
+  transition:border-color .15s,background .15s;
+}
+.load-more__btn:hover{border-color:var(--headline);background:var(--bg)}
+.load-more__count{font-size:12px;color:var(--muted);margin-top:12px}
+
+/* ── CTA STRIP ── */
+.cta-strip{
+  background:var(--dark);
+  margin-top:80px;
+  padding:48px;
+  display:flex;align-items:center;justify-content:space-between;
+  gap:32px;flex-wrap:wrap;
+}
+.cta-strip__copy{}
+.cta-strip__title{
+  font-size:22px;font-weight:700;letter-spacing:-0.025em;
+  color:var(--white);margin-bottom:5px;
+}
+.cta-strip__desc{font-size:13px;color:rgba(255,255,255,.4)}
+.cta-strip__btn{
+  flex-shrink:0;
+  background:var(--red);color:var(--white);
+  font-size:13px;font-weight:700;letter-spacing:0.03em;
+  padding:13px 36px;transition:opacity .15s;white-space:nowrap;
+}
+.cta-strip__btn:hover{opacity:.85}
+
+/* ── REVEAL ── */
+.reveal{opacity:0;transform:translateY(12px);transition:opacity .45s ease,transform .45s ease}
+.reveal.on{opacity:1;transform:none}
+
+/* ── TABLET ── */
+@media(max-width:1279px){
+  .nav__inner{padding-left:32px;padding-right:32px}
+  .page-header{padding:56px 32px 40px}
+  .filter-bar{padding-bottom:28px}
+  .page-body{padding:40px 32px 100px}
+  .reviews-grid{column-count:2}
+  .cta-strip{padding:36px 32px}
+}
+
+/* ── MOBILE ── */
+@media(max-width:799px){
+  .nav__inner{padding:0 20px}
+  .nav__links{display:none;flex-direction:column;gap:16px;position:absolute;top:60px;left:0;right:0;background:var(--white);border-bottom:1px solid var(--border);padding:20px;box-shadow:0 8px 20px rgba(0,0,0,.05)}
+  .nav__links.open{display:flex}
+  .nav__ham{display:flex}
+  .page-header{padding:40px 20px 28px}
+  .page-header__title{font-size:30px}
+  .filter-bar{padding-bottom:24px}
+  .filter-tab{padding:7px 16px;font-size:12px}
+  .page-body{padding:28px 20px 80px}
+  .reviews-grid{column-count:1}
+  .review-card{padding:24px}
+  .review-card__cert{top:24px;right:24px}
+  .cta-strip{flex-direction:column;gap:20px;padding:28px 20px}
+  .cta-strip__btn{width:100%;text-align:center;display:block}
+}
+
+/* ── QR MODAL ── */
+.qr-overlay{
+  display:none;position:fixed;inset:0;z-index:9999;
+  background:rgba(0,0,0,.55);
+  align-items:center;justify-content:center;
+  backdrop-filter:blur(4px);
+}
+.qr-overlay.open{display:flex}
+.qr-modal{
+  background:#fff;
+  width:100%;max-width:440px;
+  padding:48px 40px 40px;
+  position:relative;
+  margin:20px;
+  border-radius:24px;
+  animation:modalIn .25s ease;
+}
+@keyframes modalIn{
+  from{opacity:0;transform:translateY(12px)}
+  to{opacity:1;transform:none}
+}
+.qr-modal__close{
+  position:absolute;top:18px;right:20px;
+  font-size:20px;color:#999;cursor:pointer;
+  line-height:1;padding:4px;
+  transition:color .15s;
+}
+.qr-modal__close:hover{color:#111}
+.qr-modal__title{
+  font-size:22px;font-weight:800;letter-spacing:-0.03em;
+  color:#111;text-align:center;margin-bottom:8px;
+}
+.qr-modal__desc{
+  font-size:14px;color:#999;text-align:center;
+  letter-spacing:-0.01em;margin-bottom:32px;
+}
+.qr-modal__img{
+  width:200px;height:200px;
+  display:block;margin:0 auto 28px;
+  image-rendering:pixelated;
+}
+.qr-modal__stores{
+  display:grid;grid-template-columns:1fr 1fr;gap:10px;
+}
+.qr-modal__store{
+  display:flex;align-items:center;justify-content:center;gap:8px;
+  padding:11px 0;border:1px solid #e8e8e8;
+  font-size:12px;font-weight:600;color:#111;letter-spacing:0.02em;
+  transition:border-color .15s,background .15s;cursor:pointer;
+}
+.qr-modal__store:hover{border-color:#111;background:#f7f7f7}
+.qr-modal__store-icon{font-size:16px}
+
+
+/* ─── APP CTA ─── */
+.app-cta{background:#2b2b2b;padding:0;overflow:hidden;position:relative;}
+.app-cta::after{content:'';position:absolute;bottom:-80px;right:10%;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(193,40,56,.35) 0%,transparent 70%);pointer-events:none;}
+.app-cta__inner{max-width:var(--max);margin:0 auto;padding:0 48px;display:grid;grid-template-columns:1fr 1.4fr;gap:60px;align-items:stretch;position:relative;z-index:1;}
+.app-cta__logo{width:48px;height:48px;border-radius:12px;overflow:hidden;margin-bottom:28px;}
+.app-cta__logo img{width:100%;height:100%;object-fit:cover;}
+.app-cta__title{font-size:40px;font-weight:800;letter-spacing:-0.03em;line-height:1.2;color:var(--white);margin-bottom:0;}
+.app-cta__title span{color:var(--accent);}
+.app-cta__actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:36px}
+.app-cta__visual{display:flex;align-items:flex-end;justify-content:flex-end;}
+.app-cta__visual img{width:100%;height:auto;display:block;object-fit:contain;object-position:right bottom;}
+/* ─── FOOTER ─── */
+.footer{background:#f7f7f7;padding:56px 0 0;}
+.footer__inner{max-width:var(--max);margin:0 auto;padding:0 48px;}
+.f-info{font-size:13px;color:#555;line-height:2;}
+.f-isms{display:inline-flex;align-items:center;gap:14px;margin-top:20px;padding:12px 20px;border:none;border-radius:8px;font-size:12px;color:#555;background:#fff;}
+.f-isms img{height:32px;width:auto;}
+.f-isms-divider{width:1px;height:20px;background:#ddd;}
+.footer__divider{border:none;border-top:1px solid #e0e0e0;margin:40px 0 0;}
+.footer__bottom{padding:18px 48px;display:flex;align-items:center;gap:6px;flex-wrap:wrap;max-width:var(--max);margin:0 auto;font-size:11px;color:#999;}
+.footer__bottom span{color:#bbb;}
+@media(max-width:1279px){.app-cta__inner,.footer__inner{padding:0 32px}}
+@media(max-width:799px){.app-cta__inner{grid-template-columns:1fr;gap:40px;padding:0 20px}.app-cta__visual{height:200px}.footer__inner{padding:0 20px}.footer__bottom{flex-direction:column;align-items:flex-start}}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav__inner">
+    <a href="index.html" class="nav__logo">
+      <svg viewBox="0 0 373 64" height="28" xmlns="http://www.w3.org/2000/svg" fill="none">
+        <g clip-path="url(#a)"><rect width="64" height="64" rx="8.333" fill="#222"/><path d="M47.635 19.206H41.422V47.473h6.213V19.206Z" fill="#fff"/><path d="M16.343 20.75v26.717h9.849c-5.992-4.203-8.866-18.38-9.849-26.717Z" fill="#fff"/><path d="m31.498 31.33-10.044-16.207-4.726 4.102 13.705 24.215 8.645-12.678-3.15 2.609c-1.26 1.038-2.886.585-4.43-2.042Z" fill="#fff"/></g>
+        <g clip-path="url(#b)">
+          <path d="M122.382 25.764c-1.485.057-2.958.298-4.384.72V16.028h-6.116V50.326h6.116V30.411c.266-.779.761-1.457 1.419-1.943a3.86 3.86 0 0 1 2.263-.779c2.521 0 4.384 2.047 4.384 5.267V50.326h6.116V35.843c-.132-6.317-3.639-10.079-9.798-10.079Z" fill="#222"/><path d="M226.994 25.766a13.19 13.19 0 0 0-8.016 2.599 13.397 13.397 0 0 0-4.472 7.201 13.466 13.466 0 0 0 1.176 8.417 13.322 13.322 0 0 0 6.27 6.071c5.272 1.814 10.489.863 14.314-2.91l-1.096-1.184c-2.74 2.91-5.886 3.707-8.143 3.319-3.475-.597-5.853-4.425-5.71-9.902l18.346-.089V36.343c-.033-8.907-8.625-10.577-12.669-10.577Zm-5.677 10.987c0-5.72 2.652-9.316 6.115-9.316 2.291 0 5.896 1.87 5.896 9.36l-12.011-.044ZM267.676 25.765a13.253 13.253 0 0 0-7.825 2.356 9.298 9.298 0 0 0-5.842-2.356 9.073 9.073 0 0 0-3.419.498 9.2 9.2 0 0 0-2.403.991v-.906h-6.116v24.496h6.116V32.525c0-3.22 1.94-5.09 4.143-5.09s4.087 1.87 4.087 5.09v17.868h6.126V35.346a11.48 11.48 0 0 0-.548-3.503c.768-2.135 2.258-3.408 4.056-3.408 2.29 0 4.088 1.87 4.088 5.09v17.868h6.071V36.065c-.087-6.583-3.014-10.3-9.535-10.3ZM346.784 25.764a9.72 9.72 0 0 0-5.085 1.991V25.852h-6.116v24.496h6.116V33.752a7.014 7.014 0 0 1 2.006-4.963 6.938 6.938 0 0 1 4.915-1.843c2.005 0 2.86.587 4.811 2.357l.943-1.04a9.164 9.164 0 0 0-2.769-1.655 9.073 9.073 0 0 0-3.821-.844ZM371.071 39.473c-3.146-2.81-11.431-3.175-11.431-7.944a4.47 4.47 0 0 1 1.155-2.72 4.41 4.41 0 0 1 2.714-1.418c4.285-.398 7.299 2.213 7.891 5.388h.887a11.5 11.5 0 0 0-.186-3.645c-.888-4.237-7.672-4.27-9.535-4.27-4.274 0-9.305 1.858-9.305 6.716 0 6.129 9.393 6.815 12.593 10.034 2.926 2.866-.669 6.273-3.65 6.362-2.89-.133-5.636-1.311-7.737-3.319l-1.096 1.184c4.088 5.399 19.651 5.808 19.651-3 0-.818-.175-1.626-.512-2.371a5.547 5.547 0 0 0-1.439-1.697ZM148.356 25.766a13.19 13.19 0 0 0-8.015 2.599 13.397 13.397 0 0 0-4.472 7.201 13.465 13.465 0 0 0 1.176 8.417 13.322 13.322 0 0 0 6.27 6.071c5.272 1.814 10.489.863 14.273-2.91l-1.096-1.183c-2.74 2.91-5.886 3.706-8.154 3.319-3.474-.598-5.852-4.426-5.71-9.902l18.358-.045v-2.544c0-8.951-8.636-10.622-12.63-10.622Zm-5.71 10.943c0-5.72 2.652-9.316 6.115-9.316 2.291 0 5.896 1.87 5.896 9.36l-12.011-.044ZM210.817 17.246h-7.212v33.147h7.212V17.246ZM174.485 19.125V50.447h11.431c-6.959-4.979-10.291-21.608-11.431-31.322ZM192.075 31.473 180.414 12.487l-5.48 4.813 15.914 28.379 10.039-14.87-3.683 3.054c-1.435 1.128-3.287.575-5.129-2.39ZM80 19.525l11.31-.044V50.393h7.519V19.459L110.14 19.425V17.29L80 17.246V19.525ZM293.355 25.765a10.83 10.83 0 0 0-5.48 1.8V16.073h-6.116v34.298h6.116V30.456c.362-.582.867-1.059 1.466-1.385a3.82 3.82 0 0 1 1.953-.473c5.173 0 6.51 5.82 6.39 10.168-1.121 4.348-3.05 10.389-7.313 11.949 7.102 0 12.187-5.941 12.878-11.949.92-8.165-3.836-13-10.894-13ZM319.549 25.765a13.27 13.27 0 0 0-8.11 2.537 13.473 13.473 0 0 0-4.609 7.244 13.542 13.542 0 0 0 1.204 8.431 13.388 13.388 0 0 0 6.314 6.12c5.261 1.814 10.478.862 14.248-2.91l-1.096-1.184c-2.74 2.91-5.874 3.707-8.143 3.319-3.463-.597-5.853-4.425-5.71-9.902l18.357-.088v-2.545c.066-8.95-8.526-10.622-12.455-10.622Zm-5.71 10.942c0-5.72 2.652-9.316 6.115-9.316 2.291 0 5.896 1.87 5.896 9.36l-12.011-.044Z" fill="#222"/>
+        </g>
+        <defs><clipPath id="a"><rect width="64" height="64" fill="#fff"/></clipPath><clipPath id="b"><rect width="293" height="39.067" fill="#fff" transform="translate(80 12.467)"/></clipPath></defs>
+      </svg>
+    </a>
+    <div class="nav__links" id="navLinks">
+      <a href="join.html" class="nav__link">가입 절차</a>
+      <a href="reviews.html" class="nav__link active">회원 리뷰</a>
+      <a href="support.html" class="nav__link">고객 지원</a>
+      <a href="#" class="nav__cta">무료 가입 신청</a>
+    </div>
+    <button class="nav__ham" id="navHam" aria-label="메뉴">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- QR MODAL -->
+<div class="qr-overlay" id="qrOverlay">
+  <div class="qr-modal" role="dialog" aria-modal="true" aria-label="앱 다운로드">
+    <button class="qr-modal__close" id="qrClose" aria-label="닫기">×</button>
+    <h2 class="qr-modal__title">더멤버스 앱 다운로드</h2>
+    <p class="qr-modal__desc">QR 코드를 스캔하여 다운로드 해주세요</p>
+    <img class="qr-modal__img" src="assets/themembers_onelink_qr.svg" alt="앱 다운로드 QR 코드"/>
+  </div>
+</div>
+
+
+<!-- PAGE HEADER + FILTER BAR -->
+<div class="page-header">
+  <h1 class="page-header__title">실제 회원들의<br>솔직한 후기</h1>
+</div>
+<div class="filter-bar">
+  <div class="filter-tabs" id="filterTabs">
+    <button class="filter-tab on" data-filter="all">전체</button>
+    <button class="filter-tab" data-filter="f">여성 회원</button>
+    <button class="filter-tab" data-filter="m">남성 회원</button>
+  </div>
+</div>
+
+<!-- BODY -->
+<div class="page-body">
+
+  <!-- 리뷰 마소너리 그리드 -->
+  <div class="reviews-grid" id="reviewsGrid">
+
+    <div class="review-card reveal" data-gender="m">
+      <div class="review-card__stars">★★★★★</div>
+      <div class="review-card__profile">
+        <div class="profile-icon profile-icon--m">
+          <img src="assets/images/reviews/man.jpg" alt="남성 회원"/>
+        </div>
+        <div class="profile-info">
+          <p class="profile-info__name">남성 회원</p>
+          <div class="profile-info__meta"><span>2025년 5월 만남</span></div>
+        </div>
+      </div>
+      <p class="review-card__quote">먼저 좋은 여성분 소개시켜주셔서 감사드려요~^^ 제가 찾던 이상형의 분이셨구요~ 일단 대화가 잘 통하셨고 매너와 성격 모두 마음에 들었어요~ 저는 애프터 신청을 통해 만남을 이어가고 싶고 연락처도 주고 받았어요~ㅎㅎ 앞으로 좋은 인연이 될 수 있게 최선을 다하고 싶네요!! 많은 도움 부탁드릴께요~!!^^</p>
+    </div>
+
+    <div class="review-card reveal" data-gender="m">
+      <div class="review-card__stars">★★★★★</div>
+      <div class="review-card__profile">
+        <div class="profile-icon profile-icon--m">
+          <img src="assets/images/reviews/man.jpg" alt="남성 회원"/>
+        </div>
+        <div class="profile-info">
+          <p class="profile-info__name">남성 회원</p>
+          <div class="profile-info__meta"><span>2025년 6월 만남</span></div>
+        </div>
+      </div>
+      <p class="review-card__quote">예쁘시고 패션센스도 좋았어요. 대화가 너무 즐거워서 시간 가는 줄 몰랐습니다. 잘 웃고 상대방 칭찬도 잘해주셔서 대화 내내 기분이 좋았네요</p>
+    </div>
+
+    <div class="review-card reveal" data-gender="f">
+      <div class="review-card__stars">★★★★★</div>
+      <div class="review-card__profile">
+        <div class="profile-icon profile-icon--f">
+          <img src="assets/images/reviews/woman.jpg" alt="여성 회원"/>
+        </div>
+        <div class="profile-info">
+          <p class="profile-info__name">여성 회원</p>
+          <div class="profile-info__meta"><span>2025년 7월 만남</span></div>
+        </div>
+      </div>
+      <p class="review-card__quote">외모보는 사람인데 살짝 불안한 맘으로 나갔는데 평상시 프로필 카드보다 더 괜찮은 분이셨어요 대화도 즐겁게 잘 해서 좋은 시간 보냈습니다</p>
+    </div>
+
+    <div class="review-card reveal" data-gender="f">
+      <div class="review-card__stars">★★★★★</div>
+      <div class="review-card__profile">
+        <div class="profile-icon profile-icon--f">
+          <img src="assets/images/reviews/woman.jpg" alt="여성 회원"/>
+        </div>
+        <div class="profile-info">
+          <p class="profile-info__name">여성 회원</p>
+          <div class="profile-info__meta"><span>2025년 10월 만남</span></div>
+        </div>
+      </div>
+      <p class="review-card__quote">더블랙을 통해 첫 만남이라 긴장반 설렘반으로 나갔는데 매너도 좋으시고 대화도 편하게 잘 나누고 온거 같아 기분좋은 만남이었어요!</p>
+    </div>
+
+    <div class="review-card reveal" data-gender="m">
+      <div class="review-card__stars">★★★★★</div>
+      <div class="review-card__profile">
+        <div class="profile-icon profile-icon--m">
+          <img src="assets/images/reviews/man.jpg" alt="남성 회원"/>
+        </div>
+        <div class="profile-info">
+          <p class="profile-info__name">남성 회원</p>
+          <div class="profile-info__meta"><span>2025년 10월 만남</span></div>
+        </div>
+      </div>
+      <p class="review-card__quote">처음 이런 기회를 통해 지적이고 매력 넘치는 분 소개해주셔서 감사합니다. 인연은 어쩌면 가까운 곳에 있을지도 모른다는 말이 실감이 났고, 더 많이 알아가고픈 분이셨어요. 좋은 기회였습니다!</p>
+    </div>
+
+    <div class="review-card reveal" data-gender="m">
+      <div class="review-card__stars">★★★★★</div>
+      <div class="review-card__profile">
+        <div class="profile-icon profile-icon--m">
+          <img src="assets/images/reviews/man.jpg" alt="남성 회원"/>
+        </div>
+        <div class="profile-info">
+          <p class="profile-info__name">남성 회원</p>
+          <div class="profile-info__meta"><span>2025년 6월 만남</span></div>
+        </div>
+      </div>
+      <p class="review-card__quote">오랫만에 설레임이 있었던분 만난거 같아요 대화 매너 모두 좋았습니다^^ 애프터 진행이 안되어서 아쉽지만 더블랙 시스템 좋은거 같아요</p>
+    </div>
+
+    <div class="review-card reveal" data-gender="m">
+      <div class="review-card__stars">★★★★★</div>
+      <div class="review-card__profile">
+        <div class="profile-icon profile-icon--m">
+          <img src="assets/images/reviews/man.jpg" alt="남성 회원"/>
+        </div>
+        <div class="profile-info">
+          <p class="profile-info__name">남성 회원</p>
+          <div class="profile-info__meta"><span>2025년 9월 만남</span></div>
+        </div>
+      </div>
+      <p class="review-card__quote">더 블랙의 1:1 매칭 시스템이 믿음직스러워 좋은 만남을 가질 수 있었습니다. 깔끔하고 신뢰 가는 진행 덕분에 만족스러운 경험이었어요. :)</p>
+    </div>
+
+    <div class="review-card reveal" data-gender="f">
+      <div class="review-card__stars">★★★★★</div>
+      <div class="review-card__profile">
+        <div class="profile-icon profile-icon--f">
+          <img src="assets/images/reviews/woman.jpg" alt="여성 회원"/>
+        </div>
+        <div class="profile-info">
+          <p class="profile-info__name">여성 회원</p>
+          <div class="profile-info__meta"><span>2025년 5월 만남</span></div>
+        </div>
+      </div>
+      <p class="review-card__quote">저는 소개글을 못보고 나갔는데 도착해서 볼수 있다는걸 알았어요. 다시보려니까 사라져서 조금 아쉬워요 ㅠ 매너 좋으시고 유쾌하셨습니다!</p>
+    </div>
+
+    <div class="review-card reveal" data-gender="f">
+      <div class="review-card__stars">★★★★★</div>
+      <div class="review-card__profile">
+        <div class="profile-icon profile-icon--f">
+          <img src="assets/images/reviews/woman.jpg" alt="여성 회원"/>
+        </div>
+        <div class="profile-info">
+          <p class="profile-info__name">여성 회원</p>
+          <div class="profile-info__meta"><span>2025년 11월 만남</span></div>
+        </div>
+      </div>
+      <p class="review-card__quote">처음이라.. 번호 교환없이 헤어졌는데 상대 연락처가 안보이더라구요.. . 망연자실 했으나! 후기작성을 통해 번호 교환이 가능하네요 다행히! 매너도 너무 좋으셨고 외모도 저스타일이라 저는 직진 하려구요ㅎ</p>
+    </div>
+
+    <div class="review-card reveal" data-gender="m">
+      <div class="review-card__stars">★★★★★</div>
+      <div class="review-card__profile">
+        <div class="profile-icon profile-icon--m">
+          <img src="assets/images/reviews/man.jpg" alt="남성 회원"/>
+        </div>
+        <div class="profile-info">
+          <p class="profile-info__name">남성 회원</p>
+          <div class="profile-info__meta"><span>2025년 11월 만남</span></div>
+        </div>
+      </div>
+      <p class="review-card__quote">잘만나고 왔습니다. 또 만나기로 했는데 즐겁게 대화하다보니 서로 연락처 교환을 깜빡했어요. 서로 번호 오픈할수 있도록 도와주세요.</p>
+    </div>
+
+    <div class="review-card reveal" data-gender="m">
+      <div class="review-card__stars">★★★★★</div>
+      <div class="review-card__profile">
+        <div class="profile-icon profile-icon--m">
+          <img src="assets/images/reviews/man.jpg" alt="남성 회원"/>
+        </div>
+        <div class="profile-info">
+          <p class="profile-info__name">남성 회원</p>
+          <div class="profile-info__meta"><span>2025년 9월 만남</span></div>
+        </div>
+      </div>
+      <p class="review-card__quote">늦지 않게 시간 맞춰 나오셔서 좋았던것 같아요. 성격도 밝고 리액션이 좋은 예의 바른 분이셨어요. 다만 배경이나 조건적인부분은 얘기를 잘 안해주셔서 한번만 봐서는 알수 없었습니다.</p>
+    </div>
+
+    <div class="review-card reveal" data-gender="m">
+      <div class="review-card__stars">★★★★★</div>
+      <div class="review-card__profile">
+        <div class="profile-icon profile-icon--m">
+          <img src="assets/images/reviews/man.jpg" alt="남성 회원"/>
+        </div>
+        <div class="profile-info">
+          <p class="profile-info__name">남성 회원</p>
+          <div class="profile-info__meta"><span>2025년 6월 만남</span></div>
+        </div>
+      </div>
+      <p class="review-card__quote">매칭된 상대방이 특별히 불편하거나 불편해하지 않고 오히려 분위기를 자연스럽게 풀어주어 매우 고마웠습니다. 매너도 좋으시고, 덕분에 즐거운 대화를 하고, 좋은 시간을 가졌습니다.</p>
+    </div>
+
+    <div class="review-card reveal" data-gender="m">
+      <div class="review-card__stars">★★★★★</div>
+      <div class="review-card__profile">
+        <div class="profile-icon profile-icon--m">
+          <img src="assets/images/reviews/man.jpg" alt="남성 회원"/>
+        </div>
+        <div class="profile-info">
+          <p class="profile-info__name">남성 회원</p>
+          <div class="profile-info__meta"><span>2025년 11월 만남</span></div>
+        </div>
+      </div>
+      <p class="review-card__quote">먼저 좋은 분 소개시켜주셔서 감사드려요~^^ 프로필도 그랬지만 실제 만나서도 제가 생각했던 이상형의 분이셨고 대화도 잘 통하고 매너도 좋으셨고 다 좋았습니다. 예상보다 함께있는 시간이 길어져 3시간이 넘게 식사와 대화를 하며 의미있는 시간을 보낼 수 있었네요~^^</p>
+    </div>
+
+    <div class="review-card reveal" data-gender="f">
+      <div class="review-card__stars">★★★★★</div>
+      <div class="review-card__profile">
+        <div class="profile-icon profile-icon--f">
+          <img src="assets/images/reviews/woman.jpg" alt="여성 회원"/>
+        </div>
+        <div class="profile-info">
+          <p class="profile-info__name">여성 회원</p>
+          <div class="profile-info__meta"><span>2025년 8월 만남</span></div>
+        </div>
+      </div>
+      <p class="review-card__quote">사진을 못보고나가니 외모에대한 기대없이 만나서 그런지, 실제로 뵙고 훨씬 괜찮으셨어요. 운좋게 유쾌하고 매너 좋으신 분을 만나서 좋은 만남이였습니다. 매칭되고 약속장소정하기까지 에너지소모 피로감이 없어서 훨씬 편하고 좋았습니다.</p>
+    </div>
+
+    <div class="review-card reveal" data-gender="m">
+      <div class="review-card__stars">★★★★★</div>
+      <div class="review-card__profile">
+        <div class="profile-icon profile-icon--m">
+          <img src="assets/images/reviews/man.jpg" alt="남성 회원"/>
+        </div>
+        <div class="profile-info">
+          <p class="profile-info__name">남성 회원</p>
+          <div class="profile-info__meta"><span>2025년 7월 만남</span></div>
+        </div>
+      </div>
+      <p class="review-card__quote">사진보다 실물이 더 좋으셨고 약속시간 보다 5분 더 일찍 오시고 대화시 밝은 표정으로 대화해주시고 밥 잘 먹었다고 커피도 한잔 사주시고 헤어졌습니다. 비록 거절하셨지만 예스 오어 노를 바로 정확히 해주셔서 맘 졸이며 기다리지 않아도 되서 잘 처신 하신 좋으신 분인것 같습니다</p>
+    </div>
+
+    <div class="review-card reveal" data-gender="m">
+      <div class="review-card__stars">★★★★★</div>
+      <div class="review-card__profile">
+        <div class="profile-icon profile-icon--m">
+          <img src="assets/images/reviews/man.jpg" alt="남성 회원"/>
+        </div>
+        <div class="profile-info">
+          <p class="profile-info__name">남성 회원</p>
+          <div class="profile-info__meta"><span>2025년 10월 만남</span></div>
+        </div>
+      </div>
+      <p class="review-card__quote">외모는 사진과 크게 차이가 없고 밝고 선한 이미지라서 괜찮았습니다. 키도 제가 선호하는 너무 작지도 크지도않은 키여서 좋았습니다.</p>
+    </div>
+
+    <div class="review-card reveal" data-gender="m">
+      <div class="review-card__stars">★★★★★</div>
+      <div class="review-card__profile">
+        <div class="profile-icon profile-icon--m">
+          <img src="assets/images/reviews/man.jpg" alt="남성 회원"/>
+        </div>
+        <div class="profile-info">
+          <p class="profile-info__name">남성 회원</p>
+          <div class="profile-info__meta"><span>2025년 7월 만남</span></div>
+        </div>
+      </div>
+      <p class="review-card__quote">만나서 대화하는 시간 동안 아이 컨택을 해주시면서 이야기를 나눌 수 있어서 상대방분이 이번 만남에 진심을 다해주시는 느낌을 받았습니다. 매너도 좋으셨고, 시간도 충분히 할애해주셔서 상대방분에 대해 많은 점을 알 수 있어서 좋았습니다.^^</p>
+    </div>
+
+    <div class="review-card reveal" data-gender="f">
+      <div class="review-card__stars">★★★★★</div>
+      <div class="review-card__profile">
+        <div class="profile-icon profile-icon--f">
+          <img src="assets/images/reviews/woman.jpg" alt="여성 회원"/>
+        </div>
+        <div class="profile-info">
+          <p class="profile-info__name">여성 회원</p>
+          <div class="profile-info__meta"><span>2025년 7월 만남</span></div>
+        </div>
+      </div>
+      <p class="review-card__quote">전반적으로 좋은 분이셨어요. 키도 크시고, 외모도 괜찮으시고 무엇보다 동안이셨습니다. 얘기도 재미있게 잘 해주셨고요. 키 크고 젠틀한 좀 더 대화가 잘 통하는 분 또 만나고 싶어요^^</p>
+    </div>
+
+    <div class="review-card reveal" data-gender="f">
+      <div class="review-card__stars">★★★★★</div>
+      <div class="review-card__profile">
+        <div class="profile-icon profile-icon--f">
+          <img src="assets/images/reviews/woman.jpg" alt="여성 회원"/>
+        </div>
+        <div class="profile-info">
+          <p class="profile-info__name">여성 회원</p>
+          <div class="profile-info__meta"><span>2025년 10월 만남</span></div>
+        </div>
+      </div>
+      <p class="review-card__quote">매칭되고, 날짜 잡고, 장소 정해주셔서 불편함없이 만났어요. 당일 대화가능 시간이 1시간 전으로 촉박하게 되어 있는건 좀 불편했어요. 약속 장소까지 출발하기 전에 알 수 있도록 적어도 3시간 전에는 대화가 가능하면 좋겠어요.</p>
+    </div>
+
+    <div class="review-card reveal" data-gender="m">
+      <div class="review-card__stars">★★★★★</div>
+      <div class="review-card__profile">
+        <div class="profile-icon profile-icon--m">
+          <img src="assets/images/reviews/man.jpg" alt="남성 회원"/>
+        </div>
+        <div class="profile-info">
+          <p class="profile-info__name">남성 회원</p>
+          <div class="profile-info__meta"><span>2025년 6월 만남</span></div>
+        </div>
+      </div>
+      <p class="review-card__quote">밝고 성격이 무척 좋으셨던 분인거같습니다. 작지않은이쁜키에 늘씬하셨습니다. 다만 제가 선호하는 여성스럽기보다는 밝고 당당한 스타일이셨던거 같습니다.</p>
+    </div>
+
+    <div class="review-card reveal" data-gender="m">
+      <div class="review-card__stars">★★★★★</div>
+      <div class="review-card__profile">
+        <div class="profile-icon profile-icon--m">
+          <img src="assets/images/reviews/man.jpg" alt="남성 회원"/>
+        </div>
+        <div class="profile-info">
+          <p class="profile-info__name">남성 회원</p>
+          <div class="profile-info__meta"><span>2025년 8월 만남</span></div>
+        </div>
+      </div>
+      <p class="review-card__quote">좋은 분 소개시켜주셔서 감사드립니다. 매너 좋으셨고 상당히 유쾌한 만남 이었어요. 제가 종사하는 분야와 달랐기에 이런 자리 아니었으면 대화할 기회도 없었지 싶어요. 미모와 지적 매력 모두 갖추신 분이세요. 웃음도 많으시고요. 즐거운 자리여서 좋았습니다. 감사합니다.</p>
+    </div>
+
+    <div class="review-card reveal" data-gender="m">
+      <div class="review-card__stars">★★★★★</div>
+      <div class="review-card__profile">
+        <div class="profile-icon profile-icon--m">
+          <img src="assets/images/reviews/man.jpg" alt="남성 회원"/>
+        </div>
+        <div class="profile-info">
+          <p class="profile-info__name">남성 회원</p>
+          <div class="profile-info__meta"><span>2026년 1월 만남</span></div>
+        </div>
+      </div>
+      <p class="review-card__quote">여성분과 식사하며 즐겁게 대화를 나눌 수 있었습니다. 사진과 실물에 약간의 차이는 있었지만, 매너가 매우 좋으셨고 인상도 밝고 긍정적이셔서 편안한 분위기에서 이야기할 수 있었습니다. 또한 관심사도 비슷해 대화가 잘 이어졌습니다. 좋은 분 소개해주셔서 감사합니다.</p>
+    </div>
+
+    <div class="review-card reveal" data-gender="m">
+      <div class="review-card__stars">★★★★★</div>
+      <div class="review-card__profile">
+        <div class="profile-icon profile-icon--m">
+          <img src="assets/images/reviews/man.jpg" alt="남성 회원"/>
+        </div>
+        <div class="profile-info">
+          <p class="profile-info__name">남성 회원</p>
+          <div class="profile-info__meta"><span>2025년 6월 만남</span></div>
+        </div>
+      </div>
+      <p class="review-card__quote">좋은분 소개받아서 즐거운 시간 보낸듯 합니다. 밝고 예의바르신분이라 대화도 잘 됐구요. 시간 가는 줄 모를 정도로 이야기 나눈듯 하네요.</p>
+    </div>
+
+    <div class="review-card reveal" data-gender="m">
+      <div class="review-card__stars">★★★★★</div>
+      <div class="review-card__profile">
+        <div class="profile-icon profile-icon--m">
+          <img src="assets/images/reviews/man.jpg" alt="남성 회원"/>
+        </div>
+        <div class="profile-info">
+          <p class="profile-info__name">남성 회원</p>
+          <div class="profile-info__meta"><span>2026년 1월 만남</span></div>
+        </div>
+      </div>
+      <p class="review-card__quote">굉장히 좋은 분이셨습니다. 시간 내주시려고 멀리까지 와주시고 너무 감사했네요. 좋은 분 만나게 배려해주셔서 감사합니다.^^</p>
+    </div>
+
+    <div class="review-card reveal" data-gender="f">
+      <div class="review-card__stars">★★★★★</div>
+      <div class="review-card__profile">
+        <div class="profile-icon profile-icon--f">
+          <img src="assets/images/reviews/woman.jpg" alt="여성 회원"/>
+        </div>
+        <div class="profile-info">
+          <p class="profile-info__name">여성 회원</p>
+          <div class="profile-info__meta"><span>2025년 6월 만남</span></div>
+        </div>
+      </div>
+      <p class="review-card__quote">얼굴을 모르고 나간다는게 걱정도됐지만 나름 기대감을 가지고 갈수있는 점이라 설레고 좋았던거 같습니다! 매너도 좋으시고 즐거운 만남이된것같습니다! 잘되진않았지만 좋은 기회인것같아요!</p>
+    </div>
+
+    <div class="review-card reveal" data-gender="m">
+      <div class="review-card__stars">★★★★★</div>
+      <div class="review-card__profile">
+        <div class="profile-icon profile-icon--m">
+          <img src="assets/images/reviews/man.jpg" alt="남성 회원"/>
+        </div>
+        <div class="profile-info">
+          <p class="profile-info__name">남성 회원</p>
+          <div class="profile-info__meta"><span>2025년 10월 만남</span></div>
+        </div>
+      </div>
+      <p class="review-card__quote">사람은 좋은분 같아서 대화가 즐거웠어요. 대화창은 만남후 1-2시간은 유지 필요할것 같아요</p>
+    </div>
+
+    <div class="review-card reveal" data-gender="f">
+      <div class="review-card__stars">★★★★★</div>
+      <div class="review-card__profile">
+        <div class="profile-icon profile-icon--f">
+          <img src="assets/images/reviews/woman.jpg" alt="여성 회원"/>
+        </div>
+        <div class="profile-info">
+          <p class="profile-info__name">여성 회원</p>
+          <div class="profile-info__meta"><span>2026년 2월 만남</span></div>
+        </div>
+      </div>
+      <p class="review-card__quote">블라인드로 만나뵙게되었지만, 매너도 좋으시구 즐거웠어요 :) 이런 인연을 만들어주는 플랫폼과 아이디어, 비즈니스모델 너무너무 좋네요! 멤버스 번창하시길!</p>
+    </div>
+
+    <div class="review-card reveal" data-gender="f">
+      <div class="review-card__stars">★★★★★</div>
+      <div class="review-card__profile">
+        <div class="profile-icon profile-icon--f">
+          <img src="assets/images/reviews/woman.jpg" alt="여성 회원"/>
+        </div>
+        <div class="profile-info">
+          <p class="profile-info__name">여성 회원</p>
+          <div class="profile-info__meta"><span>2025년 6월 만남</span></div>
+        </div>
+      </div>
+      <p class="review-card__quote">예의있으시고 배려심있으시며 진지하고 겸손하신 분이셨어요. 운동도 꾸준히 하시고 자기관리도 잘하고 계시니 곧 좋은분 만나시기를 바래요.</p>
+    </div>
+
+    <div class="review-card reveal" data-gender="f">
+      <div class="review-card__stars">★★★★★</div>
+      <div class="review-card__profile">
+        <div class="profile-icon profile-icon--f">
+          <img src="assets/images/reviews/woman.jpg" alt="여성 회원"/>
+        </div>
+        <div class="profile-info">
+          <p class="profile-info__name">여성 회원</p>
+          <div class="profile-info__meta"><span>2026년 1월 만남</span></div>
+        </div>
+      </div>
+      <p class="review-card__quote">매너있게 대화를 이끌어주셨고 맛있는 저녁 식사도 대접해 주셔서 감사했어요! 서로를 알아가는 대화도 많이 한 것 같아서 좋았습니다:)</p>
+    </div>
+
+    <div class="review-card reveal" data-gender="m">
+      <div class="review-card__stars">★★★★★</div>
+      <div class="review-card__profile">
+        <div class="profile-icon profile-icon--m">
+          <img src="assets/images/reviews/man.jpg" alt="남성 회원"/>
+        </div>
+        <div class="profile-info">
+          <p class="profile-info__name">남성 회원</p>
+          <div class="profile-info__meta"><span>2025년 10월 만남</span></div>
+        </div>
+      </div>
+      <p class="review-card__quote">한번 봐서는 알수 없지만 좋은분인것 같았습니다. 만남 추천 식당들은 운영 시간도 고려 되면 좋을것 같아요.</p>
+    </div>
+
+    <div class="review-card reveal" data-gender="f">
+      <div class="review-card__stars">★★★★★</div>
+      <div class="review-card__profile">
+        <div class="profile-icon profile-icon--f">
+          <img src="assets/images/reviews/woman.jpg" alt="여성 회원"/>
+        </div>
+        <div class="profile-info">
+          <p class="profile-info__name">여성 회원</p>
+          <div class="profile-info__meta"><span>2025년 10월 만남</span></div>
+        </div>
+      </div>
+      <p class="review-card__quote">제가 가까운 곳으로 불러서 좀 멀다 보니 20분 정도 늦으시긴 했는데 매너도 너무 좋으셨고 성의 있게 계속 대해 주셔서 감사했습니다</p>
+    </div>
+
+    <div class="review-card reveal" data-gender="m">
+      <div class="review-card__stars">★★★★★</div>
+      <div class="review-card__profile">
+        <div class="profile-icon profile-icon--m">
+          <img src="assets/images/reviews/man.jpg" alt="남성 회원"/>
+        </div>
+        <div class="profile-info">
+          <p class="profile-info__name">남성 회원</p>
+          <div class="profile-info__meta"><span>2026년 1월 만남</span></div>
+        </div>
+      </div>
+      <p class="review-card__quote">대화도 편하게 해주시고 인성 좋으신 분인 것 같았어요. 좋으신 분 만나시길 응원하겠습니다.</p>
+    </div>
+
+    <div class="review-card reveal" data-gender="m">
+      <div class="review-card__stars">★★★★★</div>
+      <div class="review-card__profile">
+        <div class="profile-icon profile-icon--m">
+          <img src="assets/images/reviews/man.jpg" alt="남성 회원"/>
+        </div>
+        <div class="profile-info">
+          <p class="profile-info__name">남성 회원</p>
+          <div class="profile-info__meta"><span>2025년 11월 만남</span></div>
+        </div>
+      </div>
+      <p class="review-card__quote">만남 전에 불필요한 연락없이 만날 수 있는 게 깔끔해서 좋았어요. 그리고 지인에게 소개 받은 것 처럼 상대방이 예의를 갖춰 주어서 가볍지 않고 진지한 분위기가 됐던거 같습니다.</p>
+    </div>
+
+    <div class="review-card reveal" data-gender="f">
+      <div class="review-card__stars">★★★★★</div>
+      <div class="review-card__profile">
+        <div class="profile-icon profile-icon--f">
+          <img src="assets/images/reviews/woman.jpg" alt="여성 회원"/>
+        </div>
+        <div class="profile-info">
+          <p class="profile-info__name">여성 회원</p>
+          <div class="profile-info__meta"><span>2025년 12월 만남</span></div>
+        </div>
+      </div>
+      <p class="review-card__quote">당일날 30분 늦으신다고 연락와서 조금 당황했지만 사고 때문이라고 설명하시고 만나서 매너는 좋으셨어요!</p>
+    </div>
+
+    <div class="review-card reveal" data-gender="m">
+      <div class="review-card__stars">★★★★★</div>
+      <div class="review-card__profile">
+        <div class="profile-icon profile-icon--m">
+          <img src="assets/images/reviews/man.jpg" alt="남성 회원"/>
+        </div>
+        <div class="profile-info">
+          <p class="profile-info__name">남성 회원</p>
+          <div class="profile-info__meta"><span>2025년 8월 만남</span></div>
+        </div>
+      </div>
+      <p class="review-card__quote">얼굴은 동안이며 직업또한 좋으셨습니다. 대화도 잘 통했어요 또 만나게 되길 바랍니다</p>
+    </div>
+
+    <div class="review-card reveal" data-gender="m">
+      <div class="review-card__stars">★★★★★</div>
+      <div class="review-card__profile">
+        <div class="profile-icon profile-icon--m">
+          <img src="assets/images/reviews/man.jpg" alt="남성 회원"/>
+        </div>
+        <div class="profile-info">
+          <p class="profile-info__name">남성 회원</p>
+          <div class="profile-info__meta"><span>2026년 1월 만남</span></div>
+        </div>
+      </div>
+      <p class="review-card__quote">너무 좋으신 분이었습니다. 성격도 매너도 정말 좋으시더군요.</p>
+    </div>
+
+    <div class="review-card reveal" data-gender="m">
+      <div class="review-card__stars">★★★★★</div>
+      <div class="review-card__profile">
+        <div class="profile-icon profile-icon--m">
+          <img src="assets/images/reviews/man.jpg" alt="남성 회원"/>
+        </div>
+        <div class="profile-info">
+          <p class="profile-info__name">남성 회원</p>
+          <div class="profile-info__meta"><span>2025년 5월 만남</span></div>
+        </div>
+      </div>
+      <p class="review-card__quote">시간 맞춰 잘 만났습니다. 얼굴은 사진보다 좋으셨습니다. 전번 교환했고 한두번 더 만나볼 생각입니다</p>
+    </div>
+
+    <div class="review-card reveal" data-gender="f">
+      <div class="review-card__stars">★★★★★</div>
+      <div class="review-card__profile">
+        <div class="profile-icon profile-icon--f">
+          <img src="assets/images/reviews/woman.jpg" alt="여성 회원"/>
+        </div>
+        <div class="profile-info">
+          <p class="profile-info__name">여성 회원</p>
+          <div class="profile-info__meta"><span>2026년 1월 만남</span></div>
+        </div>
+      </div>
+      <p class="review-card__quote">약속시간보다 일찍 도착하셨다고 해서 저도 일찍 갔는데 연락할 방법이 없어서 불편했어요. 대화 개시 시간이 좀더 일찍이면 좋겠어요</p>
+    </div>
+
+    <div class="review-card reveal" data-gender="m">
+      <div class="review-card__stars">★★★★★</div>
+      <div class="review-card__profile">
+        <div class="profile-icon profile-icon--m">
+          <img src="assets/images/reviews/man.jpg" alt="남성 회원"/>
+        </div>
+        <div class="profile-info">
+          <p class="profile-info__name">남성 회원</p>
+          <div class="profile-info__meta"><span>2025년 7월 만남</span></div>
+        </div>
+      </div>
+      <p class="review-card__quote">잘 만났습니다. 사진과 조금 달랐지만 그건 어느 정도 감안할 수 있었네요. 시스템이 만남 이후에 연락처 교환이 될 수 있도록 하는 것도 좋을 듯 하네요.</p>
+    </div>
+
+    <div class="review-card reveal" data-gender="m">
+      <div class="review-card__stars">★★★★★</div>
+      <div class="review-card__profile">
+        <div class="profile-icon profile-icon--m">
+          <img src="assets/images/reviews/man.jpg" alt="남성 회원"/>
+        </div>
+        <div class="profile-info">
+          <p class="profile-info__name">남성 회원</p>
+          <div class="profile-info__meta"><span>2025년 5월 만남</span></div>
+        </div>
+      </div>
+      <p class="review-card__quote">약속시간에 맞춰 만났어요 얘기도 잘통했는데 지나치게 솔직하시더라구요. 전번 교환했는데 저장된 번호더라구요 이전 매칭된적이 있었더라구요. 첫 만남이긴 했습니다.</p>
+    </div>
+
+    <div class="review-card reveal" data-gender="f">
+      <div class="review-card__stars">★★★★★</div>
+      <div class="review-card__profile">
+        <div class="profile-icon profile-icon--f">
+          <img src="assets/images/reviews/woman.jpg" alt="여성 회원"/>
+        </div>
+        <div class="profile-info">
+          <p class="profile-info__name">여성 회원</p>
+          <div class="profile-info__meta"><span>2025년 11월 만남</span></div>
+        </div>
+      </div>
+      <p class="review-card__quote">매너 있으셨고 좋은 만남이었습니다</p>
+    </div>
+
+    <div class="review-card reveal" data-gender="f">
+      <div class="review-card__stars">★★★★★</div>
+      <div class="review-card__profile">
+        <div class="profile-icon profile-icon--f">
+          <img src="assets/images/reviews/woman.jpg" alt="여성 회원"/>
+        </div>
+        <div class="profile-info">
+          <p class="profile-info__name">여성 회원</p>
+          <div class="profile-info__meta"><span>2026년 1월 만남</span></div>
+        </div>
+      </div>
+      <p class="review-card__quote">장소 선정이 아주 탁월했고 정시보다 더 일찍 나와주셨습니다. 대화 내내 젠틀하셨고요. 좋은 분이셨습니다.</p>
+    </div>
+
+    <div class="review-card reveal" data-gender="m">
+      <div class="review-card__stars">★★★★★</div>
+      <div class="review-card__profile">
+        <div class="profile-icon profile-icon--m">
+          <img src="assets/images/reviews/man.jpg" alt="남성 회원"/>
+        </div>
+        <div class="profile-info">
+          <p class="profile-info__name">남성 회원</p>
+          <div class="profile-info__meta"><span>2026년 1월 만남</span></div>
+        </div>
+      </div>
+      <p class="review-card__quote">예의도 바르시고 애티튜드가 기본적으로 장착하신 분이었지만 제 타입은 아닌지라 아쉽지만 그래도 예전 골드스푼과는 다르게 진중한 분위기를 느낀 블랙이었습니다~</p>
+    </div>
+
+    <div class="review-card reveal" data-gender="m">
+      <div class="review-card__stars">★★★★★</div>
+      <div class="review-card__profile">
+        <div class="profile-icon profile-icon--m">
+          <img src="assets/images/reviews/man.jpg" alt="남성 회원"/>
+        </div>
+        <div class="profile-info">
+          <p class="profile-info__name">남성 회원</p>
+          <div class="profile-info__meta"><span>2025년 11월 만남</span></div>
+        </div>
+      </div>
+      <p class="review-card__quote">좋은 분이 나오셨고 한번 더 보고 싶은 생각이 있습니다. 소개티켓으로 본인 스타일을 찾으신다면 좋은 만남은 되는 것 같습니다.</p>
+    </div>
+
+    <div class="review-card reveal" data-gender="f">
+      <div class="review-card__stars">★★★★★</div>
+      <div class="review-card__profile">
+        <div class="profile-icon profile-icon--f">
+          <img src="assets/images/reviews/woman.jpg" alt="여성 회원"/>
+        </div>
+        <div class="profile-info">
+          <p class="profile-info__name">여성 회원</p>
+          <div class="profile-info__meta"><span>2025년 6월 만남</span></div>
+        </div>
+      </div>
+      <p class="review-card__quote">만남자체는 무리없이 잘 진행되었는데, 대화 내용이나 성향이 저랑은 좀 맞지 않은 것 같아요. 기본적인 매너는 좋으셨는데 좀 진취적이고 자신감있는 분이면 너무 좋을 것같아요</p>
+    </div>
+
+    <div class="review-card reveal" data-gender="m">
+      <div class="review-card__stars">★★★★★</div>
+      <div class="review-card__profile">
+        <div class="profile-icon profile-icon--m">
+          <img src="assets/images/reviews/man.jpg" alt="남성 회원"/>
+        </div>
+        <div class="profile-info">
+          <p class="profile-info__name">남성 회원</p>
+          <div class="profile-info__meta"><span>2026년 1월 만남</span></div>
+        </div>
+      </div>
+      <p class="review-card__quote">대화나 인상은 좋으셨어요. 그런데 첫 만남인데 옷은 신경을 많이 쓰시지 않은것 같더라구요. 상대방이 좀더 매력적인 분이셨으면 좋겠어요.</p>
+    </div>
+
+    <div class="review-card reveal" data-gender="f">
+      <div class="review-card__stars">★★★★★</div>
+      <div class="review-card__profile">
+        <div class="profile-icon profile-icon--f">
+          <img src="assets/images/reviews/woman.jpg" alt="여성 회원"/>
+        </div>
+        <div class="profile-info">
+          <p class="profile-info__name">여성 회원</p>
+          <div class="profile-info__meta"><span>2025년 10월 만남</span></div>
+        </div>
+      </div>
+      <p class="review-card__quote">너무 매너도 좋으시고, 능력도 출중하신분이어서 편안한 소개팅이었습니다. 비록 저와는 인연이 아니었지만, 좋은분 만나셨으면 좋겠습니다.</p>
+    </div>
+
+    <div class="review-card reveal" data-gender="m">
+      <div class="review-card__stars">★★★★★</div>
+      <div class="review-card__profile">
+        <div class="profile-icon profile-icon--m">
+          <img src="assets/images/reviews/man.jpg" alt="남성 회원"/>
+        </div>
+        <div class="profile-info">
+          <p class="profile-info__name">남성 회원</p>
+          <div class="profile-info__meta"><span>2025년 10월 만남</span></div>
+        </div>
+      </div>
+      <p class="review-card__quote">더블랙 만남주선 이번이 2번째인데~ 상호간 신분이 확실하고 더블랙만의 운영시스템 항상 신뢰가 갑니다^^ 감사합니다.</p>
+    </div>
+
+    <div class="review-card reveal" data-gender="m">
+      <div class="review-card__stars">★★★★★</div>
+      <div class="review-card__profile">
+        <div class="profile-icon profile-icon--m">
+          <img src="assets/images/reviews/man.jpg" alt="남성 회원"/>
+        </div>
+        <div class="profile-info">
+          <p class="profile-info__name">남성 회원</p>
+          <div class="profile-info__meta"><span>2025년 6월 만남</span></div>
+        </div>
+      </div>
+      <p class="review-card__quote">지적이시고 고상하신 분이라는 느낌 받았어요. 좋은분이세요.</p>
+    </div>
+
+    <div class="review-card reveal" data-gender="m">
+      <div class="review-card__stars">★★★★★</div>
+      <div class="review-card__profile">
+        <div class="profile-icon profile-icon--m">
+          <img src="assets/images/reviews/man.jpg" alt="남성 회원"/>
+        </div>
+        <div class="profile-info">
+          <p class="profile-info__name">남성 회원</p>
+          <div class="profile-info__meta"><span>2025년 7월 만남</span></div>
+        </div>
+      </div>
+      <p class="review-card__quote">조건과 매너는 좋았지만 외모가 제 스타일이 아니었습니다. 외모가 마음에 드는 분을 만나고 싶습니다</p>
+    </div>
+
+    <div class="review-card reveal" data-gender="m">
+      <div class="review-card__stars">★★★★★</div>
+      <div class="review-card__profile">
+        <div class="profile-icon profile-icon--m">
+          <img src="assets/images/reviews/man.jpg" alt="남성 회원"/>
+        </div>
+        <div class="profile-info">
+          <p class="profile-info__name">남성 회원</p>
+          <div class="profile-info__meta"><span>2025년 7월 만남</span></div>
+        </div>
+      </div>
+      <p class="review-card__quote">우선 매너 좋으시고 상대방의 이야기에 귀기울여 경청해 주시는 부분, 다소 내성적이지만 본인의 호불호에 대한 뚜렸한 주관이 맘에 들었습니다.</p>
+    </div>
+
+    <div class="review-card reveal" data-gender="m">
+      <div class="review-card__stars">★★★★★</div>
+      <div class="review-card__profile">
+        <div class="profile-icon profile-icon--m">
+          <img src="assets/images/reviews/man.jpg" alt="남성 회원"/>
+        </div>
+        <div class="profile-info">
+          <p class="profile-info__name">남성 회원</p>
+          <div class="profile-info__meta"><span>2025년 7월 만남</span></div>
+        </div>
+      </div>
+      <p class="review-card__quote">여성분 시간약속과 매너는 좋으신 분이었고 식사하면서 대화 잘 나누었습니다. 다만 사진과 실물의 차이가 좀 큰 편이었습니다.</p>
+    </div>
+
+    <div class="review-card reveal" data-gender="m">
+      <div class="review-card__stars">★★★★★</div>
+      <div class="review-card__profile">
+        <div class="profile-icon profile-icon--m">
+          <img src="assets/images/reviews/man.jpg" alt="남성 회원"/>
+        </div>
+        <div class="profile-info">
+          <p class="profile-info__name">남성 회원</p>
+          <div class="profile-info__meta"><span>2026년 1월 만남</span></div>
+        </div>
+      </div>
+      <p class="review-card__quote">매너 좋은 여성분이었습니다. 다소 저와 성향이 맞지 않는 부분도 있지만 한번 더 만나보면 좋을듯하기도 합니다. 서로에 대한 이야기를 통해서 즐거운 시간 보냈어요.</p>
+    </div>
+
+    <div class="review-card reveal" data-gender="m">
+      <div class="review-card__stars">★★★★★</div>
+      <div class="review-card__profile">
+        <div class="profile-icon profile-icon--m">
+          <img src="assets/images/reviews/man.jpg" alt="남성 회원"/>
+        </div>
+        <div class="profile-info">
+          <p class="profile-info__name">남성 회원</p>
+          <div class="profile-info__meta"><span>2025년 9월 만남</span></div>
+        </div>
+      </div>
+      <p class="review-card__quote">여성분 사진과 실물 인상에 좀 차이가 있었습니다. 식사하면서 대화 잘 나누었고 전반적으로 매너있으시고 무난한 분이셨습니다.</p>
+    </div>
+
+    <div class="review-card reveal" data-gender="m">
+      <div class="review-card__stars">★★★★★</div>
+      <div class="review-card__profile">
+        <div class="profile-icon profile-icon--m">
+          <img src="assets/images/reviews/man.jpg" alt="남성 회원"/>
+        </div>
+        <div class="profile-info">
+          <p class="profile-info__name">남성 회원</p>
+          <div class="profile-info__meta"><span>2025년 9월 만남</span></div>
+        </div>
+      </div>
+      <p class="review-card__quote">조금 생각과 다른 부분이 있었지만 매너 좋으시고 유쾌하셨어요.</p>
+    </div>
+
+  </div>
+
+
+</div>
+
+
+<section class="app-cta" id="app-cta">
+  <div class="app-cta__inner">
+    <div class="app-cta__copy reveal-l" style="padding:80px 0;display:flex;flex-direction:column;justify-content:center;">
+      <div class="app-cta__logo">
+        <img src="assets/applogo.png" alt="더멤버스 앱 로고">
+      </div>
+      <h2 class="app-cta__title">검증된 3040을 위한<br><span>더멤버스</span></h2>
+      <div class="app-cta__actions">
+        <a href="#" class="btn-red" style="display:inline-block;padding:14px 28px;background:#ffffff;border-radius:999px;color:#111111;font-size:14px;font-weight:600;letter-spacing:-0.01em;text-decoration:none;">앱 다운로드하기</a>
+      </div>
+    </div>
+    <div class="app-cta__visual reveal-r">
+      <img src="assets/images/mockups/Image_two-mockup.png" alt="더멤버스 앱 화면">
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer__inner">
+    <img src="assets/Logo.svg" alt="더멤버스" style="height:28px;width:auto;margin-bottom:20px;display:block;">
+    <p class="f-info">
+      (주)트리플콤마<br>
+      서울특별시 강남구 테헤란로 447, 13층(KB우준타워)<br>
+      대표 천우영
+    </p>
+    <div class="f-isms">
+      <img src="assets/images/image_ISMSP.png" alt="ISMS-P">
+      인증번호 ISMS-P-KISA-2026-009
+      <span class="f-isms-divider"></span>
+      유효기간 2026-02-04 ~ 2029-02-03
+    </div>
+    <hr class="footer__divider">
+  </div>
+  <div class="footer__bottom">
+    사업자등록번호 567-81-00991
+    <span>|</span>
+    결혼중개업 신고 필증 번호 서울-강남-국내-24-0007호
+    <span>|</span>
+    © Copyright 2026. Triplecomma Inc. All right reserved
+  </div>
+</footer>
+
+<script>
+// Nav ham
+document.getElementById('navHam').addEventListener('click', () => {
+  document.getElementById('navLinks').classList.toggle('open');
+});
+
+// Filter tabs
+document.querySelectorAll('.filter-tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('on'));
+    tab.classList.add('on');
+
+    const filter = tab.dataset.filter;
+    const cards  = document.querySelectorAll('#reviewsGrid .review-card');
+
+    cards.forEach(card => {
+      if (filter === 'all') {
+        card.style.display = '';
+      } else if (filter === 'f') {
+        card.style.display = card.dataset.gender === 'f' ? '' : 'none';
+      } else if (filter === 'm') {
+        card.style.display = card.dataset.gender === 'm' ? '' : 'none';
+      } else {
+        card.style.display = card.dataset.type.includes(filter) ? '' : 'none';
+      }
+    });
+  });
+});
+
+// Reveal
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('on'); io.unobserve(e.target); }
+  });
+}, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+// Load more (placeholder)
+const loadMoreBtn = document.getElementById('loadMoreBtn');
+if(loadMoreBtn) loadMoreBtn.addEventListener('click', function() {
+  this.textContent = '모든 후기를 불러왔습니다';
+  this.disabled = true;
+  this.style.opacity = '0.5';
+  this.style.cursor = 'default';
+});
+
+// QR Modal
+(function(){
+  const overlay = document.getElementById('qrOverlay');
+  const close   = document.getElementById('qrClose');
+
+  // 모든 무료 가입 신청 / 앱 다운로드 버튼에 이벤트 연결
+  function openModal(e){
+    e.preventDefault();
+    overlay.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  document.querySelectorAll('.nav__cta, .btn-red, .sidebar__cta, .cta-strip__btn, .bottom-cta__btn, .b-btn, .btn-primary-w, .btn-white, .btn-cta-w, .app-cta__actions .btn-red').forEach(el => {
+    el.addEventListener('click', openModal);
+  });
+
+  function closeModal(){
+    overlay.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  close.addEventListener('click', closeModal);
+  overlay.addEventListener('click', function(e){
+    if(e.target === overlay) closeModal();
+  });
+  document.addEventListener('keydown', function(e){
+    if(e.key === 'Escape') closeModal();
+  });
+})();
+
+</script>
+</body>
+</html>

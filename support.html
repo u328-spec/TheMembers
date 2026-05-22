@@ -1,0 +1,881 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>더멤버스 — 고객 지원</title>
+<link rel="preconnect" href="https://cdn.jsdelivr.net"/>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{font-size:16px;scroll-behavior:smooth}
+body{min-height:100vh;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+ul{list-style:none}
+a{text-decoration:none;color:inherit}
+button{cursor:pointer;border:none;background:none;font:inherit}
+
+:root{
+  --white:        #FFFFFF;
+  --bg:           #F7F7F7;
+  --bg2:          #F0F0F0;
+  --border:       #E8E8E8;
+  --border2:      #D4D4D4;
+  --headline:     #111111;
+  --para:         #6F6F6F;
+  --muted:        #999999;
+  --light:        #C4C4C4;
+  --dark:         #111111;
+  --dark2:        #1C1C1C;
+  --accent:       #C12838;
+  --accent-dark:  #9E1F2D;
+  --accent-pale:  #FDF2F3;
+  --font:'Pretendard',-apple-system,'Apple SD Gothic Neo',sans-serif;
+  --max:1200px;
+}
+body{font-family:var(--font);background:var(--white);color:var(--para)}
+
+/* ── NAV ── */
+.nav{position:sticky;top:0;z-index:100;background:var(--white)}
+.nav__inner{max-width:var(--max);margin:0 auto;padding:0 48px;height:60px;display:flex;align-items:center;justify-content:space-between}
+.nav__logo{display:flex;align-items:center;height:100%}
+.nav__links{display:flex;align-items:center;gap:32px}
+.nav__link{font-size:13px;font-weight:400;color:var(--muted);letter-spacing:-0.01em;transition:color .15s}
+.nav__link:hover{color:var(--headline)}
+.nav__link.active{color:var(--headline);font-weight:600}
+.nav__cta{margin-left:8px;background:var(--headline);color:var(--white);font-size:12px;font-weight:700;letter-spacing:0.04em;padding:9px 22px;border-radius:999px;transition:opacity .15s;cursor:pointer}
+.nav__cta:hover{opacity:.75}
+.nav__ham{display:none;flex-direction:column;gap:4px;padding:4px}
+.nav__ham span{display:block;width:20px;height:1.5px;background:var(--headline)}
+
+/* ── PAGE HEADER ── */
+.page-header{background:var(--white);padding:64px 48px 52px}
+.page-header__inner{max-width:var(--max);margin:0 auto}
+.breadcrumb{display:flex;align-items:center;gap:8px;font-size:11px;font-weight:500;letter-spacing:0.08em;color:var(--light);text-transform:uppercase;margin-bottom:16px}
+.breadcrumb__sep{color:var(--border2)}
+.breadcrumb__cur{color:var(--muted)}
+.page-header__title{font-size:40px;font-weight:800;letter-spacing:-0.035em;line-height:1.15;color:var(--headline);margin-bottom:10px}
+.page-header__desc{font-size:15px;line-height:1.75;color:var(--body);max-width:480px}
+
+/* ── BODY ── */
+.page-body{max-width:var(--max);margin:0 auto;padding:52px 48px 120px}
+
+/* ── 정보 카드 그리드 (3개) ── */
+.info-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:48px}
+.info-card{
+  position:relative;border-radius:14px;overflow:hidden;
+  min-height:220px;padding:28px 24px 24px;cursor:pointer;
+  display:flex;flex-direction:column;justify-content:flex-end;
+  transition:transform .2s ease,box-shadow .2s ease;
+}
+.info-card:hover{transform:translateY(-4px);box-shadow:0 14px 36px rgba(0,0,0,.09)}
+.info-card--blue  {background:#C8E5F4}
+.info-card--yellow{background:#F6F2C0}
+.info-card--green {background:#CCE9A4}
+.info-card__shapes{position:absolute;inset:0;pointer-events:none}
+.info-card__shape{position:absolute;border-radius:8px}
+
+.info-card--blue .info-card__shape:nth-child(1){
+  width:58%;height:92%;background:rgba(255,255,255,.62);
+  top:-16%;right:-8%;transform:rotate(-13deg)
+}
+.info-card--blue .info-card__shape:nth-child(2){
+  width:42%;height:78%;background:rgba(150,198,228,.50);
+  top:-6%;right:22%;transform:rotate(-8deg)
+}
+.info-card--yellow .info-card__shape:nth-child(1){
+  width:58%;height:92%;background:rgba(255,255,255,.62);
+  top:-16%;right:-8%;transform:rotate(-13deg)
+}
+.info-card--yellow .info-card__shape:nth-child(2){
+  width:42%;height:78%;background:rgba(215,200,110,.48);
+  top:-6%;right:22%;transform:rotate(-8deg)
+}
+.info-card--green .info-card__shape:nth-child(1){
+  width:58%;height:92%;background:rgba(175,228,130,.60);
+  top:-16%;right:-8%;transform:rotate(-13deg)
+}
+.info-card--green .info-card__shape:nth-child(2){
+  width:42%;height:78%;background:rgba(255,255,255,.58);
+  top:-6%;right:22%;transform:rotate(-8deg)
+}
+.info-card__body{position:relative;z-index:1}
+.info-card__title{
+  font-size:18px;font-weight:800;letter-spacing:-0.03em;
+  color:var(--headline);line-height:1.3;margin-bottom:10px;word-break:keep-all
+}
+.info-card__tags{font-size:12px;color:var(--muted);letter-spacing:-0.01em}
+
+/* ── FAQ 섹션 ── */
+.faq-section{}
+.faq-header{margin-bottom:28px}
+.section-eyebrow{font-size:11px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:var(--light);margin-bottom:8px;display:block}
+.section-title{font-size:26px;font-weight:800;letter-spacing:-0.03em;color:var(--headline)}
+
+.faq-cats{display:flex;gap:0;margin-bottom:28px;border:1px solid var(--border)}
+.faq-cat{
+  flex:1;padding:12px 0;text-align:center;
+  font-size:13px;font-weight:500;color:var(--muted);
+  border-right:1px solid var(--border);cursor:pointer;
+  background:var(--white);transition:background .15s,color .15s;
+}
+.faq-cat:last-child{border-right:none}
+.faq-cat:hover{background:var(--bg);color:var(--headline)}
+.faq-cat.on{background:var(--headline);color:var(--white)}
+
+.faq-list{display:flex;flex-direction:column;border:1px solid var(--border)}
+.faq-item{border-bottom:1px solid var(--border);background:var(--white)}
+.faq-item:last-child{border-bottom:none}
+.faq-q{
+  display:flex;align-items:center;gap:14px;
+  padding:20px 24px;cursor:pointer;
+  transition:background .15s;
+}
+.faq-q:hover{background:var(--bg)}
+.faq-q__mark{font-size:13px;font-weight:800;color:var(--light);flex-shrink:0;width:16px}
+.faq-item.on .faq-q__mark{color:var(--headline)}
+.faq-q__text{flex:1;font-size:14px;font-weight:500;letter-spacing:-0.015em;color:var(--headline)}
+.faq-q__chevron{flex-shrink:0;transition:transform .2s}
+.faq-item.on .faq-q__chevron{transform:rotate(180deg)}
+.faq-q__chevron svg{width:12px;height:12px;stroke:var(--light);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.faq-a{display:grid;grid-template-rows:0fr;transition:grid-template-rows .28s}
+.faq-item.on .faq-a{grid-template-rows:1fr}
+.faq-a__inner{overflow:hidden}
+.faq-a__content{
+  padding:0 24px 20px 54px;
+  font-size:13px;line-height:1.9;color:var(--para);
+  border-top:1px solid var(--border);
+  padding-top:16px;
+}
+.faq-a__content a{color:var(--accent);text-decoration:underline}
+
+/* ── 챗봇 열기 배너 ── */
+.chatbot-banner{
+  background:var(--dark);padding:36px 40px;
+  display:flex;align-items:center;justify-content:space-between;
+  gap:24px;margin-top:48px;flex-wrap:wrap;cursor:pointer;
+  transition:opacity .15s;
+}
+.chatbot-banner:hover{opacity:.88}
+.chatbot-banner__left{display:flex;align-items:center;gap:16px}
+.chatbot-banner__dot{
+  width:10px;height:10px;border-radius:50%;
+  background:var(--accent);flex-shrink:0;
+  box-shadow:0 0 0 3px rgba(193,40,56,.2);
+  animation:pulse 2s infinite;
+}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 3px rgba(193,40,56,.2)}50%{box-shadow:0 0 0 6px rgba(193,40,56,.08)}}
+.chatbot-banner__copy{}
+.chatbot-banner__title{font-size:16px;font-weight:700;color:var(--white);letter-spacing:-0.02em;margin-bottom:3px}
+.chatbot-banner__desc{font-size:13px;color:rgba(255,255,255,.4)}
+.chatbot-banner__btn{
+  flex-shrink:0;
+  background:var(--white);color:var(--dark);
+  font-size:13px;font-weight:700;letter-spacing:0.02em;
+  padding:11px 28px;transition:opacity .15s;
+}
+
+/* ════════════════════════════════════
+   CHATBOT PANEL
+════════════════════════════════════ */
+.chat-overlay{
+  display:none;
+  position:fixed;top:0;right:0;bottom:0;
+  z-index:200;
+  width:400px;
+  pointer-events:none;
+}
+.chat-overlay.open{display:block;pointer-events:auto}
+
+.chat-panel{
+  width:100%;height:100%;
+  background:var(--white);
+  display:flex;flex-direction:column;
+  border-left:1px solid var(--border);
+  box-shadow:-4px 0 24px rgba(0,0,0,.10);
+  animation:slideIn .28s cubic-bezier(.32,.72,0,1);
+}
+@keyframes slideIn{from{transform:translateX(100%)}to{transform:none}}
+
+/* chat header */
+.chat-header{
+  padding:0 20px;
+  height:60px;display:flex;align-items:center;justify-content:space-between;
+  border-bottom:1px solid var(--border);
+  flex-shrink:0;
+}
+.chat-header__info{display:flex;align-items:center;gap:10px}
+.chat-header__avatar{
+  width:32px;height:32px;border-radius:50%;
+  background:var(--dark);
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;overflow:hidden;
+}
+.chat-header__avatar svg{width:16px;height:16px}
+.chat-header__name{font-size:13px;font-weight:700;color:var(--headline)}
+.chat-header__status{font-size:11px;color:var(--muted);display:flex;align-items:center;gap:4px}
+.chat-header__status-dot{width:5px;height:5px;border-radius:50%;background:#22c55e}
+.chat-header__close{font-size:20px;color:var(--muted);padding:4px;transition:color .15s;line-height:1}
+.chat-header__close:hover{color:var(--headline)}
+
+/* chat messages */
+.chat-messages{
+  flex:1;overflow-y:auto;
+  padding:20px;display:flex;flex-direction:column;gap:16px;
+  scroll-behavior:smooth;
+}
+.chat-messages::-webkit-scrollbar{width:4px}
+.chat-messages::-webkit-scrollbar-track{background:transparent}
+.chat-messages::-webkit-scrollbar-thumb{background:var(--border2);border-radius:2px}
+
+/* 메시지 버블 */
+.msg{display:flex;gap:8px;align-items:flex-end}
+.msg--bot{align-self:flex-start}
+.msg--user{align-self:flex-end;flex-direction:row-reverse}
+
+.msg__avatar{
+  width:28px;height:28px;border-radius:50%;
+  background:var(--dark);flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;
+  font-size:12px;color:var(--white);font-weight:700;overflow:hidden;
+}
+.msg__bubble{
+  max-width:280px;padding:12px 14px;
+  font-size:13px;line-height:1.7;letter-spacing:-0.01em;
+}
+.msg--bot .msg__bubble{
+  background:var(--bg);color:var(--headline);
+  border:1px solid var(--border);
+}
+.msg--user .msg__bubble{
+  background:var(--dark);color:var(--white);
+}
+.msg__time{font-size:10px;color:var(--light);flex-shrink:0;margin-bottom:2px}
+
+/* 빠른 선택 버튼 */
+.quick-replies{
+  display:flex;flex-wrap:wrap;gap:6px;
+  padding:0 20px 16px;
+}
+.quick-reply{
+  font-size:12px;font-weight:500;
+  padding:7px 14px;
+  border:1px solid var(--border2);
+  color:var(--para);background:var(--white);
+  cursor:pointer;transition:border-color .15s,background .15s;
+  letter-spacing:-0.01em;
+}
+.quick-reply:hover{border-color:var(--headline);background:var(--bg);color:var(--headline)}
+
+/* 입력창 */
+.chat-input-area{
+  border-top:1px solid var(--border);
+  padding:12px 16px;flex-shrink:0;
+  display:flex;gap:8px;align-items:flex-end;
+}
+.chat-input{
+  flex:1;resize:none;height:40px;max-height:100px;
+  border:1px solid var(--border);
+  padding:10px 12px;font-family:var(--font);
+  font-size:13px;color:var(--headline);
+  outline:none;transition:border-color .15s;
+  overflow-y:auto;line-height:1.5;
+}
+.chat-input:focus{border-color:var(--border2)}
+.chat-input::placeholder{color:var(--light)}
+.chat-send{
+  width:40px;height:40px;flex-shrink:0;
+  background:var(--dark);
+  display:flex;align-items:center;justify-content:center;
+  transition:opacity .15s;
+}
+.chat-send:hover{opacity:.75}
+.chat-send svg{width:16px;height:16px;stroke:var(--white);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+
+/* 타이핑 인디케이터 */
+.typing{display:flex;gap:4px;padding:12px 14px;background:var(--bg);border:1px solid var(--border);width:56px}
+.typing span{width:6px;height:6px;border-radius:50%;background:var(--light);animation:dot 1.2s infinite}
+.typing span:nth-child(2){animation-delay:.2s}
+.typing span:nth-child(3){animation-delay:.4s}
+@keyframes dot{0%,80%,100%{transform:scale(1);opacity:.4}40%{transform:scale(1.2);opacity:1}}
+
+/* ── QR MODAL ── */
+.qr-overlay{display:none;position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,.55);align-items:center;justify-content:center;backdrop-filter:blur(4px)}
+.qr-overlay.open{display:flex}
+.qr-modal{background:#fff;width:100%;max-width:440px;padding:48px 40px 40px;position:relative;margin:20px;border-radius:24px;animation:modalIn .25s ease}
+@keyframes modalIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+.qr-modal__close{position:absolute;top:18px;right:20px;font-size:20px;color:var(--muted);cursor:pointer;line-height:1;padding:4px;transition:color .15s}
+.qr-modal__close:hover{color:var(--headline)}
+.qr-modal__title{font-size:22px;font-weight:800;letter-spacing:-0.03em;color:var(--headline);text-align:center;margin-bottom:8px}
+.qr-modal__desc{font-size:14px;color:var(--muted);text-align:center;letter-spacing:-0.01em;margin-bottom:32px}
+.qr-modal__img{width:200px;height:200px;display:block;margin:0 auto 28px;image-rendering:pixelated}
+.qr-modal__stores{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.qr-modal__store{display:flex;align-items:center;justify-content:center;gap:8px;padding:11px 0;border:1px solid var(--border);font-size:12px;font-weight:600;color:var(--headline);letter-spacing:0.02em;transition:border-color .15s,background .15s;cursor:pointer}
+.qr-modal__store:hover{border-color:var(--headline);background:var(--bg)}
+.qr-modal__store-icon{font-size:16px}
+
+/* ── REVEAL ── */
+.reveal{opacity:0;transform:translateY(12px);transition:opacity .45s ease,transform .45s ease}
+.reveal.on{opacity:1;transform:none}
+
+/* ── TABLET ── */
+@media(max-width:1279px){
+  .nav__inner,.page-body{padding-left:32px;padding-right:32px}
+  .page-header{padding:52px 32px 44px}
+  .info-cards{grid-template-columns:1fr 1fr}
+  .chat-overlay{width:380px}
+}
+
+/* ── MOBILE ── */
+@media(max-width:799px){
+  .nav__inner{padding:0 20px}
+  .nav__links{display:none;flex-direction:column;gap:16px;position:absolute;top:60px;left:0;right:0;background:var(--white);border-bottom:1px solid var(--border);padding:20px;box-shadow:0 8px 20px rgba(0,0,0,.05)}
+  .nav__links.open{display:flex}
+  .nav__ham{display:flex}
+  .page-header{padding:36px 20px 32px}
+  .page-header__title{font-size:26px}
+  .page-body{padding:28px 20px 80px}
+  .info-cards{grid-template-columns:1fr}
+  .info-card{min-height:180px}
+  .faq-cats{flex-wrap:wrap}
+  .faq-cat{flex:none;width:50%;border-bottom:1px solid var(--border)}
+  .chat-overlay{width:100vw}
+  .chatbot-banner{padding:24px 20px}
+  .chatbot-banner__btn{width:100%;text-align:center}
+}
+
+/* ─── APP CTA ─── */
+.app-cta{background:#2b2b2b;padding:0;overflow:hidden;position:relative;}
+.app-cta::after{content:'';position:absolute;bottom:-80px;right:10%;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(193,40,56,.35) 0%,transparent 70%);pointer-events:none;}
+.app-cta__inner{max-width:var(--max);margin:0 auto;padding:0 48px;display:grid;grid-template-columns:1fr 1.4fr;gap:60px;align-items:stretch;position:relative;z-index:1;}
+.app-cta__logo{width:48px;height:48px;border-radius:12px;overflow:hidden;margin-bottom:28px;}
+.app-cta__logo img{width:100%;height:100%;object-fit:cover;}
+.app-cta__title{font-size:40px;font-weight:800;letter-spacing:-0.03em;line-height:1.2;color:var(--white);margin-bottom:0;}
+.app-cta__title span{color:var(--accent);}
+.app-cta__actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:36px}
+.app-cta__visual{display:flex;align-items:flex-end;justify-content:flex-end;}
+.app-cta__visual img{width:100%;height:auto;display:block;object-fit:contain;object-position:right bottom;}
+/* ─── FOOTER ─── */
+.footer{background:#f7f7f7;padding:56px 0 0;}
+.footer__inner{max-width:var(--max);margin:0 auto;padding:0 48px;}
+.f-info{font-size:13px;color:#555;line-height:2;}
+.f-isms{display:inline-flex;align-items:center;gap:14px;margin-top:20px;padding:12px 20px;border:none;border-radius:8px;font-size:12px;color:#555;background:#fff;}
+.f-isms img{height:32px;width:auto;}
+.f-isms-divider{width:1px;height:20px;background:#ddd;}
+.footer__divider{border:none;border-top:1px solid #e0e0e0;margin:40px 0 0;}
+.footer__bottom{padding:18px 48px;display:flex;align-items:center;gap:6px;flex-wrap:wrap;max-width:var(--max);margin:0 auto;font-size:11px;color:#999;}
+.footer__bottom span{color:#bbb;}
+@media(max-width:1279px){.app-cta__inner,.footer__inner{padding:0 32px}}
+@media(max-width:799px){.app-cta__inner{grid-template-columns:1fr;gap:40px;padding:0 20px}.app-cta__visual{height:200px}.footer__inner{padding:0 20px}.footer__bottom{flex-direction:column;align-items:flex-start}}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav__inner">
+    <a href="index.html" class="nav__logo">
+      <svg viewBox="0 0 373 64" height="28" xmlns="http://www.w3.org/2000/svg" fill="none">
+        <g clip-path="url(#a)"><rect width="64" height="64" rx="8.333" fill="#222"/><path d="M47.635 19.206H41.422V47.473h6.213V19.206Z" fill="#fff"/><path d="M16.343 20.75v26.717h9.849c-5.992-4.203-8.866-18.38-9.849-26.717Z" fill="#fff"/><path d="m31.498 31.33-10.044-16.207-4.726 4.102 13.705 24.215 8.645-12.678-3.15 2.609c-1.26 1.038-2.886.585-4.43-2.042Z" fill="#fff"/></g>
+        <g clip-path="url(#b)"><path d="M122.382 25.764c-1.485.057-2.958.298-4.384.72V16.028h-6.116V50.326h6.116V30.411c.266-.779.761-1.457 1.419-1.943a3.86 3.86 0 0 1 2.263-.779c2.521 0 4.384 2.047 4.384 5.267V50.326h6.116V35.843c-.132-6.317-3.639-10.079-9.798-10.079Z" fill="#222"/><path d="M226.994 25.766a13.19 13.19 0 0 0-8.016 2.599 13.397 13.397 0 0 0-4.472 7.201 13.466 13.466 0 0 0 1.176 8.417 13.322 13.322 0 0 0 6.27 6.071c5.272 1.814 10.489.863 14.314-2.91l-1.096-1.184c-2.74 2.91-5.886 3.707-8.143 3.319-3.475-.597-5.853-4.425-5.71-9.902l18.346-.089V36.343c-.033-8.907-8.625-10.577-12.669-10.577Zm-5.677 10.987c0-5.72 2.652-9.316 6.115-9.316 2.291 0 5.896 1.87 5.896 9.36l-12.011-.044Z" fill="#222"/><path d="M267.676 25.765a13.253 13.253 0 0 0-7.825 2.356 9.298 9.298 0 0 0-5.842-2.356 9.073 9.073 0 0 0-3.419.498 9.2 9.2 0 0 0-2.403.991v-.906h-6.116v24.496h6.116V32.525c0-3.22 1.94-5.09 4.143-5.09s4.087 1.87 4.087 5.09v17.868h6.126V35.346a11.48 11.48 0 0 0-.548-3.503c.768-2.135 2.258-3.408 4.056-3.408 2.29 0 4.088 1.87 4.088 5.09v17.868h6.071V36.065c-.087-6.583-3.014-10.3-9.535-10.3Z" fill="#222"/><path d="M346.784 25.764a9.72 9.72 0 0 0-5.085 1.991V25.852h-6.116v24.496h6.116V33.752a7.014 7.014 0 0 1 2.006-4.963 6.938 6.938 0 0 1 4.915-1.843c2.005 0 2.86.587 4.811 2.357l.943-1.04a9.164 9.164 0 0 0-2.769-1.655 9.073 9.073 0 0 0-3.821-.844Z" fill="#222"/><path d="M371.071 39.473c-3.146-2.81-11.431-3.175-11.431-7.944a4.47 4.47 0 0 1 1.155-2.72 4.41 4.41 0 0 1 2.714-1.418c4.285-.398 7.299 2.213 7.891 5.388h.887a11.5 11.5 0 0 0-.186-3.645c-.888-4.237-7.672-4.27-9.535-4.27-4.274 0-9.305 1.858-9.305 6.716 0 6.129 9.393 6.815 12.593 10.034 2.926 2.866-.669 6.273-3.65 6.362-2.89-.133-5.636-1.311-7.737-3.319l-1.096 1.184c4.088 5.399 19.651 5.808 19.651-3 0-.818-.175-1.626-.512-2.371a5.547 5.547 0 0 0-1.439-1.697Z" fill="#222"/><path d="M148.356 25.766a13.19 13.19 0 0 0-8.015 2.599 13.397 13.397 0 0 0-4.472 7.201 13.465 13.465 0 0 0 1.176 8.417 13.322 13.322 0 0 0 6.27 6.071c5.272 1.814 10.489.863 14.273-2.91l-1.096-1.183c-2.74 2.91-5.886 3.706-8.154 3.319-3.474-.598-5.852-4.426-5.71-9.902l18.358-.045v-2.544c0-8.951-8.636-10.622-12.63-10.622Zm-5.71 10.943c0-5.72 2.652-9.316 6.115-9.316 2.291 0 5.896 1.87 5.896 9.36l-12.011-.044Z" fill="#222"/><path d="M210.817 17.246h-7.212v33.147h7.212V17.246ZM174.485 19.125V50.447h11.431c-6.959-4.979-10.291-21.608-11.431-31.322ZM192.075 31.473 180.414 12.487l-5.48 4.813 15.914 28.379 10.039-14.87-3.683 3.054c-1.435 1.128-3.287.575-5.129-2.39ZM80 19.525l11.31-.044V50.393h7.519V19.459L110.14 19.425V17.29L80 17.246V19.525ZM293.355 25.765a10.83 10.83 0 0 0-5.48 1.8V16.073h-6.116v34.298h6.116V30.456c.362-.582.867-1.059 1.466-1.385a3.82 3.82 0 0 1 1.953-.473c5.173 0 6.51 5.82 6.39 10.168-1.121 4.348-3.05 10.389-7.313 11.949 7.102 0 12.187-5.941 12.878-11.949.92-8.165-3.836-13-10.894-13ZM319.549 25.765a13.27 13.27 0 0 0-8.11 2.537 13.473 13.473 0 0 0-4.609 7.244 13.542 13.542 0 0 0 1.204 8.431 13.388 13.388 0 0 0 6.314 6.12c5.261 1.814 10.478.862 14.248-2.91l-1.096-1.184c-2.74 2.91-5.874 3.707-8.143 3.319-3.463-.597-5.853-4.425-5.71-9.902l18.357-.088v-2.545c.066-8.95-8.526-10.622-12.455-10.622Zm-5.71 10.942c0-5.72 2.652-9.316 6.115-9.316 2.291 0 5.896 1.87 5.896 9.36l-12.011-.044Z" fill="#222"/></g>
+        <defs><clipPath id="a"><rect width="64" height="64" fill="#fff"/></clipPath><clipPath id="b"><rect width="293" height="39.067" fill="#fff" transform="translate(80 12.467)"/></clipPath></defs>
+      </svg>
+    </a>
+    <div class="nav__links" id="navLinks">
+      <a href="join.html" class="nav__link">가입 절차</a>
+      <a href="reviews.html" class="nav__link">회원 리뷰</a>
+      <a href="support.html" class="nav__link active">고객 지원</a>
+      <button class="nav__cta" id="navCta">무료 가입 신청</button>
+    </div>
+    <button class="nav__ham" id="navHam" aria-label="메뉴">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- PAGE HEADER -->
+<div class="page-header">
+  <div class="page-header__inner">
+    <h1 class="page-header__title" style="text-align:center">고객 지원</h1>
+  </div>
+</div>
+
+<!-- BODY -->
+<div class="page-body">
+
+  <!-- 정보 카드 -->
+  <div class="info-cards reveal">
+    <div class="info-card info-card--blue" onclick="openChat('가입 조건이 궁금해요')">
+      <div class="info-card__shapes">
+        <div class="info-card__shape"></div>
+        <div class="info-card__shape"></div>
+      </div>
+      <div class="info-card__body">
+        <h3 class="info-card__title">가입 조건 안내</h3>
+        <p class="info-card__tags">인증 기준, 필요 서류, 남녀 차이</p>
+      </div>
+    </div>
+    <div class="info-card info-card--yellow" onclick="openChat('가입 심사 기간이 얼마나 걸리나요?')">
+      <div class="info-card__shapes">
+        <div class="info-card__shape"></div>
+        <div class="info-card__shape"></div>
+      </div>
+      <div class="info-card__body">
+        <h3 class="info-card__title">심사 및 승인</h3>
+        <p class="info-card__tags">심사 기간, 반려 사유, 재신청 방법</p>
+      </div>
+    </div>
+    <div class="info-card info-card--green" onclick="openChat('만남 보장 환급은 어떻게 받나요?')">
+      <div class="info-card__shapes">
+        <div class="info-card__shape"></div>
+        <div class="info-card__shape"></div>
+      </div>
+      <div class="info-card__body">
+        <h3 class="info-card__title">만남 보장 & 환급</h3>
+        <p class="info-card__tags">100% 환급, 보장 조건, 신청 방법</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- FAQ -->
+  <div class="faq-section reveal">
+    <div class="faq-header">
+      <span class="section-eyebrow">FAQ</span>
+      <h2 class="section-title">자주 묻는 질문</h2>
+    </div>
+
+    <!-- 카테고리 탭 -->
+    <div class="faq-cats" id="faqCats">
+      <button class="faq-cat on" data-cat="all">전체</button>
+      <button class="faq-cat" data-cat="join">가입 & 인증</button>
+      <button class="faq-cat" data-cat="match">매칭 & 만남</button>
+      <button class="faq-cat" data-cat="price">비용 & 환급</button>
+      <button class="faq-cat" data-cat="privacy">개인정보 & 보안</button>
+    </div>
+
+    <div class="faq-list" id="faqList">
+
+      <!-- 가입 & 인증 -->
+      <div class="faq-item" data-cat="join">
+        <div class="faq-q"><span class="faq-q__mark">Q</span><span class="faq-q__text">가입비가 정말 무료인가요?</span><span class="faq-q__chevron"><svg viewBox="0 0 12 12"><polyline points="2,4 6,8 10,4"/></svg></span></div>
+        <div class="faq-a"><div class="faq-a__inner"><p class="faq-a__content">네, 가입 자체는 완전히 무료입니다. 앱 다운로드 후 가입 신청부터 심사, 프로필 소개까지 별도 비용이 발생하지 않습니다. 서비스 이용에 따른 비용은 실제 만남 이후 단계에서 안내드립니다.</p></div></div>
+      </div>
+
+      <div class="faq-item" data-cat="join">
+        <div class="faq-q"><span class="faq-q__mark">Q</span><span class="faq-q__text">남성과 여성의 가입 조건이 다른가요?</span><span class="faq-q__chevron"><svg viewBox="0 0 12 12"><polyline points="2,4 6,8 10,4"/></svg></span></div>
+        <div class="faq-a"><div class="faq-a__inner"><p class="faq-a__content">네, 차이가 있습니다. 남성은 직업·소득·자산·차량 중 하나 이상의 경제력 인증이 필수입니다. 여성은 경제력 인증 또는 매력 인증(사진·인플루언서·셀럽) 중 하나만으로도 가입이 가능합니다.</p></div></div>
+      </div>
+
+      <div class="faq-item" data-cat="join">
+        <div class="faq-q"><span class="faq-q__mark">Q</span><span class="faq-q__text">심사 기간이 얼마나 걸리나요?</span><span class="faq-q__chevron"><svg viewBox="0 0 12 12"><polyline points="2,4 6,8 10,4"/></svg></span></div>
+        <div class="faq-a"><div class="faq-a__inner"><p class="faq-a__content">평균 1~3일 이내에 결과를 안내드립니다. 제출 서류가 충분하면 더 빠르게 처리될 수 있으며, 보완이 필요한 경우 추가 자료를 요청드릴 수 있습니다. 결과는 앱 푸시 알림과 문자 메시지로 안내드립니다.</p></div></div>
+      </div>
+
+      <div class="faq-item" data-cat="join">
+        <div class="faq-q"><span class="faq-q__mark">Q</span><span class="faq-q__text">가입이 반려되면 재신청할 수 있나요?</span><span class="faq-q__chevron"><svg viewBox="0 0 12 12"><polyline points="2,4 6,8 10,4"/></svg></span></div>
+        <div class="faq-a"><div class="faq-a__inner"><p class="faq-a__content">네, 반려 사유를 확인하신 후 서류를 보완하여 재신청하실 수 있습니다. 반려 사유는 앱 내 알림과 함께 상세히 안내드립니다. 보완 자료 준비 후 앱에서 바로 재신청이 가능합니다.</p></div></div>
+      </div>
+
+      <div class="faq-item" data-cat="join">
+        <div class="faq-q"><span class="faq-q__mark">Q</span><span class="faq-q__text">홈텍스 소득 조회는 어떻게 진행되나요?</span><span class="faq-q__chevron"><svg viewBox="0 0 12 12"><polyline points="2,4 6,8 10,4"/></svg></span></div>
+        <div class="faq-a"><div class="faq-a__inner"><p class="faq-a__content">소득 인증의 경우 홈텍스에서 발급한 소득 확인서 또는 근로소득 원천징수 영수증을 제출하시면 됩니다. 더멤버스 인증팀이 직접 공공 데이터와 대조하여 실제 수치를 확인합니다. 자동화가 아닌 사람이 직접 검토하는 방식입니다.</p></div></div>
+      </div>
+
+      <!-- 매칭 & 만남 -->
+      <div class="faq-item" data-cat="match">
+        <div class="faq-q"><span class="faq-q__mark">Q</span><span class="faq-q__text">가입 후 얼마나 빨리 첫 매칭이 이루어지나요?</span><span class="faq-q__chevron"><svg viewBox="0 0 12 12"><polyline points="2,4 6,8 10,4"/></svg></span></div>
+        <div class="faq-a"><div class="faq-a__inner"><p class="faq-a__content">가입 승인 후 평균 약 1주일 이내에 첫 매칭이 시작됩니다. 매일 4명의 프로필을 소개받으며, 매주 1~2명과의 실제 만남을 보장합니다. 조건 설정에 따라 기간은 다소 달라질 수 있습니다.</p></div></div>
+      </div>
+
+      <div class="faq-item" data-cat="match">
+        <div class="faq-q"><span class="faq-q__mark">Q</span><span class="faq-q__text">만남 장소와 일정은 누가 정하나요?</span><span class="faq-q__chevron"><svg viewBox="0 0 12 12"><polyline points="2,4 6,8 10,4"/></svg></span></div>
+        <div class="faq-a"><div class="faq-a__inner"><p class="faq-a__content">전담 매니저가 양측의 일정과 선호 지역을 반영하여 장소와 시간을 모두 조율합니다. 회원님은 YES 또는 NO만 응답하시면 됩니다. 레스토랑 예약까지 매니저가 처리하므로 직접 준비하실 것이 없습니다.</p></div></div>
+      </div>
+
+      <div class="faq-item" data-cat="match">
+        <div class="faq-q"><span class="faq-q__mark">Q</span><span class="faq-q__text">더블랙은 어떻게 선정되나요?</span><span class="faq-q__chevron"><svg viewBox="0 0 12 12"><polyline points="2,4 6,8 10,4"/></svg></span></div>
+        <div class="faq-a"><div class="faq-a__inner"><p class="faq-a__content">프로필 평점과 서비스 활동 점수를 종합하여 우수 회원을 더블랙으로 선정합니다. 별도 신청 없이 자동으로 선정되며, 선정 즉시 전담 매칭 매니저가 1:1로 배정됩니다. 추가 비용은 없습니다.</p></div></div>
+      </div>
+
+      <div class="faq-item" data-cat="match">
+        <div class="faq-q"><span class="faq-q__mark">Q</span><span class="faq-q__text">마음에 드는 조건을 구체적으로 설정할 수 있나요?</span><span class="faq-q__chevron"><svg viewBox="0 0 12 12"><polyline points="2,4 6,8 10,4"/></svg></span></div>
+        <div class="faq-a"><div class="faq-a__inner"><p class="faq-a__content">네, 나이대·직업·소득·거주 지역·라이프스타일 등 세부 조건을 앱에서 직접 설정하실 수 있습니다. 더블랙 회원의 경우 매니저와의 직접 상담을 통해 더욱 세밀하게 조정할 수 있습니다.</p></div></div>
+      </div>
+
+      <!-- 비용 & 환급 -->
+      <div class="faq-item" data-cat="price">
+        <div class="faq-q"><span class="faq-q__mark">Q</span><span class="faq-q__text">만남 보장 환급은 어떻게 받을 수 있나요?</span><span class="faq-q__chevron"><svg viewBox="0 0 12 12"><polyline points="2,4 6,8 10,4"/></svg></span></div>
+        <div class="faq-a"><div class="faq-a__inner"><p class="faq-a__content">약속된 기간 내 실제 만남이 성사되지 않은 경우, 고객 지원 챗봇 또는 앱 내 문의 기능을 통해 환급을 신청하실 수 있습니다. 신청 후 영업일 기준 5~7일 이내에 결제 수단으로 전액 환급됩니다.</p></div></div>
+      </div>
+
+      <div class="faq-item" data-cat="price">
+        <div class="faq-q"><span class="faq-q__mark">Q</span><span class="faq-q__text">서비스 비용은 언제, 어떻게 발생하나요?</span><span class="faq-q__chevron"><svg viewBox="0 0 12 12"><polyline points="2,4 6,8 10,4"/></svg></span></div>
+        <div class="faq-a"><div class="faq-a__inner"><p class="faq-a__content">가입 및 프로필 소개는 완전히 무료입니다. 서비스 이용 비용은 실제 만남 진행 단계에서 발생하며, 구체적인 금액은 선택하시는 서비스 플랜에 따라 다릅니다. 자세한 내용은 챗봇 또는 앱 내 요금 안내를 확인해 주세요.</p></div></div>
+      </div>
+
+      <!-- 개인정보 & 보안 -->
+      <div class="faq-item" data-cat="privacy">
+        <div class="faq-q"><span class="faq-q__mark">Q</span><span class="faq-q__text">개인 연락처가 상대방에게 공개되나요?</span><span class="faq-q__chevron"><svg viewBox="0 0 12 12"><polyline points="2,4 6,8 10,4"/></svg></span></div>
+        <div class="faq-a"><div class="faq-a__inner"><p class="faq-a__content">아니요. 만남의 전 과정이 전담 매니저를 통해 진행되므로 개인 연락처는 상대방에게 공개되지 않습니다. 전화번호, 카카오톡 ID 등 개인정보는 회원님이 직접 공유하기 전까지 보호됩니다.</p></div></div>
+      </div>
+
+      <div class="faq-item" data-cat="privacy">
+        <div class="faq-q"><span class="faq-q__mark">Q</span><span class="faq-q__text">제출한 서류는 어떻게 관리되나요?</span><span class="faq-q__chevron"><svg viewBox="0 0 12 12"><polyline points="2,4 6,8 10,4"/></svg></span></div>
+        <div class="faq-a"><div class="faq-a__inner"><p class="faq-a__content">제출하신 인증 서류는 심사 완료 후 즉시 파기되며 별도 보관하지 않습니다. 더멤버스는 관련 법령에 따라 개인정보를 처리하며, 인증 결과(등급)만 시스템에 기록됩니다. 자세한 내용은 개인정보처리방침을 확인해 주세요.</p></div></div>
+      </div>
+
+      <div class="faq-item" data-cat="privacy">
+        <div class="faq-q"><span class="faq-q__mark">Q</span><span class="faq-q__text">탈퇴하면 모든 정보가 삭제되나요?</span><span class="faq-q__chevron"><svg viewBox="0 0 12 12"><polyline points="2,4 6,8 10,4"/></svg></span></div>
+        <div class="faq-a"><div class="faq-a__inner"><p class="faq-a__content">회원 탈퇴 시 관계 법령에서 정한 보관 기간을 제외한 모든 개인정보는 즉시 파기됩니다. 탈퇴는 앱 내 설정에서 직접 하실 수 있으며, 탈퇴 후 재가입은 30일 이후 가능합니다.</p></div></div>
+      </div>
+
+    </div><!-- /faq-list -->
+  </div><!-- /faq-section -->
+
+  <!-- 챗봇 열기 배너 -->
+  <div class="chatbot-banner reveal" id="chatBanner">
+    <div class="chatbot-banner__left">
+      <span class="chatbot-banner__dot"></span>
+      <div class="chatbot-banner__copy">
+        <p class="chatbot-banner__title">원하는 답을 찾지 못하셨나요?</p>
+        <p class="chatbot-banner__desc">챗봇이 24시간 빠르게 답변드립니다</p>
+      </div>
+    </div>
+    <span class="chatbot-banner__btn">챗봇 상담 시작하기</span>
+  </div>
+
+</div><!-- /page-body -->
+
+<!-- ════ CHAT PANEL ════ -->
+<div class="chat-overlay" id="chatOverlay">
+  <div class="chat-panel" id="chatPanel">
+
+    <!-- 헤더 -->
+    <div class="chat-header">
+      <div class="chat-header__info">
+        <div class="chat-header__avatar">
+          <img src="스크린샷/m_logo.jpg" alt="더멤버스" style="width:100%;height:100%;object-fit:cover"/>
+        </div>
+        <div>
+          <p class="chat-header__name">더멤버스 고객지원</p>
+          <p class="chat-header__status"><span class="chat-header__status-dot"></span>온라인</p>
+        </div>
+      </div>
+      <button class="chat-header__close" id="chatClose">×</button>
+    </div>
+
+    <!-- 메시지 영역 -->
+    <div class="chat-messages" id="chatMessages"></div>
+
+    <!-- 빠른 답변 -->
+    <div class="quick-replies" id="quickReplies"></div>
+
+    <!-- 입력창 -->
+    <div class="chat-input-area">
+      <textarea class="chat-input" id="chatInput" placeholder="메시지를 입력하세요" rows="1"></textarea>
+      <button class="chat-send" id="chatSend" aria-label="전송">
+        <svg viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- QR MODAL -->
+<div class="qr-overlay" id="qrOverlay">
+  <div class="qr-modal" role="dialog" aria-modal="true" aria-label="앱 다운로드">
+    <button class="qr-modal__close" id="qrClose" aria-label="닫기">×</button>
+    <h2 class="qr-modal__title">더멤버스 앱 다운로드</h2>
+    <p class="qr-modal__desc">QR 코드를 스캔하여 다운로드 해주세요</p>
+    <img class="qr-modal__img" src="assets/themembers_onelink_qr.svg" alt="앱 다운로드 QR 코드"/>
+  </div>
+</div>
+
+
+<section class="app-cta" id="app-cta">
+  <div class="app-cta__inner">
+    <div class="app-cta__copy reveal-l" style="padding:80px 0;display:flex;flex-direction:column;justify-content:center;">
+      <div class="app-cta__logo">
+        <img src="assets/applogo.png" alt="더멤버스 앱 로고">
+      </div>
+      <h2 class="app-cta__title">검증된 3040을 위한<br><span>더멤버스</span></h2>
+      <div class="app-cta__actions">
+        <a href="#" class="btn-red" style="display:inline-block;padding:14px 28px;background:#ffffff;border-radius:999px;color:#111111;font-size:14px;font-weight:600;letter-spacing:-0.01em;text-decoration:none;">앱 다운로드하기</a>
+      </div>
+    </div>
+    <div class="app-cta__visual reveal-r">
+      <img src="assets/images/mockups/Image_two-mockup.png" alt="더멤버스 앱 화면">
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer__inner">
+    <img src="assets/Logo.svg" alt="더멤버스" style="height:28px;width:auto;margin-bottom:20px;display:block;">
+    <p class="f-info">
+      (주)트리플콤마<br>
+      서울특별시 강남구 테헤란로 447, 13층(KB우준타워)<br>
+      대표 천우영
+    </p>
+    <div class="f-isms">
+      <img src="assets/images/image_ISMSP.png" alt="ISMS-P">
+      인증번호 ISMS-P-KISA-2026-009
+      <span class="f-isms-divider"></span>
+      유효기간 2026-02-04 ~ 2029-02-03
+    </div>
+    <hr class="footer__divider">
+  </div>
+  <div class="footer__bottom">
+    사업자등록번호 567-81-00991
+    <span>|</span>
+    결혼중개업 신고 필증 번호 서울-강남-국내-24-0007호
+    <span>|</span>
+    © Copyright 2026. Triplecomma Inc. All right reserved
+  </div>
+</footer>
+
+<script>
+/* ══ NAV ══ */
+document.getElementById('navHam').addEventListener('click', () => {
+  document.getElementById('navLinks').classList.toggle('open');
+});
+
+/* ══ CTA → QR MODAL ══ */
+document.getElementById('navCta').addEventListener('click', () => {
+  document.getElementById('qrOverlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+});
+document.querySelectorAll('.btn-red').forEach(el => {
+  el.addEventListener('click', function(e){
+    e.preventDefault();
+    document.getElementById('qrOverlay').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  });
+});
+document.getElementById('qrClose').addEventListener('click', () => {
+  document.getElementById('qrOverlay').classList.remove('open');
+  document.body.style.overflow = '';
+});
+document.getElementById('qrOverlay').addEventListener('click', function(e) {
+  if (e.target === this) { this.classList.remove('open'); document.body.style.overflow = ''; }
+});
+document.addEventListener('keydown', function(e){
+  if(e.key === 'Escape'){ document.getElementById('qrOverlay').classList.remove('open'); document.body.style.overflow = ''; }
+});
+
+/* ══ FAQ 카테고리 ══ */
+document.querySelectorAll('.faq-cat').forEach(cat => {
+  cat.addEventListener('click', () => {
+    document.querySelectorAll('.faq-cat').forEach(c => c.classList.remove('on'));
+    cat.classList.add('on');
+    const filter = cat.dataset.cat;
+    document.querySelectorAll('.faq-item').forEach(item => {
+      item.style.display = (filter === 'all' || item.dataset.cat === filter) ? '' : 'none';
+    });
+  });
+});
+
+/* ══ FAQ 아코디언 ══ */
+document.querySelectorAll('.faq-q').forEach(q => {
+  q.addEventListener('click', () => {
+    const item = q.parentElement;
+    const isOpen = item.classList.contains('on');
+    document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('on'));
+    if (!isOpen) item.classList.add('on');
+  });
+});
+
+/* ══ CHATBOT ══ */
+const overlay   = document.getElementById('chatOverlay');
+const messages  = document.getElementById('chatMessages');
+const qreplies  = document.getElementById('quickReplies');
+const inputEl   = document.getElementById('chatInput');
+const chatClose = document.getElementById('chatClose');
+
+let chatStarted = false;
+
+// 봇 응답 데이터
+const RESPONSES = {
+  '가입 조건이 궁금해요': {
+    text: '가입 조건을 안내드릴게요 😊\n\n남성은 직업·소득·자산·차량 중 하나 이상의 경제력 인증이 필수입니다.\n\n여성은 경제력 인증 또는 매력 인증(사진·인플루언서·셀럽) 중 하나만으로 가입 가능합니다.\n\n더 궁금한 인증 항목이 있으신가요?',
+    replies: ['직업 인증 조건', '소득 인증 조건', '자산 인증 조건', '매력 인증 조건 (여성)']
+  },
+  '직업 인증 조건': {
+    text: '직업 인증 가능 항목입니다.\n\n• 전문직 — 의사, 변호사, 치과의사, 검사 등\n• 사업가 — 연매출 50억 이상 기업 대표\n• 대기업 — 재계순위 52위 이내 및 계열사\n• 공기업 — 내규에 따른 대한민국 공기업\n• 공무원 — 7급 이상\n• 명문대 — 서울대·연세대·고려대·KAIST·아이비리그',
+    replies: ['가입 심사 기간', '소득 인증 조건', '처음으로 돌아가기']
+  },
+  '소득 인증 조건': {
+    text: '소득 인증 기준입니다.\n\n• 고소득 — 20~30대 6,000만원 이상 / 40대 7,000만원 이상\n• 억대 연봉 — 연 소득 1억원 이상\n• 2억대+ 연봉 — 연 소득 2억원 이상\n\n홈텍스 소득 확인서 또는 원천징수 영수증으로 인증합니다.',
+    replies: ['자산 인증 조건', '차량 인증 조건', '처음으로 돌아가기']
+  },
+  '자산 인증 조건': {
+    text: '자산 인증 기준입니다.\n\n• 자가 보유 — 서울 7억, 그 외 5억 이상 아파트\n• 고액 자산 — 금융·부동산 총 5억원 이상\n• 초고액 자산 — 20억 / 50억 / 100억원 이상',
+    replies: ['차량 인증 조건', '직업 인증 조건', '처음으로 돌아가기']
+  },
+  '차량 인증 조건': {
+    text: '차량 인증 기준입니다.\n\n• 고급 차량 — 출시 5년 이내, 5,000만원 이상\n• 억대 차량 — 출시 3년 이내, 1억원 이상\n• 슈퍼카 — 출시 3년 이내, 2억원 이상\n\n소유 또는 리스 차량 모두 인정됩니다.',
+    replies: ['가입 심사 기간', '처음으로 돌아가기']
+  },
+  '매력 인증 조건 (여성)': {
+    text: '여성 전용 매력 인증 항목입니다.\n\n• 매력 사진 — 셀카, 우아한 일상, 여행 사진\n• 인플루언서 — 인스타그램 2만+ / 유튜브 10만+\n• 셀럽 — 미스코리아 수상 / 인스타 10만+ / 유튜브 50만+\n\n경제력 인증 없이 매력 인증 하나만으로도 가입 가능합니다.',
+    replies: ['가입 심사 기간', '처음으로 돌아가기']
+  },
+  '가입 심사 기간이 얼마나 걸리나요?': {
+    text: '가입 심사는 평균 1~3일 이내 완료됩니다.\n\n제출 서류가 충분하면 더 빠르게 처리되며, 보완이 필요한 경우 추가 자료를 요청드릴 수 있습니다.\n\n결과는 앱 푸시 알림과 문자 메시지로 안내드립니다.',
+    replies: ['반려되면 재신청 가능한가요?', '어떤 서류를 준비해야 하나요?', '처음으로 돌아가기']
+  },
+  '반려되면 재신청 가능한가요?': {
+    text: '네, 재신청 가능합니다.\n\n반려 사유를 확인하신 후 서류를 보완하여 앱에서 바로 재신청하실 수 있습니다. 반려 사유는 앱 내 알림으로 상세히 안내드립니다.',
+    replies: ['가입 조건이 궁금해요', '처음으로 돌아가기']
+  },
+  '어떤 서류를 준비해야 하나요?': {
+    text: '인증 항목에 따라 필요 서류가 다릅니다.\n\n• 직업 인증 — 재직증명서, 사업자등록증, 학위증명서 등\n• 소득 인증 — 홈텍스 소득 확인서, 원천징수 영수증\n• 자산 인증 — 부동산 등기부등본, 금융 자산 증명서\n• 차량 인증 — 자동차 등록증, 리스 계약서\n\n자세한 내용은 앱 내 가입 화면에서 확인 가능합니다.',
+    replies: ['가입 심사 기간이 얼마나 걸리나요?', '처음으로 돌아가기']
+  },
+  '만남 보장 환급은 어떻게 받나요?': {
+    text: '만남 미성사 시 100% 환급해 드립니다.\n\n약속된 기간 내 실제 만남이 성사되지 않은 경우, 이 채팅창 또는 앱 내 문의 기능으로 환급 신청을 해주세요.\n\n신청 후 영업일 기준 5~7일 이내에 결제 수단으로 전액 환급됩니다.',
+    replies: ['환급 조건이 더 궁금해요', '처음으로 돌아가기']
+  },
+  '환급 조건이 더 궁금해요': {
+    text: '환급은 아래 조건을 충족할 때 신청 가능합니다.\n\n• 서비스 이용 기간 내 단 한 번의 만남도 성사되지 않은 경우\n• 회원님의 귀책 사유(일방적 거절, 연락 두절 등)가 없는 경우\n\n구체적인 기간 조건은 선택하신 서비스 플랜에 따라 다르며, 앱 내 이용약관에서 확인하실 수 있습니다.',
+    replies: ['처음으로 돌아가기']
+  },
+  '더블랙은 어떻게 선정되나요?': {
+    text: '더블랙은 별도 신청 없이 자동으로 선정됩니다.\n\n프로필 평점과 서비스 활동 점수를 종합하여 우수 회원을 더블랙으로 선정합니다.\n\n선정 즉시 전담 매칭 매니저 1명이 배정되며, 추가 비용은 없습니다.',
+    replies: ['더블랙 혜택이 뭔가요?', '처음으로 돌아가기']
+  },
+  '더블랙 혜택이 뭔가요?': {
+    text: '더블랙 회원 전용 혜택입니다.\n\n• 전담 매칭 매니저 1:1 배정\n• 일정·장소·만남 전 과정 직접 관리\n• 조건 상담을 통한 정밀 매칭\n• 개인 연락처 완전 비공개 보장\n\nYES / NO만 선택하시면 나머지는 매니저가 처리합니다.',
+    replies: ['처음으로 돌아가기']
+  },
+  '개인정보는 안전한가요?': {
+    text: '개인정보 보호를 최우선으로 합니다.\n\n• 개인 연락처는 만남 전 과정에서 상대방에게 공개되지 않습니다.\n• 제출 서류는 심사 완료 후 즉시 파기됩니다.\n• 회원 탈퇴 시 법령 보관 기간 외 모든 정보를 즉시 삭제합니다.',
+    replies: ['탈퇴하면 정보가 삭제되나요?', '처음으로 돌아가기']
+  },
+  '탈퇴하면 정보가 삭제되나요?': {
+    text: '네, 탈퇴 즉시 개인정보를 파기합니다.\n\n관계 법령에서 정한 보관 기간을 제외한 모든 정보가 삭제됩니다. 탈퇴는 앱 설정에서 직접 하실 수 있으며, 탈퇴 후 30일 이후 재가입이 가능합니다.',
+    replies: ['처음으로 돌아가기']
+  },
+  '처음으로 돌아가기': {
+    text: '무엇을 도와드릴까요? 아래 항목을 선택하거나 직접 질문을 입력해 주세요.',
+    replies: ['가입 조건이 궁금해요', '가입 심사 기간이 얼마나 걸리나요?', '만남 보장 환급은 어떻게 받나요?', '더블랙은 어떻게 선정되나요?', '개인정보는 안전한가요?']
+  }
+};
+
+const DEFAULT_REPLIES = ['가입 조건이 궁금해요', '가입 심사 기간이 얼마나 걸리나요?', '만남 보장 환급은 어떻게 받나요?', '더블랙은 어떻게 선정되나요?', '개인정보는 안전한가요?'];
+
+function now() {
+  return new Date().toLocaleTimeString('ko-KR', { hour: '2-digit', minute: '2-digit' });
+}
+
+function addMsg(text, type) {
+  const msg = document.createElement('div');
+  msg.className = `msg msg--${type}`;
+  if (type === 'bot') {
+    msg.innerHTML = `
+      <div class="msg__avatar"><img src="스크린샷/m_logo.jpg" alt="" style="width:100%;height:100%;object-fit:cover"/></div>
+      <div>
+        <div class="msg__bubble">${text.replace(/\n/g, '<br>')}</div>
+      </div>
+      <span class="msg__time">${now()}</span>`;
+  } else {
+    msg.innerHTML = `
+      <span class="msg__time">${now()}</span>
+      <div class="msg__bubble">${text}</div>`;
+  }
+  messages.appendChild(msg);
+  messages.scrollTop = messages.scrollHeight;
+}
+
+function showTyping() {
+  const t = document.createElement('div');
+  t.className = 'msg msg--bot';
+  t.id = 'typing';
+  t.innerHTML = `<div class="msg__avatar"><img src="스크린샷/m_logo.jpg" alt="" style="width:100%;height:100%;object-fit:cover"/></div><div class="typing"><span></span><span></span><span></span></div>`;
+  messages.appendChild(t);
+  messages.scrollTop = messages.scrollHeight;
+}
+
+function removeTyping() {
+  const t = document.getElementById('typing');
+  if (t) t.remove();
+}
+
+function setReplies(arr) {
+  qreplies.innerHTML = '';
+  arr.forEach(r => {
+    const btn = document.createElement('button');
+    btn.className = 'quick-reply';
+    btn.textContent = r;
+    btn.addEventListener('click', () => handleInput(r));
+    qreplies.appendChild(btn);
+  });
+}
+
+function handleInput(text) {
+  addMsg(text, 'user');
+  setReplies([]);
+  showTyping();
+  setTimeout(() => {
+    removeTyping();
+    const resp = RESPONSES[text];
+    if (resp) {
+      addMsg(resp.text, 'bot');
+      setReplies(resp.replies);
+    } else {
+      addMsg('죄송합니다, 해당 내용은 담당자를 통해 안내드리겠습니다.\n\n아래 항목 중 선택하시거나 앱을 통해 추가 문의해 주세요.', 'bot');
+      setReplies(DEFAULT_REPLIES);
+    }
+  }, 800);
+}
+
+function openChat(initialMsg) {
+  overlay.classList.add('open');
+  if (!chatStarted) {
+    chatStarted = true;
+    setTimeout(() => {
+      addMsg('안녕하세요! 더멤버스 고객지원입니다 😊\n\n궁금하신 내용을 선택하거나 직접 입력해 주세요.', 'bot');
+      if (initialMsg) {
+        setTimeout(() => handleInput(initialMsg), 400);
+      } else {
+        setReplies(DEFAULT_REPLIES);
+      }
+    }, 300);
+  } else if (initialMsg) {
+    handleInput(initialMsg);
+  }
+}
+
+function closeChat() {
+  overlay.classList.remove('open');
+}
+
+// 이벤트
+chatClose.addEventListener('click', closeChat);
+// 딤 없으므로 overlay 클릭 닫기 불필요
+document.getElementById('chatBanner').addEventListener('click', () => openChat(null));
+
+// 챗봇 전송
+function sendMessage() {
+  const text = inputEl.value.trim();
+  if (!text) return;
+  inputEl.value = '';
+  inputEl.style.height = '40px';
+  handleInput(text);
+}
+document.getElementById('chatSend').addEventListener('click', sendMessage);
+inputEl.addEventListener('keydown', e => {
+  if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendMessage(); }
+});
+inputEl.addEventListener('input', function() {
+  this.style.height = '40px';
+  this.style.height = Math.min(this.scrollHeight, 100) + 'px';
+});
+
+// Reveal
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('on'); io.unobserve(e.target); } });
+}, { threshold: 0.08 });
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
+</body>
+</html>

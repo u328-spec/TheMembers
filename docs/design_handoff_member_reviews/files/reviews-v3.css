@@ -1,0 +1,502 @@
+/* ============================================================
+   더블랙 — V3 Kakao Bank–style scene carousel
+   세로로 긴 사진 카드 + 살짝 오프셋된 흰 카드
+   ============================================================ */
+
+.kb-section {
+  background: #FFFFFF;
+  padding: 100px 0 140px;
+  overflow: hidden;
+}
+
+.kb-section__head {
+  max-width: var(--max);
+  margin: 0 auto 64px;
+  padding: 0 24px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+}
+.kb-section__title {
+  font-size: 38px;
+  font-weight: 800;
+  line-height: 1.3;
+  letter-spacing: -0.03em;
+  color: var(--headline);
+  text-wrap: balance;
+}
+.kb-section__title em {
+  font-style: normal;
+  color: var(--accent);
+}
+.kb-section__nav {
+  display: flex;
+  gap: 8px;
+  flex-shrink: 0;
+}
+.kb-section__nav button {
+  width: 44px;
+  height: 44px;
+  border-radius: 999px;
+  background: var(--bg);
+  border: 0;
+  color: var(--headline);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: background .15s ease, opacity .15s ease;
+  cursor: pointer;
+}
+.kb-section__nav button:hover:not(:disabled) { background: var(--border2); }
+.kb-section__nav button:disabled { opacity: 0.25; cursor: default; }
+
+.kb-track {
+  display: flex;
+  gap: 32px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  padding: 60px max(24px, calc((100vw - var(--max)) / 2 + 24px)) 100px;
+  scrollbar-width: none;
+  scroll-padding-left: max(24px, calc((100vw - var(--max)) / 2 + 24px));
+}
+.kb-track::-webkit-scrollbar { display: none; }
+
+/* ============================================================
+   Scene — 사진 + 텍스트 카드 (서로 살짝 겹침, 카카오뱅크 스타일)
+   ============================================================ */
+.kb-scene {
+  flex: 0 0 540px;
+  scroll-snap-align: start;
+  position: relative;
+  height: 540px;
+  display: flex;
+  align-items: stretch;
+}
+
+.kb-photo {
+  width: 290px;
+  height: 480px;
+  align-self: center;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 24px 60px -20px rgba(0,0,0,0.22);
+  position: relative;
+  z-index: 1;
+  flex-shrink: 0;
+}
+.kb-art {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+/* right: 텍스트 카드 오른쪽 / left: 텍스트 카드 왼쪽 */
+.kb-scene--right .kb-photo { transform: translate(0, -20px); }
+.kb-scene--right .kb-hl {
+  margin-left: -70px;   /* photo 위로 겹침 */
+  align-self: center;
+  transform: translate(0, 30px);
+}
+
+.kb-scene--left {
+  flex-direction: row-reverse;
+}
+.kb-scene--left .kb-photo { transform: translate(0, 20px); }
+.kb-scene--left .kb-hl {
+  margin-right: -70px;
+  align-self: center;
+  transform: translate(0, -30px);
+}
+
+/* ============================================================
+   Highlight card — 텍스트 카드 (사진과 동일 높이)
+   ============================================================ */
+.kb-hl {
+  width: 320px;
+  height: 440px;
+  background: #FFFFFF;
+  border-radius: 20px;
+  padding: 28px 26px;
+  box-shadow: 0 20px 52px -16px rgba(0,0,0,0.20);
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  overflow: hidden;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.kb-hl__top {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+.kb-hl__label {
+  font-size: 11px;
+  color: var(--muted);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  display: inline-block;
+  align-self: flex-start;
+  background: var(--bg);
+  padding: 4px 10px;
+  border-radius: 999px;
+}
+.kb-hl__label--dark {
+  background: rgba(255,255,255,0.1);
+  color: rgba(255,255,255,0.7);
+}
+
+.kb-hl__title {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--headline);
+  letter-spacing: -0.02em;
+  line-height: 1.4;
+}
+.kb-hl__big {
+  font-size: 32px;
+  font-weight: 800;
+  color: var(--headline);
+  letter-spacing: -0.03em;
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+}
+.kb-hl__big span {
+  color: var(--border2);
+  font-weight: 400;
+  margin: 0 4px;
+}
+
+.kb-hl__body {
+  flex: 1;
+  font-size: 14px;
+  line-height: 1.75;
+  color: var(--headline);
+  letter-spacing: -0.01em;
+  overflow-y: auto;
+  text-wrap: pretty;
+  scrollbar-width: thin;
+  scrollbar-color: var(--border2) transparent;
+}
+.kb-hl__body::-webkit-scrollbar { width: 4px; }
+.kb-hl__body::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 999px; }
+
+.kb-hl__foot {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding-top: 16px;
+  border-top: 1px solid var(--border);
+  flex-shrink: 0;
+}
+.kb-hl__date {
+  font-size: 11px;
+  color: var(--muted);
+  letter-spacing: 0.02em;
+  font-variant-numeric: tabular-nums;
+  flex-shrink: 0;
+}
+.kb-hl__avatar {
+  flex-shrink: 0;
+}
+.kb-hl__avatar .rv-avatar {
+  width: 36px;
+  height: 36px;
+}
+.kb-hl__who {
+  flex: 1;
+  min-width: 0;
+}
+.kb-hl__handle {
+  font-size: 13px;
+  font-weight: 800;
+  color: var(--headline);
+  letter-spacing: -0.01em;
+  margin-bottom: 2px;
+}
+.kb-hl__meta {
+  font-size: 11px;
+  color: var(--muted);
+  letter-spacing: 0.02em;
+}
+
+.kb-hl__foot--rating {
+  font-size: 11px;
+  color: var(--muted);
+  letter-spacing: 0.02em;
+  font-weight: 600;
+}
+.kb-dot {
+  width: 2px;
+  height: 2px;
+  background: var(--border2);
+  border-radius: 999px;
+}
+
+.kb-hl__pills {
+  display: flex;
+  align-items: center;
+  gap: 0;
+}
+.kb-hl__pill {
+  width: 32px;
+  height: 32px;
+  border-radius: 999px;
+  border: 2px solid #FFF;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+.kb-hl__pill .rv-avatar {
+  width: 28px;
+  height: 28px;
+  border-radius: 999px;
+  overflow: hidden;
+}
+.kb-hl__pills .kb-hl__handle {
+  margin-left: 10px;
+}
+
+/* ============================================================
+   Chat variant — 카카오톡 스타일 대화 스레드
+   ============================================================ */
+.kb-hl--chat {
+  padding: 0;
+  background: #ABC1D1;
+  overflow: hidden;
+}
+
+.kb-hl__chat-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 16px;
+  background: #ABC1D1;
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+  flex-shrink: 0;
+}
+.kb-hl__chat-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 999px;
+  overflow: hidden;
+  flex-shrink: 0;
+  background: #fff;
+}
+.kb-hl__chat-avatar .rv-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 999px;
+  overflow: hidden;
+}
+.kb-hl__chat-name {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--headline);
+  letter-spacing: -0.01em;
+}
+.kb-hl__chat-status {
+  font-size: 10px;
+  color: rgba(0,0,0,0.5);
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+.kb-online {
+  width: 6px;
+  height: 6px;
+  border-radius: 999px;
+  background: #1FAA59;
+  display: inline-block;
+}
+
+.kb-hl__chat-thread {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  overflow-y: auto;
+  padding: 16px 14px;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(0,0,0,.18) transparent;
+}
+.kb-hl__chat-thread::-webkit-scrollbar { width: 4px; }
+.kb-hl__chat-thread::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.18); border-radius: 999px; }
+
+.kb-hl__chat-row {
+  display: flex;
+  align-items: flex-end;
+  gap: 6px;
+  max-width: 100%;
+}
+.kb-hl__chat-row--in { justify-content: flex-start; }
+.kb-hl__chat-row--out { justify-content: flex-end; }
+
+.kb-hl__chat-bubble {
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.55;
+  padding: 10px 14px;
+  border-radius: 14px;
+  text-wrap: pretty;
+  letter-spacing: -0.01em;
+  max-width: 80%;
+}
+.kb-hl__chat-bubble--in {
+  background: #FFFFFF;
+  color: var(--headline);
+  border-bottom-left-radius: 4px;
+}
+.kb-hl__chat-bubble--out {
+  background: #FEE500;
+  color: var(--headline);
+  border-bottom-right-radius: 4px;
+}
+.kb-hl__chat-bubble--reaction {
+  background: rgba(255,255,255,0.85);
+  font-size: 12px;
+}
+.kb-hl__chat-time {
+  font-size: 9.5px;
+  color: rgba(0,0,0,0.45);
+  white-space: nowrap;
+  padding-bottom: 2px;
+  letter-spacing: 0;
+}
+
+.kb-hl__chat-input {
+  flex-shrink: 0;
+  background: #FFF;
+  padding: 12px 16px;
+  border-top: 1px solid rgba(0,0,0,0.06);
+}
+.kb-hl__chat-input span {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--muted);
+  letter-spacing: 0.02em;
+}
+
+/* ============================================================
+   Quote variant — 검정 카드
+   ============================================================ */
+.kb-hl--quote {
+  background: var(--headline);
+  color: #fff;
+  padding: 30px 28px;
+}
+.kb-hl__quote-mark {
+  font-family: 'Georgia', serif;
+  font-size: 60px;
+  line-height: 0.6;
+  color: var(--accent);
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+.kb-hl__quote-text {
+  flex: 1;
+  font-size: 17px;
+  font-weight: 600;
+  line-height: 1.7;
+  letter-spacing: -0.02em;
+  color: #fff;
+  text-wrap: pretty;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255,255,255,.2) transparent;
+}
+.kb-hl__quote-text::-webkit-scrollbar { width: 4px; }
+.kb-hl__quote-text::-webkit-scrollbar-thumb { background: rgba(255,255,255,.2); border-radius: 999px; }
+
+.kb-hl__quote-meta {
+  padding-top: 14px;
+  border-top: 1px solid rgba(255,255,255,0.12);
+  flex-shrink: 0;
+}
+.kb-hl__quote-handle {
+  font-size: 13px;
+  font-weight: 800;
+  color: #fff;
+  margin-bottom: 4px;
+}
+.kb-hl__quote-info {
+  font-size: 11px;
+  color: rgba(255,255,255,0.55);
+  letter-spacing: 0.02em;
+}
+
+/* ============================================================
+   Tag chip floating on photo
+   ============================================================ */
+.kb-scene__tag {
+  position: absolute;
+  top: 22px;
+  left: 22px;
+  background: rgba(255,255,255,0.95);
+  backdrop-filter: blur(8px);
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--headline);
+  z-index: 2;
+  letter-spacing: 0.02em;
+}
+
+/* ============================================================
+   Page hero (V3)
+   ============================================================ */
+.kb-page-hero {
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 100px 24px 60px;
+  text-align: center;
+}
+.kb-page-hero__eyebrow {
+  font-size: 11px;
+  letter-spacing: 0.32em;
+  color: var(--accent);
+  font-weight: 700;
+  margin-bottom: 18px;
+}
+.kb-page-hero h1 {
+  font-size: 48px;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.2;
+  margin: 0;
+}
+.kb-page-hero p {
+  margin-top: 20px;
+  font-size: 15px;
+  line-height: 1.7;
+  color: var(--para);
+  max-width: 540px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* ============================================================
+   Responsive
+   ============================================================ */
+@media (max-width: 720px) {
+  .kb-section__title { font-size: 26px; }
+  .kb-section__head { flex-direction: column; align-items: flex-start; }
+  .kb-scene { flex: 0 0 440px; height: 460px; }
+  .kb-photo { width: 220px; height: 400px; }
+  .kb-hl { width: 260px; height: 380px; padding: 22px 20px; }
+  .kb-scene--right .kb-hl { margin-left: -50px; }
+  .kb-scene--left .kb-hl { margin-right: -50px; }
+  .kb-hl__body { font-size: 13px; }
+  .kb-page-hero h1 { font-size: 30px; }
+}

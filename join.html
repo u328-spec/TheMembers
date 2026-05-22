@@ -1,0 +1,1375 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>더멤버스 — 가입 절차</title>
+<link rel="preconnect" href="https://cdn.jsdelivr.net"/>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css"/>
+<style>
+/* ─────────────────────────────────────
+   RESET
+───────────────────────────────────── */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{font-size:16px;scroll-behavior:smooth}
+body{min-height:100vh;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+ul{list-style:none}
+a{text-decoration:none;color:inherit}
+button{cursor:pointer;border:none;background:none;font:inherit}
+
+/* ─────────────────────────────────────
+   TOKENS
+───────────────────────────────────── */
+:root{
+  /* color */
+  --white:    #FFFFFF;
+  --bg:       #F7F7F7;
+  --bg2:      #F2F2F2;
+  --border:   #E8E8E8;
+  --border2:  #D8D8D8;
+  --headline: #111111;
+  --body:     #555555;
+  --muted:    #999999;
+  --light:    #BBBBBB;
+  --dark:     #111111;
+  --dark2:    #1A1A1A;
+
+  /* accent — 정말 중요한 곳만 */
+  --red:      #C12838;
+  --red-pale: #FDF2F3;
+
+  /* layout */
+  --font:'Pretendard',-apple-system,'Apple SD Gothic Neo',sans-serif;
+  --max:1200px;
+}
+
+body{font-family:var(--font);background:var(--white);color:var(--body)}
+
+/* ─────────────────────────────────────
+   NAV
+───────────────────────────────────── */
+.nav{
+  position:sticky;top:0;z-index:100;
+  background:var(--white);
+}
+.nav__inner{
+  max-width:var(--max);margin:0 auto;padding:0 48px;
+  height:60px;display:flex;align-items:center;justify-content:space-between;
+}
+.nav__logo{display:flex;align-items:center;height:100%}
+.nav__links{display:flex;align-items:center;gap:32px}
+.nav__link{
+  font-size:13px;font-weight:400;color:var(--muted);
+  letter-spacing:-0.01em;transition:color 0.15s;
+}
+.nav__link:hover{color:var(--headline)}
+.nav__link.active{color:var(--headline);font-weight:600}
+.nav__cta{
+  margin-left:8px;
+  background:var(--headline);color:var(--white);
+  font-size:12px;font-weight:700;letter-spacing:0.04em;
+  padding:9px 22px;border-radius:999px;
+  transition:opacity 0.15s;
+}
+.nav__cta:hover{opacity:0.75}
+.nav__ham{display:none;flex-direction:column;gap:4px;padding:4px}
+.nav__ham span{display:block;width:20px;height:1.5px;background:var(--headline)}
+
+/* ─────────────────────────────────────
+   PAGE HEADER
+───────────────────────────────────── */
+.page-header{
+  background:var(--white);
+  border-bottom:1px solid var(--border);
+  padding:64px 48px 56px;
+}
+.page-header__inner{
+  max-width:var(--max);margin:0 auto;
+  display:flex;justify-content:center;
+  text-align:center;
+}
+.page-header__breadcrumb{
+  display:flex;align-items:center;gap:8px;
+  font-size:11px;font-weight:500;letter-spacing:0.08em;
+  color:var(--light);text-transform:uppercase;
+  margin-bottom:18px;
+}
+.page-header__breadcrumb-sep{font-size:10px;color:var(--border2)}
+.page-header__breadcrumb-current{color:var(--muted)}
+.page-header__title{
+  font-size:40px;font-weight:800;
+  letter-spacing:-0.035em;line-height:1.15;
+  color:var(--headline);margin-bottom:12px;
+}
+.page-header__desc{
+  font-size:15px;font-weight:400;line-height:1.75;
+  letter-spacing:-0.01em;color:var(--body);
+  max-width:520px;
+}
+.page-header__meta{
+  display:flex;flex-direction:column;align-items:flex-end;gap:8px;
+  flex-shrink:0;
+}
+.page-header__meta-item{
+  display:flex;align-items:center;gap:8px;
+  font-size:12px;color:var(--muted);
+}
+.page-header__meta-dot{
+  width:5px;height:5px;border-radius:50%;
+  background:var(--border2);
+}
+
+/* ─────────────────────────────────────
+   LAYOUT
+───────────────────────────────────── */
+.page-body{
+  max-width:var(--max);margin:0 auto;
+  padding:0 48px 120px;
+  display:grid;
+  grid-template-columns:220px 1fr;
+  gap:64px;
+  align-items:start;
+}
+
+/* ─────────────────────────────────────
+   SIDEBAR NAV
+───────────────────────────────────── */
+.sidebar{
+  position:sticky;
+  top:80px;
+  padding-top:52px;
+}
+.sidebar__title{
+  font-size:10px;font-weight:700;letter-spacing:0.16em;
+  text-transform:uppercase;color:var(--light);
+  margin-bottom:12px;padding-bottom:12px;
+  border-bottom:1px solid var(--border);
+}
+.sidebar__list{display:flex;flex-direction:column;gap:0}
+.sidebar__item{
+  display:flex;align-items:center;gap:10px;
+  padding:11px 0;
+  border-bottom:1px solid var(--border);
+  cursor:pointer;transition:color 0.15s;
+}
+.sidebar__item:last-child{border-bottom:none}
+.sidebar__item-num{
+  font-size:11px;font-weight:700;letter-spacing:0.04em;
+  color:var(--light);min-width:18px;
+  transition:color 0.15s;
+}
+.sidebar__item-label{
+  font-size:13px;font-weight:400;color:var(--muted);
+  transition:color 0.15s;line-height:1.4;
+}
+.sidebar__item:hover .sidebar__item-label,
+.sidebar__item:hover .sidebar__item-num{color:var(--headline)}
+.sidebar__item.active .sidebar__item-num{color:var(--red)}
+.sidebar__item.active .sidebar__item-label{color:var(--headline);font-weight:600}
+
+.sidebar__cta{
+  margin-top:28px;
+  background:var(--red);color:var(--white);
+  display:block;text-align:center;
+  font-size:13px;font-weight:700;letter-spacing:0.02em;
+  padding:13px 0;
+  transition:opacity 0.15s;
+}
+.sidebar__cta:hover{opacity:0.85}
+
+/* ─────────────────────────────────────
+   MAIN CONTENT
+───────────────────────────────────── */
+.main{padding-top:52px}
+
+/* ── section block ── */
+.content-section{
+  padding-bottom:80px;
+  border-bottom:1px solid var(--border);
+  margin-bottom:80px;
+}
+.content-section:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0}
+
+.cs-header{margin-bottom:40px}
+.cs-num{
+  font-size:11px;font-weight:700;letter-spacing:0.14em;
+  text-transform:uppercase;color:var(--light);
+  margin-bottom:8px;
+}
+.cs-title{
+  font-size:26px;font-weight:700;letter-spacing:-0.025em;
+  line-height:1.25;color:var(--headline);
+  margin-bottom:10px;
+}
+.cs-desc{
+  font-size:14px;font-weight:400;line-height:1.85;
+  color:var(--body);max-width:600px;
+}
+
+/* ─────────────────────────────────────
+   STEP 1 — 앱 다운로드
+───────────────────────────────────── */
+.info-cards{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:1px;
+  background:var(--border);border:1px solid var(--border);
+  border-radius:12px;overflow:hidden;
+}
+.info-card{
+  background:var(--white);
+  padding:28px 24px;
+  display:flex;flex-direction:column;gap:6px;
+  align-items:center;text-align:center;
+  transition:background 0.2s;
+}
+.info-card:hover{background:var(--bg)}
+.info-card__label{
+  font-size:11px;font-weight:600;letter-spacing:0.1em;
+  text-transform:uppercase;color:var(--light);
+  margin-bottom:4px;
+}
+.info-card__value{
+  font-size:28px;font-weight:800;letter-spacing:-0.03em;
+  line-height:1;color:var(--headline);
+}
+.info-card__sub{
+  font-size:12px;line-height:1.6;color:var(--muted);
+}
+
+/* ─────────────────────────────────────
+   STEP 2 — 인증 탭
+───────────────────────────────────── */
+.cert-tabs{
+  display:flex;flex-direction:column;gap:0;
+  border:1px solid var(--border);margin-bottom:0;
+  border-radius:12px 12px 0 0;overflow:hidden;
+}
+.cert-tab{
+  display:flex;align-items:center;gap:14px;
+  padding:0;
+  border-bottom:1px solid var(--border);
+  cursor:pointer;background:var(--white);
+  transition:background 0.15s;
+  text-align:left;
+}
+.cert-tab:last-child{border-bottom:none}
+.cert-tab:hover{background:var(--bg)}
+.cert-tab.on{background:var(--bg2)}
+.cert-tab__num{
+  width:52px;height:52px;
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;
+  font-size:11px;font-weight:700;letter-spacing:0.06em;
+  color:var(--light);
+  border-right:1px solid var(--border);
+  transition:color 0.15s;
+}
+.cert-tab.on .cert-tab__num{color:var(--headline)}
+.cert-tab__body{flex:1;padding:16px 20px}
+.cert-tab__title{font-size:14px;font-weight:600;letter-spacing:-0.015em;color:var(--headline);margin-bottom:2px}
+.cert-tab__sub{font-size:11px;color:var(--muted)}
+.cert-tab__gender{
+  flex-shrink:0;margin-right:16px;
+  font-size:10px;font-weight:600;letter-spacing:0.06em;
+  padding:3px 10px;
+  border:1px solid var(--border);color:var(--muted);
+  background:var(--bg);border-radius:999px;
+}
+.cert-tab.on .cert-tab__gender{border-color:var(--border2)}
+.cert-tab__arrow{
+  flex-shrink:0;margin-right:20px;
+  font-size:14px;color:var(--light);
+  transition:transform 0.2s,color 0.15s;
+}
+.cert-tab.on .cert-tab__arrow{transform:rotate(90deg);color:var(--headline)}
+
+/* cert panel */
+.cert-panels{border:1px solid var(--border);border-top:none;border-radius:0 0 12px 12px;overflow:hidden}
+.cert-panel{display:none;padding:32px}
+.cert-panel.on{display:block}
+
+.cert-panel__grid{
+  display:grid;grid-template-columns:1fr 1fr;gap:8px;
+  margin-bottom:20px;
+}
+.cert-item{
+  display:flex;align-items:flex-start;gap:10px;
+  padding:14px 16px;
+  background:var(--bg);
+  border:1px solid var(--border);
+  border-radius:8px;
+  transition:border-color 0.15s;
+}
+.cert-item:hover{border-color:var(--border2)}
+.cert-item__dot{
+  width:3px;height:3px;border-radius:50%;
+  background:var(--border2);
+  flex-shrink:0;margin-top:8px;
+}
+.cert-item__text{font-size:13px;line-height:1.65;color:var(--headline)}
+.cert-item__text strong{font-weight:600}
+.cert-item__text span{color:var(--muted);font-size:12px}
+
+.cert-note{
+  padding:14px 18px;
+  background:var(--bg);border:1px solid var(--border);
+  border-left:2px solid var(--border2);
+  border-radius:8px;
+  font-size:12px;line-height:1.7;color:var(--muted);
+}
+.cert-note--accent{
+  background:var(--red-pale);
+  border-left-color:var(--red);
+  color:var(--body);
+}
+
+/* women badge */
+.women-only{
+  display:inline-flex;align-items:center;gap:5px;
+  font-size:10px;font-weight:700;letter-spacing:0.08em;
+  padding:3px 10px;
+  background:var(--red-pale);color:var(--red);
+  border:1px solid rgba(193,40,56,0.15);
+  border-radius:999px;
+}
+
+/* ─────────────────────────────────────
+   STEP 3 — 심사 프로세스
+───────────────────────────────────── */
+.process-rows{
+  border:1px solid var(--border);
+  border-radius:12px;overflow:hidden;
+}
+.process-row{
+  display:grid;
+  grid-template-columns:56px 1fr auto;
+  border-bottom:1px solid var(--border);
+  transition:background 0.15s;
+}
+.process-row:last-child{border-bottom:none}
+.process-row:hover{background:var(--bg)}
+.process-row__num{
+  display:flex;align-items:center;justify-content:center;
+  padding:24px 0;
+  border-right:1px solid var(--border);
+  font-size:11px;font-weight:700;letter-spacing:0.06em;color:var(--light);
+}
+.process-row__body{padding:24px 28px}
+.process-row__title{
+  font-size:14px;font-weight:600;letter-spacing:-0.015em;
+  color:var(--headline);margin-bottom:5px;
+}
+.process-row__desc{font-size:13px;line-height:1.7;color:var(--body)}
+.process-row__tag{
+  display:flex;align-items:center;padding:24px 20px 24px 0;
+}
+.tag{
+  font-size:10px;font-weight:600;letter-spacing:0.06em;
+  padding:4px 10px;white-space:nowrap;border-radius:999px;
+}
+.tag-dark{background:var(--headline);color:var(--white)}  /* 핵심 강조만 */
+.tag-muted{background:var(--bg2);color:var(--muted);border:1px solid var(--border)}
+
+/* ─────────────────────────────────────
+   STEP 4 — 활동 안내
+───────────────────────────────────── */
+.activity-grid{
+  display:grid;grid-template-columns:1fr 1fr;gap:16px;
+}
+.activity-card{
+  border:1px solid var(--border);padding:28px 24px;
+  background:var(--white);border-radius:16px;
+  transition:box-shadow 0.2s,border-color 0.2s;
+}
+.activity-card:hover{box-shadow:0 4px 24px rgba(0,0,0,0.07);border-color:var(--border2)}
+.activity-card__icon{
+  font-size:20px;margin-bottom:14px;
+}
+.activity-card__title{
+  font-size:15px;font-weight:700;letter-spacing:-0.02em;
+  color:var(--headline);margin-bottom:8px;
+}
+.activity-card__desc{font-size:13px;line-height:1.75;color:var(--body)}
+
+/* ─────────────────────────────────────
+   STEP 5 — 더블랙
+───────────────────────────────────── */
+.black-card{
+  background:var(--dark);
+  border:1px solid #2a2a2a;
+  border-radius:16px;overflow:hidden;
+}
+.black-card__header{
+  padding:32px 36px 28px;
+  border-bottom:1px solid #2a2a2a;
+  display:flex;align-items:flex-start;justify-content:space-between;gap:24px;
+}
+.black-card__title{
+  font-size:28px;font-weight:800;letter-spacing:-0.03em;
+  color:var(--white);margin-bottom:6px;
+}
+.black-card__title-sub{
+  font-size:12px;font-weight:400;letter-spacing:0.14em;
+  color:#555;text-transform:uppercase;
+}
+.black-card__badge{
+  flex-shrink:0;
+  font-size:10px;font-weight:700;letter-spacing:0.1em;
+  text-transform:uppercase;
+  padding:5px 14px;
+  border:1px solid #333;color:#777;
+}
+.black-card__body{
+  display:grid;grid-template-columns:1fr 1fr;
+}
+.black-card__feats{
+  padding:32px 36px;
+  border-right:1px solid #2a2a2a;
+  display:flex;flex-direction:column;gap:0;
+}
+.black-feat{
+  display:flex;align-items:flex-start;gap:14px;
+  padding:18px 0;border-bottom:1px solid #222;
+}
+.black-feat:first-child{padding-top:0}
+.black-feat:last-child{border-bottom:none;padding-bottom:0}
+.black-feat__idx{
+  font-size:10px;font-weight:700;letter-spacing:0.08em;
+  color:#444;flex-shrink:0;margin-top:3px;
+  min-width:20px;
+}
+.black-feat__title{
+  font-size:14px;font-weight:600;color:#e0e0e0;
+  margin-bottom:3px;
+}
+.black-feat__desc{font-size:12px;line-height:1.65;color:#555}
+
+.black-card__info{padding:32px 36px}
+.black-info-rows{display:flex;flex-direction:column;gap:0;margin-bottom:24px}
+.black-info-row{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:13px 0;border-bottom:1px solid #222;font-size:13px;
+}
+.black-info-row:first-child{padding-top:0}
+.black-info-row:last-child{border-bottom:none;padding-bottom:0}
+.black-info-key{color:#555}
+.black-info-val{font-weight:600;color:#c0c0c0}
+
+/* ─────────────────────────────────────
+   STEP 6 — 만남 보장
+───────────────────────────────────── */
+.guarantee-box{
+  border:1px solid var(--border);
+  overflow:hidden;
+}
+.guarantee-box__top{
+  display:grid;grid-template-columns:1fr 1fr 1fr;
+  background:var(--bg);border-bottom:1px solid var(--border);
+}
+.g-stat{
+  padding:28px 24px;
+  border-right:1px solid var(--border);
+  display:flex;flex-direction:column;gap:4px;
+  transition:background 0.15s;
+}
+.g-stat:last-child{border-right:none}
+.g-stat:hover{background:var(--bg2)}
+.g-num{
+  font-size:32px;font-weight:800;letter-spacing:-0.04em;
+  line-height:1;color:var(--headline);
+}
+.g-label{font-size:12px;font-weight:500;color:var(--headline);margin-bottom:2px}
+.g-sub{font-size:11px;color:var(--muted);line-height:1.5}
+
+/* 핵심 보장 항목 — 여기만 레드 사용 */
+.guarantee-box__promise{
+  padding:28px 32px;
+  border-bottom:1px solid var(--border);
+  display:flex;align-items:center;gap:16px;
+}
+.promise-icon{
+  width:36px;height:36px;background:var(--red);
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;font-size:14px;color:var(--white);
+}
+.promise-text strong{
+  display:block;font-size:15px;font-weight:700;
+  color:var(--headline);margin-bottom:3px;
+}
+.promise-text p{font-size:13px;color:var(--body);line-height:1.6}
+
+.guarantee-box__items{
+  display:grid;grid-template-columns:1fr 1fr;
+}
+.g-item{
+  padding:22px 28px;
+  border-right:1px solid var(--border);
+  border-top:1px solid var(--border);
+  display:flex;align-items:flex-start;gap:12px;
+  transition:background 0.15s;
+}
+.g-item:nth-child(even){border-right:none}
+.g-item:hover{background:var(--bg)}
+.g-item__check{
+  width:18px;height:18px;border:1px solid var(--border2);
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;margin-top:2px;font-size:9px;color:var(--headline);font-weight:700;
+}
+.g-item__text{font-size:13px;line-height:1.65;color:var(--body)}
+.g-item__text strong{font-weight:600;color:var(--headline);display:block;margin-bottom:2px}
+
+/* ─────────────────────────────────────
+   BOTTOM CTA
+───────────────────────────────────── */
+.bottom-cta{
+  margin-top:64px;
+  padding:40px 48px;
+  background:var(--headline);
+  display:flex;align-items:center;justify-content:space-between;gap:32px;
+  flex-wrap:wrap;
+}
+.bottom-cta__copy{}
+.bottom-cta__title{
+  font-size:20px;font-weight:700;letter-spacing:-0.025em;
+  color:var(--white);margin-bottom:5px;
+}
+.bottom-cta__desc{font-size:13px;color:rgba(255,255,255,0.4);line-height:1.6}
+.bottom-cta__btn{
+  flex-shrink:0;
+  background:var(--red);color:var(--white);  /* CTA 버튼 — 레드 사용 */
+  font-size:13px;font-weight:700;letter-spacing:0.04em;
+  padding:14px 36px;transition:opacity 0.15s;
+  white-space:nowrap;
+}
+.bottom-cta__btn:hover{opacity:0.85}
+
+/* ─────────────────────────────────────
+   REVEAL
+───────────────────────────────────── */
+.reveal{opacity:0;transform:translateY(14px);transition:opacity 0.45s ease,transform 0.45s ease}
+.reveal.on{opacity:1;transform:none}
+
+/* ─────────────────────────────────────
+   TABLET  800–1279
+───────────────────────────────────── */
+@media(max-width:1279px){
+  .nav__inner{padding:0 32px}
+  .page-header{padding:52px 32px 44px}
+  .page-body{padding:0 32px 100px;grid-template-columns:180px 1fr;gap:40px}
+  .page-header__title{font-size:32px}
+  .info-cards{grid-template-columns:1fr 1fr}
+  .black-card__body{grid-template-columns:1fr}
+  .black-card__feats{border-right:none;border-bottom:1px solid #2a2a2a}
+  .guarantee-box__top{grid-template-columns:1fr 1fr}
+  .g-stat:last-child{border-right:none;border-top:1px solid var(--border);grid-column:1/-1}
+  .bottom-cta{padding:32px}
+}
+
+/* ─────────────────────────────────────
+   MOBILE  0–799
+───────────────────────────────────── */
+@media(max-width:799px){
+  .nav__inner{padding:0 20px}
+  .nav__links{display:none;flex-direction:column;gap:16px;position:absolute;top:60px;left:0;right:0;background:var(--white);border-bottom:1px solid var(--border);padding:20px;box-shadow:0 8px 20px rgba(0,0,0,0.05)}
+  .nav__links.open{display:flex}
+  .nav__ham{display:flex}
+
+  .page-header{padding:36px 20px 32px}
+  .page-header__inner{grid-template-columns:1fr}
+  .page-header__meta{display:none}
+  .page-header__title{font-size:26px}
+
+  .page-body{
+    padding:0 20px 80px;
+    grid-template-columns:1fr;
+    gap:0;
+  }
+  .sidebar{position:static;padding-top:32px;padding-bottom:8px}
+  .sidebar__list{display:flex;flex-direction:row;overflow-x:auto;gap:0;border:1px solid var(--border)}
+  .sidebar__item{
+    flex-shrink:0;flex-direction:column;align-items:center;gap:4px;
+    padding:12px 16px;border-bottom:none;border-right:1px solid var(--border);
+    text-align:center;
+  }
+  .sidebar__item:last-child{border-right:none}
+  .sidebar__item-num{min-width:auto}
+  .sidebar__item-label{font-size:11px}
+  .sidebar__cta{display:none}
+
+  .main{padding-top:32px}
+  .info-cards{grid-template-columns:1fr 1fr}
+  .cert-panel__grid{grid-template-columns:1fr}
+  .activity-grid{grid-template-columns:1fr}
+  .black-card__body{grid-template-columns:1fr}
+  .black-card__feats{border-right:none;border-bottom:1px solid #2a2a2a}
+  .black-card__header{flex-direction:column;gap:12px}
+  .guarantee-box__top{grid-template-columns:1fr}
+  .g-stat{border-right:none;border-bottom:1px solid var(--border)}
+  .g-stat:last-child{border-bottom:none}
+  .guarantee-box__items{grid-template-columns:1fr}
+  .g-item:nth-child(even){border-right:none}
+  .g-item{border-right:none}
+  .process-row{grid-template-columns:44px 1fr}
+  .process-row__tag{display:none}
+  .bottom-cta{flex-direction:column;gap:20px;padding:28px 20px}
+  .bottom-cta__btn{width:100%;text-align:center;display:block}
+}
+
+/* ── QR MODAL ── */
+.qr-overlay{
+  display:none;position:fixed;inset:0;z-index:9999;
+  background:rgba(0,0,0,.55);
+  align-items:center;justify-content:center;
+  backdrop-filter:blur(4px);
+}
+.qr-overlay.open{display:flex}
+.qr-modal{
+  background:#fff;
+  width:100%;max-width:440px;
+  padding:48px 40px 40px;
+  position:relative;
+  margin:20px;
+  border-radius:24px;
+  animation:modalIn .25s ease;
+}
+@keyframes modalIn{
+  from{opacity:0;transform:translateY(12px)}
+  to{opacity:1;transform:none}
+}
+.qr-modal__close{
+  position:absolute;top:18px;right:20px;
+  font-size:20px;color:#999;cursor:pointer;
+  line-height:1;padding:4px;
+  transition:color .15s;
+}
+.qr-modal__close:hover{color:#111}
+.qr-modal__title{
+  font-size:22px;font-weight:800;letter-spacing:-0.03em;
+  color:#111;text-align:center;margin-bottom:8px;
+}
+.qr-modal__desc{
+  font-size:14px;color:#999;text-align:center;
+  letter-spacing:-0.01em;margin-bottom:32px;
+}
+.qr-modal__img{
+  width:200px;height:200px;
+  display:block;margin:0 auto 28px;
+  image-rendering:pixelated;
+}
+.qr-modal__stores{
+  display:grid;grid-template-columns:1fr 1fr;gap:10px;
+}
+.qr-modal__store{
+  display:flex;align-items:center;justify-content:center;gap:8px;
+  padding:11px 0;border:1px solid #e8e8e8;
+  font-size:12px;font-weight:600;color:#111;letter-spacing:0.02em;
+  transition:border-color .15s,background .15s;cursor:pointer;
+}
+.qr-modal__store:hover{border-color:#111;background:#f7f7f7}
+.qr-modal__store-icon{font-size:16px}
+
+/* ── STORY SLIDER ── */
+.story-section{padding:80px 0;background:var(--bg)}
+.story-inner{max-width:var(--max);margin:0 auto;padding:0 48px}
+.story-header{
+  display:flex;align-items:center;justify-content:space-between;
+  margin-bottom:32px;
+}
+.story-title{font-size:20px;font-weight:800;letter-spacing:-0.03em;color:var(--headline)}
+.story-nav{display:flex;gap:8px}
+.story-nav__btn{
+  width:40px;height:40px;border-radius:50%;
+  border:1px solid var(--border);background:var(--white);
+  display:flex;align-items:center;justify-content:center;
+  cursor:pointer;font-size:16px;color:var(--muted);
+  transition:border-color .15s,color .15s;
+}
+.story-nav__btn:hover{border-color:var(--headline);color:var(--headline)}
+.story-track{
+  display:flex;gap:16px;
+  overflow-x:auto;scroll-behavior:smooth;
+  padding-bottom:8px;scrollbar-width:none;
+}
+.story-track::-webkit-scrollbar{display:none}
+.story-card{
+  flex-shrink:0;width:280px;
+  border:1px solid var(--border);border-radius:16px;
+  background:var(--white);
+  padding:20px 20px 0;
+  display:flex;flex-direction:column;gap:12px;
+  overflow:hidden;
+}
+.story-card__top{
+  display:flex;align-items:center;justify-content:space-between;
+}
+.story-card__cat{display:flex;align-items:center;gap:8px}
+.story-card__icon{
+  width:32px;height:32px;border-radius:50%;
+  background:var(--bg2);border:1px solid var(--border);
+  display:flex;align-items:center;justify-content:center;
+  font-size:15px;
+}
+.story-card__badge{
+  font-size:12px;font-weight:600;color:var(--body);letter-spacing:-0.01em;
+}
+.story-card__menu{font-size:12px;color:var(--muted);letter-spacing:3px;line-height:1}
+.story-card__headline{
+  font-size:15px;font-weight:700;letter-spacing:-0.02em;
+  line-height:1.45;color:var(--headline);
+}
+.story-card__tags{display:flex;flex-wrap:wrap;gap:4px;padding-bottom:4px}
+.story-card__tag{font-size:11px;color:var(--muted)}
+.story-card__visual{
+  margin:0 -20px;
+  border-radius:0 0 14px 14px;overflow:hidden;
+  min-height:160px;
+  display:flex;align-items:center;justify-content:center;
+}
+.story-card__visual--db{background:var(--dark)}
+.story-card__visual--id{background:#F5E8A0}
+.story-card__visual--quote{
+  background:var(--dark);padding:24px;
+  flex-direction:column;align-items:flex-start;gap:10px;
+}
+.s-vis-db{text-align:center;color:#fff}
+.s-vis-db strong{display:block;font-size:22px;font-weight:900;letter-spacing:0.12em}
+.s-vis-db span{font-size:9px;letter-spacing:0.22em;color:rgba(255,255,255,.45);display:block;margin-top:4px}
+.s-vis-id{text-align:center}
+.s-vis-id__code{font-size:28px;font-weight:900;letter-spacing:-0.02em;color:var(--headline)}
+.s-vis-id__sub{font-size:11px;color:var(--muted);margin-top:4px}
+.s-vis-quote__mark{font-size:32px;color:var(--accent);line-height:1;font-weight:900}
+.s-vis-quote__text{font-size:13px;line-height:1.7;color:rgba(255,255,255,.85);font-weight:500}
+
+@media(max-width:799px){
+  .story-inner{padding:0 20px}
+  .story-card{width:240px}
+}
+
+
+/* ─── APP CTA ─── */
+.app-cta{background:#2b2b2b;padding:0;overflow:hidden;position:relative;}
+.app-cta::after{content:'';position:absolute;bottom:-80px;right:10%;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(193,40,56,.35) 0%,transparent 70%);pointer-events:none;}
+.app-cta__inner{max-width:var(--max);margin:0 auto;padding:0 48px;display:grid;grid-template-columns:1fr 1.4fr;gap:60px;align-items:stretch;position:relative;z-index:1;}
+.app-cta__logo{width:48px;height:48px;border-radius:12px;overflow:hidden;margin-bottom:28px;}
+.app-cta__logo img{width:100%;height:100%;object-fit:cover;}
+.app-cta__title{font-size:40px;font-weight:800;letter-spacing:-0.03em;line-height:1.2;color:var(--white);margin-bottom:0;}
+.app-cta__title span{color:var(--accent);}
+.app-cta__actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:36px}
+.app-cta__visual{display:flex;align-items:flex-end;justify-content:flex-end;}
+.app-cta__visual img{width:100%;height:auto;display:block;object-fit:contain;object-position:right bottom;}
+/* ─── FOOTER ─── */
+.footer{background:#f7f7f7;padding:56px 0 0;}
+.footer__inner{max-width:var(--max);margin:0 auto;padding:0 48px;}
+.f-info{font-size:13px;color:#555;line-height:2;}
+.f-isms{display:inline-flex;align-items:center;gap:14px;margin-top:20px;padding:12px 20px;border:none;border-radius:8px;font-size:12px;color:#555;background:#fff;}
+.f-isms img{height:32px;width:auto;}
+.f-isms-divider{width:1px;height:20px;background:#ddd;}
+.footer__divider{border:none;border-top:1px solid #e0e0e0;margin:40px 0 0;}
+.footer__bottom{padding:18px 48px;display:flex;align-items:center;gap:6px;flex-wrap:wrap;max-width:var(--max);margin:0 auto;font-size:11px;color:#999;}
+.footer__bottom span{color:#bbb;}
+@media(max-width:1279px){.app-cta__inner,.footer__inner{padding:0 32px}}
+@media(max-width:799px){.app-cta__inner{grid-template-columns:1fr;gap:40px;padding:0 20px}.app-cta__visual{height:200px}.footer__inner{padding:0 20px}.footer__bottom{flex-direction:column;align-items:flex-start}}
+</style>
+</head>
+<body>
+
+<!-- ══ NAV ══ -->
+<nav class="nav">
+  <div class="nav__inner">
+    <a href="index.html" class="nav__logo"><svg class="nav__logo-svg" viewBox="0 0 373 64" height="28" xmlns="http://www.w3.org/2000/svg" fill="none"><g clip-path="url(#clip0_2248_5700)">
+<rect width="64" height="64" rx="8.33333" fill="#222222"/>
+<path d="M47.635 19.2063H41.4222V47.473H47.635V19.2063Z" fill="white"/>
+<path d="M16.3434 20.7499V47.4665H26.192C20.1997 43.2637 17.3264 29.0862 16.3434 20.7499Z" fill="white"/>
+<path d="M31.4979 31.3295L21.4539 15.123L16.7281 19.2251L30.433 43.4402L39.0781 30.7624L35.9275 33.3711C34.6673 34.3099 33.0416 33.8562 31.4979 31.3295Z" fill="white"/>
+</g>
+<g clip-path="url(#clip1_2248_5700)">
+<path d="M122.382 25.7641C120.897 25.8208 119.424 26.0623 117.998 26.4832V16.0278H111.882V50.326H117.998V30.4109C118.264 29.6323 118.759 28.9543 119.417 28.4679C120.075 27.9814 120.865 27.7097 121.68 27.6892C124.201 27.6892 126.064 29.736 126.064 32.9556V50.326H132.18V35.8433C132.048 29.5258 128.541 25.7641 122.382 25.7641Z" fill="#222222"/>
+<path d="M226.994 25.7661C224.102 25.6515 221.263 26.5719 218.978 28.365C216.693 30.1581 215.109 32.7085 214.506 35.566C213.903 38.4234 214.32 41.404 215.682 43.9816C217.044 46.5592 219.265 48.5679 221.952 49.6531C227.224 51.4676 232.441 50.5161 236.266 46.7433L235.17 45.5595C232.43 48.4693 229.284 49.2659 227.027 48.8787C223.552 48.2812 221.174 44.4531 221.317 38.9765L239.663 38.8879V36.3432C239.63 27.4368 231.038 25.7661 226.994 25.7661ZM221.317 36.7526C221.317 31.0326 223.969 27.4368 227.432 27.4368C229.723 27.4368 233.328 29.3066 233.328 36.7969L221.317 36.7526Z" fill="#222222"/>
+<path d="M267.676 25.7648C264.883 25.6644 262.133 26.4923 259.851 28.1214C258.286 26.5912 256.188 25.7445 254.009 25.7648C252.85 25.7346 251.694 25.9029 250.59 26.2626C250.105 26.373 249.634 26.5401 249.187 26.7605V25.8533H243.071V50.3488H249.187V32.5248C249.187 29.3052 251.127 27.4354 253.33 27.4354C255.533 27.4354 257.418 29.3052 257.418 32.5248V50.393H263.544V35.3461C263.599 33.8253 263.414 32.3054 262.996 30.8431C263.764 28.7078 265.254 27.4354 267.052 27.4354C269.342 27.4354 271.14 29.3052 271.14 32.5248V50.393H277.211V36.0653C277.124 29.4822 274.197 25.7648 267.676 25.7648Z" fill="#222222"/>
+<path d="M346.784 25.7635C344.917 25.8408 343.129 26.5412 341.699 27.755V25.852H335.583V50.3476H341.699V33.7517C341.818 32.2568 342.458 30.8529 343.505 29.7894C344.553 28.726 345.94 28.0718 347.42 27.9431C349.425 27.9431 350.28 28.5295 352.231 30.2998L353.174 29.2597C352.468 28.1987 351.518 27.3263 350.405 26.7174C349.292 26.1085 348.05 25.7811 346.784 25.7635Z" fill="#222222"/>
+<path d="M371.071 39.4728C367.925 36.6625 359.64 36.2974 359.64 31.5289C359.671 30.4805 360.082 29.4801 360.795 28.7173C361.508 27.9546 362.474 27.4826 363.509 27.391C367.794 26.9927 370.808 29.6037 371.4 32.7791H372.287C372.34 31.8749 372.277 30.9676 372.101 30.0795C371.213 25.842 364.429 25.8088 362.566 25.8088C358.292 25.8088 353.261 27.6675 353.261 32.5246C353.261 38.654 362.654 39.34 365.854 42.5596C368.78 45.4251 365.185 48.8328 362.204 48.9213C359.314 48.788 356.568 47.61 354.467 45.6022L353.371 46.786C357.459 52.1852 373.022 52.5946 373.022 43.7877C373.021 42.9696 372.846 42.1612 372.509 41.4169C372.173 40.6727 371.682 40.0098 371.071 39.4728Z" fill="#222222"/>
+<path d="M148.356 25.7661C145.465 25.6515 142.626 26.5719 140.341 28.365C138.056 30.1581 136.472 32.7085 135.869 35.566C135.266 38.4234 135.682 41.404 137.045 43.9816C138.407 46.5592 140.628 48.5679 143.315 49.6531C148.587 51.4676 153.804 50.5161 157.629 46.7433L156.533 45.5595C153.793 48.4693 150.647 49.2659 148.389 48.8787C144.915 48.2812 142.537 44.4531 142.679 38.9765L161.037 38.9322V36.3875C161.037 27.4368 152.401 25.7661 148.356 25.7661ZM142.646 36.7084C142.646 30.9883 145.299 27.3925 148.762 27.3925C151.053 27.3925 154.658 29.2623 154.658 36.7526L142.646 36.7084Z" fill="#222222"/>
+<path d="M210.817 17.2458H203.605V50.3933H210.817V17.2458Z" fill="#222222"/>
+<path d="M174.485 19.1252V50.4472H185.916C178.957 45.4684 175.625 28.8394 174.485 19.1252Z" fill="#222222"/>
+<path d="M192.075 31.4725L180.414 12.4868L174.934 17.2996L190.848 45.6785L200.887 30.8086L197.204 33.8623C195.769 34.9908 193.917 34.4376 192.075 31.4725Z" fill="#222222"/>
+<path d="M80 19.525L91.3105 19.4808V50.3933H98.829V19.4586L110.14 19.4254V17.2901L80 17.2458V19.525Z" fill="#222222"/>
+<path d="M293.355 25.7651C291.387 25.788 289.474 26.4215 287.875 27.5796V16.0731H281.759V50.3712H287.875V30.4562C288.237 29.8742 288.742 29.397 289.341 29.0713C289.941 28.7455 290.614 28.5822 291.294 28.5975C296.467 28.5975 297.804 34.4171 297.684 38.7652C297.563 43.1133 295.634 49.1542 291.371 50.7142C298.473 50.7142 303.558 44.7729 304.249 38.7652C305.169 30.6 300.413 25.7651 293.355 25.7651Z" fill="#222222"/>
+<path d="M319.549 25.7651C316.632 25.6101 313.757 26.5097 311.439 28.3024C309.121 30.095 307.511 32.6632 306.9 35.5458C306.289 38.4284 306.716 41.4366 308.104 44.0301C309.492 46.6236 311.751 48.6326 314.474 49.6963C319.735 51.5108 324.952 50.5593 328.722 46.7865L327.626 45.6026C324.886 48.5125 321.752 49.3091 319.483 48.9218C316.02 48.3244 313.63 44.4963 313.773 39.0196L332.13 38.9311V36.3864C332.196 27.4357 323.604 25.7651 319.549 25.7651ZM313.839 36.7073C313.839 30.9872 316.491 27.3915 319.954 27.3915C322.245 27.3915 325.85 29.2613 325.85 36.7515L313.839 36.7073Z" fill="#222222"/>
+</g>
+<defs>
+<clipPath id="clip0_2248_5700">
+<rect width="64" height="64" fill="white"/>
+</clipPath>
+<clipPath id="clip1_2248_5700">
+<rect width="293" height="39.0667" fill="white" transform="translate(80 12.4667)"/>
+</clipPath>
+</defs>
+</svg></a>
+    <div class="nav__links" id="navLinks">
+      <a href="join.html" class="nav__link active">가입 절차</a>
+      <a href="reviews.html" class="nav__link">회원 리뷰</a>
+      <a href="support.html" class="nav__link">고객 지원</a>
+      <a href="#cta" class="nav__cta">무료 가입 신청</a>
+    </div>
+    <button class="nav__ham" id="navHam" aria-label="메뉴">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- QR MODAL -->
+<div class="qr-overlay" id="qrOverlay">
+  <div class="qr-modal" role="dialog" aria-modal="true" aria-label="앱 다운로드">
+    <button class="qr-modal__close" id="qrClose" aria-label="닫기">×</button>
+    <h2 class="qr-modal__title">더멤버스 앱 다운로드</h2>
+    <p class="qr-modal__desc">QR 코드를 스캔하여 다운로드 해주세요</p>
+    <img class="qr-modal__img" src="assets/themembers_onelink_qr.svg" alt="앱 다운로드 QR 코드"/>
+  </div>
+</div>
+
+
+<!-- ══ PAGE HEADER ══ -->
+<div class="page-header">
+  <div class="page-header__inner">
+    <div>
+      <h1 class="page-header__title">가입비 없이, 전화 상담 없이,<br>앱에서 간편하게.</h1>
+    </div>
+  </div>
+</div>
+
+<!-- ══ BODY ══ -->
+<div class="page-body">
+
+  <!-- ── SIDEBAR ── -->
+  <aside class="sidebar">
+    <p class="sidebar__title">단계별 안내</p>
+    <div class="sidebar__list">
+      <div class="sidebar__item active" data-target="step1">
+        <span class="sidebar__item-num">01</span>
+        <span class="sidebar__item-label">앱 다운로드 & 가입</span>
+      </div>
+      <div class="sidebar__item" data-target="step2">
+        <span class="sidebar__item-num">02</span>
+        <span class="sidebar__item-label">프로필 & 인증</span>
+      </div>
+      <div class="sidebar__item" data-target="step3">
+        <span class="sidebar__item-num">03</span>
+        <span class="sidebar__item-label">가입 심사</span>
+      </div>
+      <div class="sidebar__item" data-target="step4">
+        <span class="sidebar__item-num">04</span>
+        <span class="sidebar__item-label">활동 시작</span>
+      </div>
+      <div class="sidebar__item" data-target="step5">
+        <span class="sidebar__item-num">05</span>
+        <span class="sidebar__item-label">더블랙 등급</span>
+      </div>
+      <div class="sidebar__item" data-target="step6">
+        <span class="sidebar__item-num">06</span>
+        <span class="sidebar__item-label">매니저 관리</span>
+      </div>
+      <div class="sidebar__item" data-target="step7">
+        <span class="sidebar__item-num">07</span>
+        <span class="sidebar__item-label">만남 보장</span>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ── MAIN ── -->
+  <main class="main">
+
+    <!-- STEP 1 -->
+    <div class="content-section reveal" id="step1">
+      <div class="cs-header">
+        <p class="cs-num">STEP 01</p>
+        <h2 class="cs-title">앱 다운로드 & 무료 가입 신청</h2>
+        <p class="cs-desc">더멤버스는 가입비 없이, 온라인 100%로 진행됩니다. 전화 상담이나 방문 없이 앱에서 간편하게 무료 가입을 신청하실 수 있습니다.</p>
+      </div>
+      <div class="info-cards">
+        <div class="info-card">
+          <p class="info-card__value">가입비 0원</p>
+          <p class="info-card__sub">가입 자체는 완전히 무료입니다</p>
+        </div>
+        <div class="info-card">
+          <p class="info-card__value">온라인</p>
+          <p class="info-card__sub">전화 없이 앱에서 완결</p>
+        </div>
+        <div class="info-card">
+          <p class="info-card__value">1일~1주일</p>
+          <p class="info-card__sub">가입 후 평균 약 1주일 소요</p>
+        </div>
+        <div class="info-card">
+          <p class="info-card__value">매일 4명</p>
+          <p class="info-card__sub">매일 4장의 무료 프로필 소개</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- STEP 2 -->
+    <div class="content-section reveal" id="step2">
+      <div class="cs-header">
+        <p class="cs-num">STEP 02</p>
+        <h2 class="cs-title">프로필 등록 & 인증</h2>
+        <p class="cs-desc">남성은 경제력과 관련된 인증이 필수이며 택 1 이상 선택할 수 있습니다. 여성은 경제력 인증 또는 매력 인증 하나만으로 가입이 가능합니다.</p>
+      </div>
+
+      <!-- 탭 -->
+      <div class="cert-tabs" id="certTabs">
+        <button class="cert-tab on" data-panel="job">
+          <span class="cert-tab__num">01</span>
+          <div class="cert-tab__body">
+            <p class="cert-tab__title">직업 인증</p>
+            <p class="cert-tab__sub">전문직 · 대기업 · 공기업 · 공무원 · 명문대</p>
+          </div>
+          <span class="cert-tab__gender">남성 · 여성</span>
+          <span class="cert-tab__arrow">›</span>
+        </button>
+        <button class="cert-tab" data-panel="income">
+          <span class="cert-tab__num">02</span>
+          <div class="cert-tab__body">
+            <p class="cert-tab__title">소득 인증</p>
+            <p class="cert-tab__sub">고소득 · 억대 연봉 · 2억대+ 연봉</p>
+          </div>
+          <span class="cert-tab__gender">남성 · 여성</span>
+          <span class="cert-tab__arrow">›</span>
+        </button>
+        <button class="cert-tab" data-panel="asset">
+          <span class="cert-tab__num">03</span>
+          <div class="cert-tab__body">
+            <p class="cert-tab__title">자산 인증</p>
+            <p class="cert-tab__sub">자가 보유 · 고액 자산 · 초고액 자산</p>
+          </div>
+          <span class="cert-tab__gender">남성 · 여성</span>
+          <span class="cert-tab__arrow">›</span>
+        </button>
+        <button class="cert-tab" data-panel="car">
+          <span class="cert-tab__num">04</span>
+          <div class="cert-tab__body">
+            <p class="cert-tab__title">차량 인증</p>
+            <p class="cert-tab__sub">고급 차량 · 억대 차량 · 슈퍼카</p>
+          </div>
+          <span class="cert-tab__gender">남성 · 여성</span>
+          <span class="cert-tab__arrow">›</span>
+        </button>
+        <button class="cert-tab" data-panel="charm">
+          <span class="cert-tab__num">05</span>
+          <div class="cert-tab__body">
+            <p class="cert-tab__title">매력 인증</p>
+            <p class="cert-tab__sub">매력 사진 · 인플루언서 · 셀럽</p>
+          </div>
+          <span class="women-only cert-tab__gender" style="border-color:rgba(193,40,56,0.15);margin-right:16px">여성 전용</span>
+          <span class="cert-tab__arrow">›</span>
+        </button>
+      </div>
+
+      <!-- 패널 -->
+      <div class="cert-panels">
+        <div class="cert-panel on" id="panel-job">
+          <div class="cert-panel__grid">
+            <div class="cert-item"><div class="cert-item__dot"></div><div class="cert-item__text"><strong>전문직</strong><span> — 의사, 변호사, 치과의사, 검사 등</span></div></div>
+            <div class="cert-item"><div class="cert-item__dot"></div><div class="cert-item__text"><strong>사업가</strong><span> — 연매출 50억 이상 기업 대표</span></div></div>
+            <div class="cert-item"><div class="cert-item__dot"></div><div class="cert-item__text"><strong>대기업</strong><span> — 재계순위 52위 이내 및 계열사</span></div></div>
+            <div class="cert-item"><div class="cert-item__dot"></div><div class="cert-item__text"><strong>공기업</strong><span> — 내규에 따른 대한민국 공기업</span></div></div>
+            <div class="cert-item"><div class="cert-item__dot"></div><div class="cert-item__text"><strong>공무원</strong><span> — 7급 이상 대한민국 공무원</span></div></div>
+            <div class="cert-item"><div class="cert-item__dot"></div><div class="cert-item__text"><strong>명문대</strong><span> — 서울대·연세대·고려대·KAIST·아이비리그 등</span></div></div>
+          </div>
+        </div>
+        <div class="cert-panel" id="panel-income">
+          <div class="cert-panel__grid">
+            <div class="cert-item"><div class="cert-item__dot"></div><div class="cert-item__text"><strong>고소득</strong><span> — 20~30대 6,000만원 이상 / 40대 7,000만원 이상</span></div></div>
+            <div class="cert-item"><div class="cert-item__dot"></div><div class="cert-item__text"><strong>억대 연봉</strong><span> — 연 소득 1억원 이상</span></div></div>
+            <div class="cert-item"><div class="cert-item__dot"></div><div class="cert-item__text"><strong>2억대+ 연봉</strong><span> — 연 소득 2억원 이상</span></div></div>
+          </div>
+        </div>
+        <div class="cert-panel" id="panel-asset">
+          <div class="cert-panel__grid">
+            <div class="cert-item"><div class="cert-item__dot"></div><div class="cert-item__text"><strong>자가 보유</strong><span> — 서울 7억, 그 외 5억 이상 아파트</span></div></div>
+            <div class="cert-item"><div class="cert-item__dot"></div><div class="cert-item__text"><strong>고액 자산</strong><span> — 금융·부동산 총 5억원 이상</span></div></div>
+            <div class="cert-item"><div class="cert-item__dot"></div><div class="cert-item__text"><strong>초고액 자산</strong><span> — 개인 자산 20억 / 50억 / 100억원 이상</span></div></div>
+          </div>
+        </div>
+        <div class="cert-panel" id="panel-car">
+          <div class="cert-panel__grid">
+            <div class="cert-item"><div class="cert-item__dot"></div><div class="cert-item__text"><strong>고급 차량</strong><span> — 출시 5년 이내, 5,000만원 이상 소유·리스</span></div></div>
+            <div class="cert-item"><div class="cert-item__dot"></div><div class="cert-item__text"><strong>억대 차량</strong><span> — 출시 3년 이내, 1억원 이상 소유·리스</span></div></div>
+            <div class="cert-item"><div class="cert-item__dot"></div><div class="cert-item__text"><strong>슈퍼카</strong><span> — 출시 3년 이내, 2억원 이상 소유·리스</span></div></div>
+          </div>
+        </div>
+        <div class="cert-panel" id="panel-charm">
+          <div class="cert-panel__grid">
+            <div class="cert-item"><div class="cert-item__dot"></div><div class="cert-item__text"><strong>매력 사진</strong><span> — 셀카, 우아한 일상, 취향이 보이는 여행 사진</span></div></div>
+            <div class="cert-item"><div class="cert-item__dot"></div><div class="cert-item__text"><strong>인플루언서</strong><span> — 미스코리아 / 유튜브 10만+ / 인스타 2만+</span></div></div>
+            <div class="cert-item"><div class="cert-item__dot"></div><div class="cert-item__text"><strong>셀럽</strong><span> — 연예인·공인 / 유튜브 50만+ / 인스타 10만+</span></div></div>
+          </div>
+          <p class="cert-note cert-note--accent">※ 매력 인증은 여성 전용 카테고리입니다. 남성은 직업·소득·자산·차량 인증 중 택 1이 필수입니다.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- STEP 3 -->
+    <div class="content-section reveal" id="step3">
+      <div class="cs-header">
+        <p class="cs-num">STEP 03</p>
+        <h2 class="cs-title">가입 심사 및 결과 안내</h2>
+        <p class="cs-desc">더멤버스 인증팀이 가입 신청 내용을 직접 검토합니다. 심사에는 평균 1~3일 정도 소요될 수 있습니다.</p>
+      </div>
+      <div class="process-rows">
+        <div class="process-row">
+          <div class="process-row__num">1</div>
+          <div class="process-row__body">
+            <p class="process-row__title">서류 제출 & 접수</p>
+            <p class="process-row__desc">앱에서 인증에 필요한 자료를 제출합니다. 인증팀이 직접 접수하여 검토를 시작합니다.</p>
+          </div>
+          <div class="process-row__tag"><span class="tag tag-muted">즉시</span></div>
+        </div>
+        <div class="process-row">
+          <div class="process-row__num">2</div>
+          <div class="process-row__body">
+            <p class="process-row__title">자료 검토 & 보완 요청</p>
+            <p class="process-row__desc">제출 자료가 부족한 경우 보완 자료를 요청드릴 수 있습니다. 회원님의 장점과 매력을 더 잘 보여드리기 위한 과정입니다.</p>
+          </div>
+          <div class="process-row__tag"><span class="tag tag-muted">1~3일</span></div>
+        </div>
+        <div class="process-row">
+          <div class="process-row__num">3</div>
+          <div class="process-row__body">
+            <p class="process-row__title">심사 결과 통보</p>
+            <p class="process-row__desc">심사 결과는 앱 푸시 알림 및 문자 메시지로 안내드립니다. 승인 즉시 서비스 이용이 가능합니다.</p>
+          </div>
+          <div class="process-row__tag"><span class="tag tag-dark">결과 통보</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- STEP 4 -->
+    <div class="content-section reveal" id="step4">
+      <div class="cs-header">
+        <p class="cs-num">STEP 04</p>
+        <h2 class="cs-title">더멤버스 활동 시작</h2>
+        <p class="cs-desc">가입이 완료되면 바로 서비스를 이용할 수 있습니다. 매일 4장의 무료 프로필을 소개받으며 상위 1% 프라이빗 매칭을 경험하세요.</p>
+      </div>
+      <div class="activity-grid">
+        <div class="activity-card">
+          <div class="activity-card__icon">👤</div>
+          <p class="activity-card__title">매일 4명 프로필 소개</p>
+          <p class="activity-card__desc">매일 4장의 무료 프로필을 소개받습니다. 추가 비용 없이 매일 새로운 만남의 기회가 주어집니다.</p>
+        </div>
+        <div class="activity-card">
+          <div class="activity-card__icon">🤝</div>
+          <p class="activity-card__title">매주 1~2명 만남 보장</p>
+          <p class="activity-card__desc">단순 소개에 그치지 않고 실제 만남까지 매주 1~2명을 보장합니다. 지속적으로 관리해 드립니다.</p>
+        </div>
+        <div class="activity-card">
+          <div class="activity-card__icon">🔒</div>
+          <p class="activity-card__title">연락처 비공개 보장</p>
+          <p class="activity-card__desc">개인 연락처를 공개하지 않아도 안전하게 만남이 진행됩니다. 프라이버시가 완벽히 보호됩니다.</p>
+        </div>
+        <div class="activity-card">
+          <div class="activity-card__icon">📱</div>
+          <p class="activity-card__title">앱 하나로 모든 과정</p>
+          <p class="activity-card__desc">프로필 확인, 매칭 응답, 일정 확인까지 모든 과정이 앱 안에서 간편하게 완료됩니다.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- STEP 5 -->
+    <div class="content-section reveal" id="step5">
+      <div class="cs-header">
+        <p class="cs-num">STEP 05</p>
+        <h2 class="cs-title">더블랙 회원 등급 업그레이드</h2>
+        <p class="cs-desc">가입 회원 중 프로필 평점과 활동 점수를 종합하여 우수 회원은 '더블랙' 등급으로 선정됩니다. 별도 신청 없이 자동으로 선정됩니다.</p>
+      </div>
+      <div class="black-card">
+        <div class="black-card__header">
+          <div>
+            <p class="black-card__title">THE BLACK</p>
+            <p class="black-card__title-sub">Premium Membership Tier</p>
+          </div>
+          <span class="black-card__badge">최상위 등급</span>
+        </div>
+        <div class="black-card__body">
+          <div class="black-card__feats">
+            <div class="black-feat">
+              <span class="black-feat__idx">01</span>
+              <div>
+                <p class="black-feat__title">전담 매칭 매니저 1:1 배정</p>
+                <p class="black-feat__desc">활동 시작부터 만남 성사까지 전담 매니저가 배정됩니다.</p>
+              </div>
+            </div>
+            <div class="black-feat">
+              <span class="black-feat__idx">02</span>
+              <div>
+                <p class="black-feat__title">일정·장소·만남 전 과정 관리</p>
+                <p class="black-feat__desc">YES / NO만 선택하시면 나머지는 모두 매니저가 처리합니다.</p>
+              </div>
+            </div>
+            <div class="black-feat">
+              <span class="black-feat__idx">03</span>
+              <div>
+                <p class="black-feat__title">완전한 프라이버시 보호</p>
+                <p class="black-feat__desc">개인 연락처를 공개하지 않아도 안전하게 만남이 진행됩니다.</p>
+              </div>
+            </div>
+          </div>
+          <div class="black-card__info">
+            <div class="black-info-rows">
+              <div class="black-info-row">
+                <span class="black-info-key">선정 기준</span>
+                <span class="black-info-val">프로필 평점 + 활동 점수</span>
+              </div>
+              <div class="black-info-row">
+                <span class="black-info-key">신청 방법</span>
+                <span class="black-info-val">별도 신청 없이 자동 선정</span>
+              </div>
+              <div class="black-info-row">
+                <span class="black-info-key">추가 비용</span>
+                <span class="black-info-val">없음</span>
+              </div>
+              <div class="black-info-row">
+                <span class="black-info-key">매니저 배정</span>
+                <span class="black-info-val">선정 즉시 1:1 배정</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- STEP 6 -->
+    <div class="content-section reveal" id="step6">
+      <div class="cs-header">
+        <p class="cs-num">STEP 06</p>
+        <h2 class="cs-title">전담 매니저의 만남 관리</h2>
+        <p class="cs-desc">매니저가 추천한 프로필에 YES 또는 NO만 선택하세요. 복잡한 연락 과정 없이 일정 조율, 장소 선정, 만남 진행까지 모두 관리해드립니다.</p>
+      </div>
+      <div class="process-rows">
+        <div class="process-row">
+          <div class="process-row__num">1</div>
+          <div class="process-row__body">
+            <p class="process-row__title">프로필 추천 & 응답</p>
+            <p class="process-row__desc">매니저가 추천한 프로필을 확인하고 YES 또는 NO로만 응답합니다. 복잡한 과정이 없습니다.</p>
+          </div>
+          <div class="process-row__tag"><span class="tag tag-muted">YES / NO</span></div>
+        </div>
+        <div class="process-row">
+          <div class="process-row__num">2</div>
+          <div class="process-row__body">
+            <p class="process-row__title">일정 & 장소 조율</p>
+            <p class="process-row__desc">매칭이 성사되면 매니저가 양측의 일정과 장소를 모두 조율합니다. 개인 연락처는 공개하지 않아도 됩니다.</p>
+          </div>
+          <div class="process-row__tag"><span class="tag tag-muted">매니저 진행</span></div>
+        </div>
+        <div class="process-row">
+          <div class="process-row__num">3</div>
+          <div class="process-row__body">
+            <p class="process-row__title">만남 진행 & 피드백</p>
+            <p class="process-row__desc">만남 이후 매니저가 피드백을 수집하고 다음 매칭에 반영합니다. 지속적인 관리로 최적의 매칭을 찾아드립니다.</p>
+          </div>
+          <div class="process-row__tag"><span class="tag tag-dark">완료</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- STEP 7 -->
+    <div class="content-section reveal" id="step7">
+      <div class="cs-header">
+        <p class="cs-num">STEP 07</p>
+        <h2 class="cs-title">만남 100% 보장</h2>
+        <p class="cs-desc">더멤버스는 실제 만남 성사까지 지속적으로 관리합니다. 약속된 기간 내 만남이 성사되지 않을 경우 100% 환급 보장 제도를 운영합니다.</p>
+      </div>
+      <div class="guarantee-box">
+        <div class="guarantee-box__top">
+          <div class="g-stat">
+            <p class="g-num">1~2명</p>
+            <p class="g-label">매주 보장 만남 수</p>
+            <p class="g-sub">지속적으로 관리해 드립니다</p>
+          </div>
+          <div class="g-stat">
+            <p class="g-num">~1주</p>
+            <p class="g-label">첫 매칭까지 평균</p>
+            <p class="g-sub">가입 후 빠르게 시작됩니다</p>
+          </div>
+          <div class="g-stat">
+            <p class="g-num">100%</p>
+            <p class="g-label">미성사 시 환급</p>
+            <p class="g-sub">약속된 기간 내 미성사 시 전액</p>
+          </div>
+        </div>
+        <!-- 핵심 보장 — 레드 사용 -->
+        <div class="guarantee-box__promise">
+          <div class="promise-icon">!</div>
+          <div class="promise-text">
+            <strong>만남 미성사 시 100% 전액 환급</strong>
+            <p>약속된 기간 내 만남이 성사되지 않을 경우, 더멤버스는 서비스 비용을 100% 환급합니다. 진심을 다한 서비스만이 할 수 있는 약속입니다.</p>
+          </div>
+        </div>
+        <div class="guarantee-box__items">
+          <div class="g-item">
+            <div class="g-item__check">✓</div>
+            <div class="g-item__text"><strong>만남 100% 성사 보장</strong>전문 매니저의 체계적인 관리를 통해 반드시 만남이 이루어집니다.</div>
+          </div>
+          <div class="g-item">
+            <div class="g-item__check">✓</div>
+            <div class="g-item__text"><strong>전액 환급 제도 운영</strong>약속 기간 내 미성사 시 서비스 비용을 전액 돌려드립니다.</div>
+          </div>
+          <div class="g-item">
+            <div class="g-item__check">✓</div>
+            <div class="g-item__text"><strong>개인 연락처 비공개</strong>만남 전 과정에서 개인 정보는 철저히 보호됩니다.</div>
+          </div>
+          <div class="g-item">
+            <div class="g-item__check">✓</div>
+            <div class="g-item__text"><strong>지속적인 매칭 관리</strong>한 번의 만남으로 끝나지 않고 지속적으로 관리합니다.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- BOTTOM CTA -->
+    <div class="bottom-cta reveal" id="cta">
+      <div class="bottom-cta__copy">
+        <p class="bottom-cta__title">지금 바로 시작하세요</p>
+        <p class="bottom-cta__desc">가입비 없이, 전화 없이, 방문 없이. 앱 하나로 상위 1% 프라이빗 매칭을 경험하세요.</p>
+      </div>
+      <a href="#" class="bottom-cta__btn">무료 가입 신청하기</a>
+    </div>
+
+  </main>
+</div>
+
+
+
+<section class="app-cta" id="app-cta">
+  <div class="app-cta__inner">
+    <div class="app-cta__copy reveal-l" style="padding:80px 0;display:flex;flex-direction:column;justify-content:center;">
+      <div class="app-cta__logo">
+        <img src="assets/applogo.png" alt="더멤버스 앱 로고">
+      </div>
+      <h2 class="app-cta__title">검증된 3040을 위한<br><span>더멤버스</span></h2>
+      <div class="app-cta__actions">
+        <a href="#" class="btn-red" style="display:inline-block;padding:14px 28px;background:#ffffff;border-radius:999px;color:#111111;font-size:14px;font-weight:600;letter-spacing:-0.01em;text-decoration:none;">앱 다운로드하기</a>
+      </div>
+    </div>
+    <div class="app-cta__visual reveal-r">
+      <img src="assets/images/mockups/Image_two-mockup.png" alt="더멤버스 앱 화면">
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer__inner">
+    <img src="assets/Logo.svg" alt="더멤버스" style="height:28px;width:auto;margin-bottom:20px;display:block;">
+    <p class="f-info">
+      (주)트리플콤마<br>
+      서울특별시 강남구 테헤란로 447, 13층(KB우준타워)<br>
+      대표 천우영
+    </p>
+    <div class="f-isms">
+      <img src="assets/images/image_ISMSP.png" alt="ISMS-P">
+      인증번호 ISMS-P-KISA-2026-009
+      <span class="f-isms-divider"></span>
+      유효기간 2026-02-04 ~ 2029-02-03
+    </div>
+    <hr class="footer__divider">
+  </div>
+  <div class="footer__bottom">
+    사업자등록번호 567-81-00991
+    <span>|</span>
+    결혼중개업 신고 필증 번호 서울-강남-국내-24-0007호
+    <span>|</span>
+    © Copyright 2026. Triplecomma Inc. All right reserved
+  </div>
+</footer>
+
+<script>
+/* ── Nav ham ── */
+document.getElementById('navHam').addEventListener('click',()=>{
+  document.getElementById('navLinks').classList.toggle('open');
+});
+
+/* ── Cert tabs ── */
+document.querySelectorAll('.cert-tab').forEach(tab=>{
+  tab.addEventListener('click',()=>{
+    document.querySelectorAll('.cert-tab').forEach(t=>t.classList.remove('on'));
+    document.querySelectorAll('.cert-panel').forEach(p=>p.classList.remove('on'));
+    tab.classList.add('on');
+    document.getElementById('panel-'+tab.dataset.panel).classList.add('on');
+  });
+});
+
+/* ── Sidebar active on scroll ── */
+const sections = document.querySelectorAll('.content-section[id]');
+const sidebarItems = document.querySelectorAll('.sidebar__item');
+
+const sidebarMap = {};
+sidebarItems.forEach(item=>{
+  sidebarMap[item.dataset.target] = item;
+  item.addEventListener('click',()=>{
+    const target = document.getElementById(item.dataset.target);
+    if(target) target.scrollIntoView({behavior:'smooth',block:'start'});
+  });
+});
+
+const io = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      sidebarItems.forEach(i=>i.classList.remove('active'));
+      if(sidebarMap[e.target.id]) sidebarMap[e.target.id].classList.add('active');
+    }
+  });
+},{threshold:0.35});
+
+sections.forEach(s=>io.observe(s));
+
+/* ── Reveal ── */
+const revealObs = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){e.target.classList.add('on');revealObs.unobserve(e.target);}
+  });
+},{threshold:0.08,rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.reveal').forEach(el=>revealObs.observe(el));
+
+// QR Modal
+(function(){
+  const overlay = document.getElementById('qrOverlay');
+  const close   = document.getElementById('qrClose');
+
+  // 모든 무료 가입 신청 / 앱 다운로드 버튼에 이벤트 연결
+  function openModal(e){
+    e.preventDefault();
+    overlay.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  document.querySelectorAll('.nav__cta, .btn-red, .sidebar__cta, .cta-strip__btn, .bottom-cta__btn, .b-btn, .btn-primary-w, .btn-white, .btn-cta-w, .app-cta__actions .btn-red').forEach(el => {
+    el.addEventListener('click', openModal);
+  });
+
+  function closeModal(){
+    overlay.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  close.addEventListener('click', closeModal);
+  overlay.addEventListener('click', function(e){
+    if(e.target === overlay) closeModal();
+  });
+  document.addEventListener('keydown', function(e){
+    if(e.key === 'Escape') closeModal();
+  });
+})();
+
+/* ── Story slider ── */
+(()=>{
+  const track = document.getElementById('storyTrack');
+  const SCROLL = 296;
+  document.getElementById('storyPrev').addEventListener('click',()=>{
+    track.scrollBy({left:-SCROLL,behavior:'smooth'});
+  });
+  document.getElementById('storyNext').addEventListener('click',()=>{
+    track.scrollBy({left:SCROLL,behavior:'smooth'});
+  });
+})();
+
+</script>
+</body>
+</html>
