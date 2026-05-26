@@ -48,79 +48,66 @@ body{font-family:var(--font);background:var(--white);color:var(--para)}
 .nav__ham span{display:block;width:20px;height:1.5px;background:var(--headline)}
 
 /* ── PAGE HEADER ── */
-.page-header{background:var(--white);padding:64px 48px 52px}
+.page-header{background:var(--white);padding:64px 48px 8px}
 .page-header__inner{max-width:var(--max);margin:0 auto}
 .breadcrumb{display:flex;align-items:center;gap:8px;font-size:11px;font-weight:500;letter-spacing:0.08em;color:var(--light);text-transform:uppercase;margin-bottom:16px}
 .breadcrumb__sep{color:var(--border2)}
 .breadcrumb__cur{color:var(--muted)}
-.page-header__title{font-size:40px;font-weight:800;letter-spacing:-0.035em;line-height:1.15;color:var(--headline);margin-bottom:10px}
+.page-header__title{font-size:46px;font-weight:800;letter-spacing:-0.035em;line-height:1.15;color:var(--headline);margin-bottom:10px}
 .page-header__desc{font-size:15px;line-height:1.75;color:var(--body);max-width:480px}
 
 /* ── BODY ── */
-.page-body{max-width:var(--max);margin:0 auto;padding:52px 48px 120px}
+.page-body{max-width:var(--max);margin:0 auto;padding:16px 48px 120px}
 
 /* ── 정보 카드 그리드 (3개) ── */
 .info-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:48px}
 .info-card{
-  position:relative;border-radius:14px;overflow:hidden;
-  min-height:220px;padding:28px 24px 24px;cursor:pointer;
-  display:flex;flex-direction:column;justify-content:flex-end;
+  position:relative;border-radius:20px;overflow:hidden;
+  min-height:240px;padding:24px;cursor:pointer;
+  display:flex;flex-direction:column;justify-content:flex-start;
   transition:transform .2s ease,box-shadow .2s ease;
 }
 .info-card:hover{transform:translateY(-4px);box-shadow:0 14px 36px rgba(0,0,0,.09)}
-.info-card--blue  {background:#C8E5F4}
-.info-card--yellow{background:#F6F2C0}
-.info-card--green {background:#CCE9A4}
-.info-card__shapes{position:absolute;inset:0;pointer-events:none}
-.info-card__shape{position:absolute;border-radius:8px}
-
-.info-card--blue .info-card__shape:nth-child(1){
-  width:58%;height:92%;background:rgba(255,255,255,.62);
-  top:-16%;right:-8%;transform:rotate(-13deg)
+.info-card--blue  {background:#E4F3FB}
+.info-card--yellow{background:#FAF5E0}
+.info-card--green {background:#E2F5EE}
+.info-card__icon{
+  width:52px;height:52px;border-radius:50%;
+  background:#fff;display:flex;align-items:center;justify-content:center;
+  font-size:26px;flex-shrink:0;margin-bottom:20px;
 }
-.info-card--blue .info-card__shape:nth-child(2){
-  width:42%;height:78%;background:rgba(150,198,228,.50);
-  top:-6%;right:22%;transform:rotate(-8deg)
-}
-.info-card--yellow .info-card__shape:nth-child(1){
-  width:58%;height:92%;background:rgba(255,255,255,.62);
-  top:-16%;right:-8%;transform:rotate(-13deg)
-}
-.info-card--yellow .info-card__shape:nth-child(2){
-  width:42%;height:78%;background:rgba(215,200,110,.48);
-  top:-6%;right:22%;transform:rotate(-8deg)
-}
-.info-card--green .info-card__shape:nth-child(1){
-  width:58%;height:92%;background:rgba(175,228,130,.60);
-  top:-16%;right:-8%;transform:rotate(-13deg)
-}
-.info-card--green .info-card__shape:nth-child(2){
-  width:42%;height:78%;background:rgba(255,255,255,.58);
-  top:-6%;right:22%;transform:rotate(-8deg)
-}
-.info-card__body{position:relative;z-index:1}
+.info-card__body{display:flex;flex-direction:column;gap:14px;margin-top:auto}
 .info-card__title{
-  font-size:18px;font-weight:800;letter-spacing:-0.03em;
-  color:var(--headline);line-height:1.3;margin-bottom:10px;word-break:keep-all
+  font-size:22px;font-weight:800;letter-spacing:-0.03em;
+  color:var(--headline);line-height:1.45;word-break:keep-all;
 }
-.info-card__tags{font-size:12px;color:var(--muted);letter-spacing:-0.01em}
+.info-card__arrow{
+  width:34px;height:34px;border-radius:50%;
+  background:rgba(0,0,0,.1);
+  display:flex;align-items:center;justify-content:center;
+  font-size:18px;color:var(--headline);line-height:1;
+  align-self:flex-end;
+}
 
 /* ── FAQ 섹션 ── */
 .faq-section{}
-.faq-header{margin-bottom:28px}
+.faq-header{margin-bottom:28px;text-align:center}
 .section-eyebrow{font-size:11px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:var(--light);margin-bottom:8px;display:block}
 .section-title{font-size:26px;font-weight:800;letter-spacing:-0.03em;color:var(--headline)}
 
-.faq-cats{display:flex;gap:0;margin-bottom:28px;border:1px solid var(--border)}
+.faq-cats-wrap{overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch;margin-bottom:28px;text-align:center}
+.faq-cats-wrap::-webkit-scrollbar{display:none}
+.faq-cats{display:inline-flex;background:#F2F2F2;border-radius:999px;padding:4px;gap:2px}
 .faq-cat{
-  flex:1;padding:12px 0;text-align:center;
+  display:flex;align-items:center;
+  padding:8px 22px;
   font-size:13px;font-weight:500;color:var(--muted);
-  border-right:1px solid var(--border);cursor:pointer;
-  background:var(--white);transition:background .15s,color .15s;
+  border-radius:999px;border:none;background:none;
+  transition:background .18s,color .18s;
+  white-space:nowrap;letter-spacing:-0.01em;cursor:pointer;
 }
-.faq-cat:last-child{border-right:none}
-.faq-cat:hover{background:var(--bg);color:var(--headline)}
-.faq-cat.on{background:var(--headline);color:var(--white)}
+.faq-cat:hover{color:var(--headline)}
+.faq-cat.on{background:var(--headline);color:var(--white);font-weight:600}
 
 .faq-list{display:flex;flex-direction:column;border:1px solid var(--border)}
 .faq-item{border-bottom:1px solid var(--border);background:var(--white)}
@@ -320,8 +307,11 @@ body{font-family:var(--font);background:var(--white);color:var(--para)}
 /* ── TABLET ── */
 @media(max-width:1279px){
   .nav__inner,.page-body{padding-left:32px;padding-right:32px}
-  .page-header{padding:52px 32px 44px}
-  .info-cards{grid-template-columns:1fr 1fr}
+  .page-header{padding:52px 32px 8px}
+  .info-cards{display:flex;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch;gap:14px;padding:16px 0;justify-content:center;margin-bottom:60px}
+  .info-cards::-webkit-scrollbar{display:none}
+  .info-card{flex:0 0 220px;min-height:240px}
+  .info-card__title{font-size:19px}
   .chat-overlay{width:380px}
 }
 
@@ -331,13 +321,10 @@ body{font-family:var(--font);background:var(--white);color:var(--para)}
   .nav__links{display:none;flex-direction:column;gap:16px;position:absolute;top:60px;left:0;right:0;background:var(--white);border-bottom:1px solid var(--border);padding:20px;box-shadow:0 8px 20px rgba(0,0,0,.05)}
   .nav__links.open{display:flex}
   .nav__ham{display:flex}
-  .page-header{padding:36px 20px 32px}
-  .page-header__title{font-size:26px}
-  .page-body{padding:28px 20px 80px}
-  .info-cards{grid-template-columns:1fr}
-  .info-card{min-height:180px}
-  .faq-cats{flex-wrap:wrap}
-  .faq-cat{flex:none;width:50%;border-bottom:1px solid var(--border)}
+  .page-header{padding:36px 20px 8px}
+  .page-header__title{font-size:28px}
+  .page-body{padding:12px 20px 80px}
+  .info-card{flex:0 0 170px;min-height:210px}
   .chat-overlay{width:100vw}
   .chatbot-banner{padding:24px 20px}
   .chatbot-banner__btn{width:100%;text-align:center}
@@ -395,7 +382,7 @@ body{font-family:var(--font);background:var(--white);color:var(--para)}
 <!-- PAGE HEADER -->
 <div class="page-header">
   <div class="page-header__inner">
-    <h1 class="page-header__title" style="text-align:center">고객 지원</h1>
+    <h1 class="page-header__title" style="text-align:center">궁금한 건 바로<br>알려드릴게요.</h1>
   </div>
 </div>
 
@@ -405,33 +392,24 @@ body{font-family:var(--font);background:var(--white);color:var(--para)}
   <!-- 정보 카드 -->
   <div class="info-cards reveal">
     <div class="info-card info-card--blue" onclick="openChat('가입 조건이 궁금해요')">
-      <div class="info-card__shapes">
-        <div class="info-card__shape"></div>
-        <div class="info-card__shape"></div>
-      </div>
+      <div class="info-card__icon">📋</div>
       <div class="info-card__body">
-        <h3 class="info-card__title">가입 조건 안내</h3>
-        <p class="info-card__tags">인증 기준, 필요 서류, 남녀 차이</p>
+        <h3 class="info-card__title">인증 기준과<br>필요한 서류<br>알려줘</h3>
+        <div class="info-card__arrow">›</div>
       </div>
     </div>
     <div class="info-card info-card--yellow" onclick="openChat('가입 심사 기간이 얼마나 걸리나요?')">
-      <div class="info-card__shapes">
-        <div class="info-card__shape"></div>
-        <div class="info-card__shape"></div>
-      </div>
+      <div class="info-card__icon">🔍</div>
       <div class="info-card__body">
-        <h3 class="info-card__title">심사 및 승인</h3>
-        <p class="info-card__tags">심사 기간, 반려 사유, 재신청 방법</p>
+        <h3 class="info-card__title">심사 기간과<br>반려 사유가<br>궁금해</h3>
+        <div class="info-card__arrow">›</div>
       </div>
     </div>
     <div class="info-card info-card--green" onclick="openChat('만남 보장 환급은 어떻게 받나요?')">
-      <div class="info-card__shapes">
-        <div class="info-card__shape"></div>
-        <div class="info-card__shape"></div>
-      </div>
+      <div class="info-card__icon">💰</div>
       <div class="info-card__body">
-        <h3 class="info-card__title">만남 보장 & 환급</h3>
-        <p class="info-card__tags">100% 환급, 보장 조건, 신청 방법</p>
+        <h3 class="info-card__title">만남 보장<br>환급은<br>어떻게 받아?</h3>
+        <div class="info-card__arrow">›</div>
       </div>
     </div>
   </div>
@@ -439,17 +417,17 @@ body{font-family:var(--font);background:var(--white);color:var(--para)}
   <!-- FAQ -->
   <div class="faq-section reveal">
     <div class="faq-header">
-      <span class="section-eyebrow">FAQ</span>
       <h2 class="section-title">자주 묻는 질문</h2>
     </div>
 
     <!-- 카테고리 탭 -->
-    <div class="faq-cats" id="faqCats">
-      <button class="faq-cat on" data-cat="all">전체</button>
-      <button class="faq-cat" data-cat="join">가입 & 인증</button>
-      <button class="faq-cat" data-cat="match">매칭 & 만남</button>
-      <button class="faq-cat" data-cat="price">비용 & 환급</button>
-      <button class="faq-cat" data-cat="privacy">개인정보 & 보안</button>
+    <div class="faq-cats-wrap">
+      <div class="faq-cats" id="faqCats">
+        <button class="faq-cat on" data-cat="all">전체</button>
+        <button class="faq-cat" data-cat="join">가입 & 인증</button>
+        <button class="faq-cat" data-cat="meet">만남 & 환급</button>
+        <button class="faq-cat" data-cat="privacy">개인정보 & 보안</button>
+      </div>
     </div>
 
     <div class="faq-list" id="faqList">
@@ -481,33 +459,33 @@ body{font-family:var(--font);background:var(--white);color:var(--para)}
       </div>
 
       <!-- 매칭 & 만남 -->
-      <div class="faq-item" data-cat="match">
+      <div class="faq-item" data-cat="meet">
         <div class="faq-q"><span class="faq-q__mark">Q</span><span class="faq-q__text">가입 후 얼마나 빨리 첫 매칭이 이루어지나요?</span><span class="faq-q__chevron"><svg viewBox="0 0 12 12"><polyline points="2,4 6,8 10,4"/></svg></span></div>
         <div class="faq-a"><div class="faq-a__inner"><p class="faq-a__content">가입 승인 후 평균 약 1주일 이내에 첫 매칭이 시작됩니다. 매일 4명의 프로필을 소개받으며, 매주 1~2명과의 실제 만남을 보장합니다. 조건 설정에 따라 기간은 다소 달라질 수 있습니다.</p></div></div>
       </div>
 
-      <div class="faq-item" data-cat="match">
+      <div class="faq-item" data-cat="meet">
         <div class="faq-q"><span class="faq-q__mark">Q</span><span class="faq-q__text">만남 장소와 일정은 누가 정하나요?</span><span class="faq-q__chevron"><svg viewBox="0 0 12 12"><polyline points="2,4 6,8 10,4"/></svg></span></div>
         <div class="faq-a"><div class="faq-a__inner"><p class="faq-a__content">전담 매니저가 양측의 일정과 선호 지역을 반영하여 장소와 시간을 모두 조율합니다. 회원님은 YES 또는 NO만 응답하시면 됩니다. 레스토랑 예약까지 매니저가 처리하므로 직접 준비하실 것이 없습니다.</p></div></div>
       </div>
 
-      <div class="faq-item" data-cat="match">
+      <div class="faq-item" data-cat="meet">
         <div class="faq-q"><span class="faq-q__mark">Q</span><span class="faq-q__text">더블랙은 어떻게 선정되나요?</span><span class="faq-q__chevron"><svg viewBox="0 0 12 12"><polyline points="2,4 6,8 10,4"/></svg></span></div>
         <div class="faq-a"><div class="faq-a__inner"><p class="faq-a__content">프로필 평점과 서비스 활동 점수를 종합하여 우수 회원을 더블랙으로 선정합니다. 별도 신청 없이 자동으로 선정되며, 선정 즉시 전담 매칭 매니저가 1:1로 배정됩니다. 추가 비용은 없습니다.</p></div></div>
       </div>
 
-      <div class="faq-item" data-cat="match">
+      <div class="faq-item" data-cat="meet">
         <div class="faq-q"><span class="faq-q__mark">Q</span><span class="faq-q__text">마음에 드는 조건을 구체적으로 설정할 수 있나요?</span><span class="faq-q__chevron"><svg viewBox="0 0 12 12"><polyline points="2,4 6,8 10,4"/></svg></span></div>
         <div class="faq-a"><div class="faq-a__inner"><p class="faq-a__content">네, 나이대·직업·소득·거주 지역·라이프스타일 등 세부 조건을 앱에서 직접 설정하실 수 있습니다. 더블랙 회원의 경우 매니저와의 직접 상담을 통해 더욱 세밀하게 조정할 수 있습니다.</p></div></div>
       </div>
 
       <!-- 비용 & 환급 -->
-      <div class="faq-item" data-cat="price">
+      <div class="faq-item" data-cat="meet">
         <div class="faq-q"><span class="faq-q__mark">Q</span><span class="faq-q__text">만남 보장 환급은 어떻게 받을 수 있나요?</span><span class="faq-q__chevron"><svg viewBox="0 0 12 12"><polyline points="2,4 6,8 10,4"/></svg></span></div>
         <div class="faq-a"><div class="faq-a__inner"><p class="faq-a__content">약속된 기간 내 실제 만남이 성사되지 않은 경우, 고객 지원 챗봇 또는 앱 내 문의 기능을 통해 환급을 신청하실 수 있습니다. 신청 후 영업일 기준 5~7일 이내에 결제 수단으로 전액 환급됩니다.</p></div></div>
       </div>
 
-      <div class="faq-item" data-cat="price">
+      <div class="faq-item" data-cat="meet">
         <div class="faq-q"><span class="faq-q__mark">Q</span><span class="faq-q__text">서비스 비용은 언제, 어떻게 발생하나요?</span><span class="faq-q__chevron"><svg viewBox="0 0 12 12"><polyline points="2,4 6,8 10,4"/></svg></span></div>
         <div class="faq-a"><div class="faq-a__inner"><p class="faq-a__content">가입 및 프로필 소개는 완전히 무료입니다. 서비스 이용 비용은 실제 만남 진행 단계에서 발생하며, 구체적인 금액은 선택하시는 서비스 플랜에 따라 다릅니다. 자세한 내용은 챗봇 또는 앱 내 요금 안내를 확인해 주세요.</p></div></div>
       </div>
@@ -531,17 +509,6 @@ body{font-family:var(--font);background:var(--white);color:var(--para)}
     </div><!-- /faq-list -->
   </div><!-- /faq-section -->
 
-  <!-- 챗봇 열기 배너 -->
-  <div class="chatbot-banner reveal" id="chatBanner">
-    <div class="chatbot-banner__left">
-      <span class="chatbot-banner__dot"></span>
-      <div class="chatbot-banner__copy">
-        <p class="chatbot-banner__title">원하는 답을 찾지 못하셨나요?</p>
-        <p class="chatbot-banner__desc">챗봇이 24시간 빠르게 답변드립니다</p>
-      </div>
-    </div>
-    <span class="chatbot-banner__btn">챗봇 상담 시작하기</span>
-  </div>
 
 </div><!-- /page-body -->
 
@@ -852,7 +819,6 @@ function closeChat() {
 // 이벤트
 chatClose.addEventListener('click', closeChat);
 // 딤 없으므로 overlay 클릭 닫기 불필요
-document.getElementById('chatBanner').addEventListener('click', () => openChat(null));
 
 // 챗봇 전송
 function sendMessage() {

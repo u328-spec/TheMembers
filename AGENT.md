@@ -36,7 +36,10 @@ TheMembers/
 │   ├── review.pdf
 │   └── 스크린샷/
 ├── docs/
-│   └── design_handoff_member_reviews/  # 캐러셀 핸드오프 참고 문서
+│   ├── design_handoff_hero_section.md      # index.html Hero 섹션 핸드오프
+│   ├── design_handoff_problem_section.md   # index.html Problem 섹션 핸드오프
+│   ├── design_handoff_quality_section.md   # index.html Quality 섹션 핸드오프
+│   └── design_handoff_member_reviews/      # reviews.html 캐러셀 핸드오프
 ├── AGENT.md
 └── CLAUDE.md
 ```
@@ -108,3 +111,20 @@ TheMembers/
 - 변경 전 반드시 기존 파일을 읽고 파악한 후 수정
 - 기존 CSS 변수와 디자인 언어 유지하며 확장
 - 새 컴포넌트는 기존 패턴 참고해 일관성 유지
+
+## Git / GitHub
+
+- 저장소: https://github.com/u328-spec/TheMembers.git
+- 기본 브랜치: `main`
+- `.gitignore`: `.DS_Store`, `.claude/` 제외 설정됨
+
+### 커밋·푸시 흐름
+```bash
+git add <파일>
+git commit -m "작업 내용 요약"
+git push
+```
+
+### 주의
+- `.claude/` 폴더는 절대 커밋하지 않음 (로컬 설정 파일 포함)
+- `_archive/`는 미사용 드래프트로, 커밋에 포함되어 있으나 배포 불필요
