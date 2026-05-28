@@ -141,8 +141,16 @@ body{font-family:var(--font);background:var(--white);color:var(--body)}
 }
 
 /* 별점 */
-.review-card__stars{
-  font-size:15px;color:#F5A623;letter-spacing:2px;order:0;
+.review-card__badge{
+  display:inline-flex;align-items:center;gap:4px;
+  order:0;align-self:flex-start;
+  background:linear-gradient(160deg,#f4f4f4 0%,#d6d6d6 25%,#ececec 45%,#b8b8b8 65%,#d2d2d2 82%,#e8e8e8 100%);
+  color:#3a3a3a;
+  font-size:11px;font-weight:800;letter-spacing:0.06em;
+  padding:5px 12px;border-radius:100px;
+  border:1px solid rgba(255,255,255,0.55);
+  box-shadow:0 2px 5px rgba(0,0,0,0.22),0 1px 1px rgba(0,0,0,0.12),inset 0 1px 2px rgba(255,255,255,0.95),inset 0 -1px 2px rgba(0,0,0,0.08);
+  text-shadow:0 1px 1px rgba(255,255,255,0.9),0 -1px 1px rgba(0,0,0,0.18);
 }
 /* 카드 내부 flex 순서 */
 .review-card__quote{order:1}
@@ -439,7 +447,7 @@ body{font-family:var(--font);background:var(--white);color:var(--body)}
   <div class="reviews-grid" id="reviewsGrid">
 
     <div class="review-card reveal" data-gender="m">
-      <div class="review-card__stars">★★★★★</div>
+      <div class="review-card__badge">✓ 100% 실제 후기</div>
       <div class="review-card__profile">
         <div class="profile-icon profile-icon--m">
           <img src="assets/images/reviews/man.jpg" alt="남성 회원"/>
@@ -453,7 +461,7 @@ body{font-family:var(--font);background:var(--white);color:var(--body)}
     </div>
 
     <div class="review-card reveal" data-gender="m">
-      <div class="review-card__stars">★★★★★</div>
+      <div class="review-card__badge">✓ 100% 실제 후기</div>
       <div class="review-card__profile">
         <div class="profile-icon profile-icon--m">
           <img src="assets/images/reviews/man.jpg" alt="남성 회원"/>
@@ -467,7 +475,7 @@ body{font-family:var(--font);background:var(--white);color:var(--body)}
     </div>
 
     <div class="review-card reveal" data-gender="f">
-      <div class="review-card__stars">★★★★★</div>
+      <div class="review-card__badge">✓ 100% 실제 후기</div>
       <div class="review-card__profile">
         <div class="profile-icon profile-icon--f">
           <img src="assets/images/reviews/woman.jpg" alt="여성 회원"/>
@@ -481,7 +489,7 @@ body{font-family:var(--font);background:var(--white);color:var(--body)}
     </div>
 
     <div class="review-card reveal" data-gender="f">
-      <div class="review-card__stars">★★★★★</div>
+      <div class="review-card__badge">✓ 100% 실제 후기</div>
       <div class="review-card__profile">
         <div class="profile-icon profile-icon--f">
           <img src="assets/images/reviews/woman.jpg" alt="여성 회원"/>
@@ -495,7 +503,7 @@ body{font-family:var(--font);background:var(--white);color:var(--body)}
     </div>
 
     <div class="review-card reveal" data-gender="m">
-      <div class="review-card__stars">★★★★★</div>
+      <div class="review-card__badge">✓ 100% 실제 후기</div>
       <div class="review-card__profile">
         <div class="profile-icon profile-icon--m">
           <img src="assets/images/reviews/man.jpg" alt="남성 회원"/>
@@ -509,7 +517,7 @@ body{font-family:var(--font);background:var(--white);color:var(--body)}
     </div>
 
     <div class="review-card reveal" data-gender="m">
-      <div class="review-card__stars">★★★★★</div>
+      <div class="review-card__badge">✓ 100% 실제 후기</div>
       <div class="review-card__profile">
         <div class="profile-icon profile-icon--m">
           <img src="assets/images/reviews/man.jpg" alt="남성 회원"/>
@@ -523,7 +531,7 @@ body{font-family:var(--font);background:var(--white);color:var(--body)}
     </div>
 
     <div class="review-card reveal" data-gender="m">
-      <div class="review-card__stars">★★★★★</div>
+      <div class="review-card__badge">✓ 100% 실제 후기</div>
       <div class="review-card__profile">
         <div class="profile-icon profile-icon--m">
           <img src="assets/images/reviews/man.jpg" alt="남성 회원"/>
@@ -537,7 +545,7 @@ body{font-family:var(--font);background:var(--white);color:var(--body)}
     </div>
 
     <div class="review-card reveal" data-gender="f">
-      <div class="review-card__stars">★★★★★</div>
+      <div class="review-card__badge">✓ 100% 실제 후기</div>
       <div class="review-card__profile">
         <div class="profile-icon profile-icon--f">
           <img src="assets/images/reviews/woman.jpg" alt="여성 회원"/>
@@ -551,7 +559,7 @@ body{font-family:var(--font);background:var(--white);color:var(--body)}
     </div>
 
     <div class="review-card reveal" data-gender="f">
-      <div class="review-card__stars">★★★★★</div>
+      <div class="review-card__badge">✓ 100% 실제 후기</div>
       <div class="review-card__profile">
         <div class="profile-icon profile-icon--f">
           <img src="assets/images/reviews/woman.jpg" alt="여성 회원"/>
@@ -565,7 +573,7 @@ body{font-family:var(--font);background:var(--white);color:var(--body)}
     </div>
 
     <div class="review-card reveal" data-gender="m">
-      <div class="review-card__stars">★★★★★</div>
+      <div class="review-card__badge">✓ 100% 실제 후기</div>
       <div class="review-card__profile">
         <div class="profile-icon profile-icon--m">
           <img src="assets/images/reviews/man.jpg" alt="남성 회원"/>
@@ -579,7 +587,7 @@ body{font-family:var(--font);background:var(--white);color:var(--body)}
     </div>
 
     <div class="review-card reveal" data-gender="m">
-      <div class="review-card__stars">★★★★★</div>
+      <div class="review-card__badge">✓ 100% 실제 후기</div>
       <div class="review-card__profile">
         <div class="profile-icon profile-icon--m">
           <img src="assets/images/reviews/man.jpg" alt="남성 회원"/>
@@ -593,7 +601,7 @@ body{font-family:var(--font);background:var(--white);color:var(--body)}
     </div>
 
     <div class="review-card reveal" data-gender="m">
-      <div class="review-card__stars">★★★★★</div>
+      <div class="review-card__badge">✓ 100% 실제 후기</div>
       <div class="review-card__profile">
         <div class="profile-icon profile-icon--m">
           <img src="assets/images/reviews/man.jpg" alt="남성 회원"/>
@@ -607,7 +615,7 @@ body{font-family:var(--font);background:var(--white);color:var(--body)}
     </div>
 
     <div class="review-card reveal" data-gender="m">
-      <div class="review-card__stars">★★★★★</div>
+      <div class="review-card__badge">✓ 100% 실제 후기</div>
       <div class="review-card__profile">
         <div class="profile-icon profile-icon--m">
           <img src="assets/images/reviews/man.jpg" alt="남성 회원"/>
@@ -621,7 +629,7 @@ body{font-family:var(--font);background:var(--white);color:var(--body)}
     </div>
 
     <div class="review-card reveal" data-gender="f">
-      <div class="review-card__stars">★★★★★</div>
+      <div class="review-card__badge">✓ 100% 실제 후기</div>
       <div class="review-card__profile">
         <div class="profile-icon profile-icon--f">
           <img src="assets/images/reviews/woman.jpg" alt="여성 회원"/>
@@ -635,7 +643,7 @@ body{font-family:var(--font);background:var(--white);color:var(--body)}
     </div>
 
     <div class="review-card reveal" data-gender="m">
-      <div class="review-card__stars">★★★★★</div>
+      <div class="review-card__badge">✓ 100% 실제 후기</div>
       <div class="review-card__profile">
         <div class="profile-icon profile-icon--m">
           <img src="assets/images/reviews/man.jpg" alt="남성 회원"/>
@@ -649,7 +657,7 @@ body{font-family:var(--font);background:var(--white);color:var(--body)}
     </div>
 
     <div class="review-card reveal" data-gender="m">
-      <div class="review-card__stars">★★★★★</div>
+      <div class="review-card__badge">✓ 100% 실제 후기</div>
       <div class="review-card__profile">
         <div class="profile-icon profile-icon--m">
           <img src="assets/images/reviews/man.jpg" alt="남성 회원"/>
@@ -663,7 +671,7 @@ body{font-family:var(--font);background:var(--white);color:var(--body)}
     </div>
 
     <div class="review-card reveal" data-gender="m">
-      <div class="review-card__stars">★★★★★</div>
+      <div class="review-card__badge">✓ 100% 실제 후기</div>
       <div class="review-card__profile">
         <div class="profile-icon profile-icon--m">
           <img src="assets/images/reviews/man.jpg" alt="남성 회원"/>
@@ -677,7 +685,7 @@ body{font-family:var(--font);background:var(--white);color:var(--body)}
     </div>
 
     <div class="review-card reveal" data-gender="f">
-      <div class="review-card__stars">★★★★★</div>
+      <div class="review-card__badge">✓ 100% 실제 후기</div>
       <div class="review-card__profile">
         <div class="profile-icon profile-icon--f">
           <img src="assets/images/reviews/woman.jpg" alt="여성 회원"/>
@@ -691,7 +699,7 @@ body{font-family:var(--font);background:var(--white);color:var(--body)}
     </div>
 
     <div class="review-card reveal" data-gender="f">
-      <div class="review-card__stars">★★★★★</div>
+      <div class="review-card__badge">✓ 100% 실제 후기</div>
       <div class="review-card__profile">
         <div class="profile-icon profile-icon--f">
           <img src="assets/images/reviews/woman.jpg" alt="여성 회원"/>
@@ -705,7 +713,7 @@ body{font-family:var(--font);background:var(--white);color:var(--body)}
     </div>
 
     <div class="review-card reveal" data-gender="m">
-      <div class="review-card__stars">★★★★★</div>
+      <div class="review-card__badge">✓ 100% 실제 후기</div>
       <div class="review-card__profile">
         <div class="profile-icon profile-icon--m">
           <img src="assets/images/reviews/man.jpg" alt="남성 회원"/>
@@ -719,7 +727,7 @@ body{font-family:var(--font);background:var(--white);color:var(--body)}
     </div>
 
     <div class="review-card reveal" data-gender="m">
-      <div class="review-card__stars">★★★★★</div>
+      <div class="review-card__badge">✓ 100% 실제 후기</div>
       <div class="review-card__profile">
         <div class="profile-icon profile-icon--m">
           <img src="assets/images/reviews/man.jpg" alt="남성 회원"/>
@@ -733,7 +741,7 @@ body{font-family:var(--font);background:var(--white);color:var(--body)}
     </div>
 
     <div class="review-card reveal" data-gender="m">
-      <div class="review-card__stars">★★★★★</div>
+      <div class="review-card__badge">✓ 100% 실제 후기</div>
       <div class="review-card__profile">
         <div class="profile-icon profile-icon--m">
           <img src="assets/images/reviews/man.jpg" alt="남성 회원"/>
@@ -747,7 +755,7 @@ body{font-family:var(--font);background:var(--white);color:var(--body)}
     </div>
 
     <div class="review-card reveal" data-gender="m">
-      <div class="review-card__stars">★★★★★</div>
+      <div class="review-card__badge">✓ 100% 실제 후기</div>
       <div class="review-card__profile">
         <div class="profile-icon profile-icon--m">
           <img src="assets/images/reviews/man.jpg" alt="남성 회원"/>
@@ -761,7 +769,7 @@ body{font-family:var(--font);background:var(--white);color:var(--body)}
     </div>
 
     <div class="review-card reveal" data-gender="m">
-      <div class="review-card__stars">★★★★★</div>
+      <div class="review-card__badge">✓ 100% 실제 후기</div>
       <div class="review-card__profile">
         <div class="profile-icon profile-icon--m">
           <img src="assets/images/reviews/man.jpg" alt="남성 회원"/>
@@ -775,7 +783,7 @@ body{font-family:var(--font);background:var(--white);color:var(--body)}
     </div>
 
     <div class="review-card reveal" data-gender="f">
-      <div class="review-card__stars">★★★★★</div>
+      <div class="review-card__badge">✓ 100% 실제 후기</div>
       <div class="review-card__profile">
         <div class="profile-icon profile-icon--f">
           <img src="assets/images/reviews/woman.jpg" alt="여성 회원"/>
@@ -789,7 +797,7 @@ body{font-family:var(--font);background:var(--white);color:var(--body)}
     </div>
 
     <div class="review-card reveal" data-gender="m">
-      <div class="review-card__stars">★★★★★</div>
+      <div class="review-card__badge">✓ 100% 실제 후기</div>
       <div class="review-card__profile">
         <div class="profile-icon profile-icon--m">
           <img src="assets/images/reviews/man.jpg" alt="남성 회원"/>
@@ -803,7 +811,7 @@ body{font-family:var(--font);background:var(--white);color:var(--body)}
     </div>
 
     <div class="review-card reveal" data-gender="f">
-      <div class="review-card__stars">★★★★★</div>
+      <div class="review-card__badge">✓ 100% 실제 후기</div>
       <div class="review-card__profile">
         <div class="profile-icon profile-icon--f">
           <img src="assets/images/reviews/woman.jpg" alt="여성 회원"/>
@@ -817,7 +825,7 @@ body{font-family:var(--font);background:var(--white);color:var(--body)}
     </div>
 
     <div class="review-card reveal" data-gender="f">
-      <div class="review-card__stars">★★★★★</div>
+      <div class="review-card__badge">✓ 100% 실제 후기</div>
       <div class="review-card__profile">
         <div class="profile-icon profile-icon--f">
           <img src="assets/images/reviews/woman.jpg" alt="여성 회원"/>
@@ -831,7 +839,7 @@ body{font-family:var(--font);background:var(--white);color:var(--body)}
     </div>
 
     <div class="review-card reveal" data-gender="f">
-      <div class="review-card__stars">★★★★★</div>
+      <div class="review-card__badge">✓ 100% 실제 후기</div>
       <div class="review-card__profile">
         <div class="profile-icon profile-icon--f">
           <img src="assets/images/reviews/woman.jpg" alt="여성 회원"/>
@@ -845,7 +853,7 @@ body{font-family:var(--font);background:var(--white);color:var(--body)}
     </div>
 
     <div class="review-card reveal" data-gender="m">
-      <div class="review-card__stars">★★★★★</div>
+      <div class="review-card__badge">✓ 100% 실제 후기</div>
       <div class="review-card__profile">
         <div class="profile-icon profile-icon--m">
           <img src="assets/images/reviews/man.jpg" alt="남성 회원"/>
@@ -859,7 +867,7 @@ body{font-family:var(--font);background:var(--white);color:var(--body)}
     </div>
 
     <div class="review-card reveal" data-gender="f">
-      <div class="review-card__stars">★★★★★</div>
+      <div class="review-card__badge">✓ 100% 실제 후기</div>
       <div class="review-card__profile">
         <div class="profile-icon profile-icon--f">
           <img src="assets/images/reviews/woman.jpg" alt="여성 회원"/>
@@ -873,7 +881,7 @@ body{font-family:var(--font);background:var(--white);color:var(--body)}
     </div>
 
     <div class="review-card reveal" data-gender="m">
-      <div class="review-card__stars">★★★★★</div>
+      <div class="review-card__badge">✓ 100% 실제 후기</div>
       <div class="review-card__profile">
         <div class="profile-icon profile-icon--m">
           <img src="assets/images/reviews/man.jpg" alt="남성 회원"/>
@@ -887,7 +895,7 @@ body{font-family:var(--font);background:var(--white);color:var(--body)}
     </div>
 
     <div class="review-card reveal" data-gender="m">
-      <div class="review-card__stars">★★★★★</div>
+      <div class="review-card__badge">✓ 100% 실제 후기</div>
       <div class="review-card__profile">
         <div class="profile-icon profile-icon--m">
           <img src="assets/images/reviews/man.jpg" alt="남성 회원"/>
@@ -901,7 +909,7 @@ body{font-family:var(--font);background:var(--white);color:var(--body)}
     </div>
 
     <div class="review-card reveal" data-gender="f">
-      <div class="review-card__stars">★★★★★</div>
+      <div class="review-card__badge">✓ 100% 실제 후기</div>
       <div class="review-card__profile">
         <div class="profile-icon profile-icon--f">
           <img src="assets/images/reviews/woman.jpg" alt="여성 회원"/>
@@ -915,7 +923,7 @@ body{font-family:var(--font);background:var(--white);color:var(--body)}
     </div>
 
     <div class="review-card reveal" data-gender="m">
-      <div class="review-card__stars">★★★★★</div>
+      <div class="review-card__badge">✓ 100% 실제 후기</div>
       <div class="review-card__profile">
         <div class="profile-icon profile-icon--m">
           <img src="assets/images/reviews/man.jpg" alt="남성 회원"/>
@@ -929,7 +937,7 @@ body{font-family:var(--font);background:var(--white);color:var(--body)}
     </div>
 
     <div class="review-card reveal" data-gender="m">
-      <div class="review-card__stars">★★★★★</div>
+      <div class="review-card__badge">✓ 100% 실제 후기</div>
       <div class="review-card__profile">
         <div class="profile-icon profile-icon--m">
           <img src="assets/images/reviews/man.jpg" alt="남성 회원"/>
@@ -943,7 +951,7 @@ body{font-family:var(--font);background:var(--white);color:var(--body)}
     </div>
 
     <div class="review-card reveal" data-gender="m">
-      <div class="review-card__stars">★★★★★</div>
+      <div class="review-card__badge">✓ 100% 실제 후기</div>
       <div class="review-card__profile">
         <div class="profile-icon profile-icon--m">
           <img src="assets/images/reviews/man.jpg" alt="남성 회원"/>
@@ -957,7 +965,7 @@ body{font-family:var(--font);background:var(--white);color:var(--body)}
     </div>
 
     <div class="review-card reveal" data-gender="f">
-      <div class="review-card__stars">★★★★★</div>
+      <div class="review-card__badge">✓ 100% 실제 후기</div>
       <div class="review-card__profile">
         <div class="profile-icon profile-icon--f">
           <img src="assets/images/reviews/woman.jpg" alt="여성 회원"/>
@@ -971,7 +979,7 @@ body{font-family:var(--font);background:var(--white);color:var(--body)}
     </div>
 
     <div class="review-card reveal" data-gender="m">
-      <div class="review-card__stars">★★★★★</div>
+      <div class="review-card__badge">✓ 100% 실제 후기</div>
       <div class="review-card__profile">
         <div class="profile-icon profile-icon--m">
           <img src="assets/images/reviews/man.jpg" alt="남성 회원"/>
@@ -985,7 +993,7 @@ body{font-family:var(--font);background:var(--white);color:var(--body)}
     </div>
 
     <div class="review-card reveal" data-gender="m">
-      <div class="review-card__stars">★★★★★</div>
+      <div class="review-card__badge">✓ 100% 실제 후기</div>
       <div class="review-card__profile">
         <div class="profile-icon profile-icon--m">
           <img src="assets/images/reviews/man.jpg" alt="남성 회원"/>
@@ -999,7 +1007,7 @@ body{font-family:var(--font);background:var(--white);color:var(--body)}
     </div>
 
     <div class="review-card reveal" data-gender="f">
-      <div class="review-card__stars">★★★★★</div>
+      <div class="review-card__badge">✓ 100% 실제 후기</div>
       <div class="review-card__profile">
         <div class="profile-icon profile-icon--f">
           <img src="assets/images/reviews/woman.jpg" alt="여성 회원"/>
@@ -1013,7 +1021,7 @@ body{font-family:var(--font);background:var(--white);color:var(--body)}
     </div>
 
     <div class="review-card reveal" data-gender="f">
-      <div class="review-card__stars">★★★★★</div>
+      <div class="review-card__badge">✓ 100% 실제 후기</div>
       <div class="review-card__profile">
         <div class="profile-icon profile-icon--f">
           <img src="assets/images/reviews/woman.jpg" alt="여성 회원"/>
@@ -1027,7 +1035,7 @@ body{font-family:var(--font);background:var(--white);color:var(--body)}
     </div>
 
     <div class="review-card reveal" data-gender="m">
-      <div class="review-card__stars">★★★★★</div>
+      <div class="review-card__badge">✓ 100% 실제 후기</div>
       <div class="review-card__profile">
         <div class="profile-icon profile-icon--m">
           <img src="assets/images/reviews/man.jpg" alt="남성 회원"/>
@@ -1041,7 +1049,7 @@ body{font-family:var(--font);background:var(--white);color:var(--body)}
     </div>
 
     <div class="review-card reveal" data-gender="m">
-      <div class="review-card__stars">★★★★★</div>
+      <div class="review-card__badge">✓ 100% 실제 후기</div>
       <div class="review-card__profile">
         <div class="profile-icon profile-icon--m">
           <img src="assets/images/reviews/man.jpg" alt="남성 회원"/>
@@ -1055,7 +1063,7 @@ body{font-family:var(--font);background:var(--white);color:var(--body)}
     </div>
 
     <div class="review-card reveal" data-gender="f">
-      <div class="review-card__stars">★★★★★</div>
+      <div class="review-card__badge">✓ 100% 실제 후기</div>
       <div class="review-card__profile">
         <div class="profile-icon profile-icon--f">
           <img src="assets/images/reviews/woman.jpg" alt="여성 회원"/>
@@ -1069,7 +1077,7 @@ body{font-family:var(--font);background:var(--white);color:var(--body)}
     </div>
 
     <div class="review-card reveal" data-gender="m">
-      <div class="review-card__stars">★★★★★</div>
+      <div class="review-card__badge">✓ 100% 실제 후기</div>
       <div class="review-card__profile">
         <div class="profile-icon profile-icon--m">
           <img src="assets/images/reviews/man.jpg" alt="남성 회원"/>
@@ -1083,7 +1091,7 @@ body{font-family:var(--font);background:var(--white);color:var(--body)}
     </div>
 
     <div class="review-card reveal" data-gender="f">
-      <div class="review-card__stars">★★★★★</div>
+      <div class="review-card__badge">✓ 100% 실제 후기</div>
       <div class="review-card__profile">
         <div class="profile-icon profile-icon--f">
           <img src="assets/images/reviews/woman.jpg" alt="여성 회원"/>
@@ -1097,7 +1105,7 @@ body{font-family:var(--font);background:var(--white);color:var(--body)}
     </div>
 
     <div class="review-card reveal" data-gender="m">
-      <div class="review-card__stars">★★★★★</div>
+      <div class="review-card__badge">✓ 100% 실제 후기</div>
       <div class="review-card__profile">
         <div class="profile-icon profile-icon--m">
           <img src="assets/images/reviews/man.jpg" alt="남성 회원"/>
@@ -1111,7 +1119,7 @@ body{font-family:var(--font);background:var(--white);color:var(--body)}
     </div>
 
     <div class="review-card reveal" data-gender="m">
-      <div class="review-card__stars">★★★★★</div>
+      <div class="review-card__badge">✓ 100% 실제 후기</div>
       <div class="review-card__profile">
         <div class="profile-icon profile-icon--m">
           <img src="assets/images/reviews/man.jpg" alt="남성 회원"/>
@@ -1125,7 +1133,7 @@ body{font-family:var(--font);background:var(--white);color:var(--body)}
     </div>
 
     <div class="review-card reveal" data-gender="m">
-      <div class="review-card__stars">★★★★★</div>
+      <div class="review-card__badge">✓ 100% 실제 후기</div>
       <div class="review-card__profile">
         <div class="profile-icon profile-icon--m">
           <img src="assets/images/reviews/man.jpg" alt="남성 회원"/>
@@ -1139,7 +1147,7 @@ body{font-family:var(--font);background:var(--white);color:var(--body)}
     </div>
 
     <div class="review-card reveal" data-gender="m">
-      <div class="review-card__stars">★★★★★</div>
+      <div class="review-card__badge">✓ 100% 실제 후기</div>
       <div class="review-card__profile">
         <div class="profile-icon profile-icon--m">
           <img src="assets/images/reviews/man.jpg" alt="남성 회원"/>
@@ -1153,7 +1161,7 @@ body{font-family:var(--font);background:var(--white);color:var(--body)}
     </div>
 
     <div class="review-card reveal" data-gender="m">
-      <div class="review-card__stars">★★★★★</div>
+      <div class="review-card__badge">✓ 100% 실제 후기</div>
       <div class="review-card__profile">
         <div class="profile-icon profile-icon--m">
           <img src="assets/images/reviews/man.jpg" alt="남성 회원"/>
@@ -1167,7 +1175,7 @@ body{font-family:var(--font);background:var(--white);color:var(--body)}
     </div>
 
     <div class="review-card reveal" data-gender="m">
-      <div class="review-card__stars">★★★★★</div>
+      <div class="review-card__badge">✓ 100% 실제 후기</div>
       <div class="review-card__profile">
         <div class="profile-icon profile-icon--m">
           <img src="assets/images/reviews/man.jpg" alt="남성 회원"/>
@@ -1181,7 +1189,7 @@ body{font-family:var(--font);background:var(--white);color:var(--body)}
     </div>
 
     <div class="review-card reveal" data-gender="m">
-      <div class="review-card__stars">★★★★★</div>
+      <div class="review-card__badge">✓ 100% 실제 후기</div>
       <div class="review-card__profile">
         <div class="profile-icon profile-icon--m">
           <img src="assets/images/reviews/man.jpg" alt="남성 회원"/>
@@ -1195,7 +1203,7 @@ body{font-family:var(--font);background:var(--white);color:var(--body)}
     </div>
 
     <div class="review-card reveal" data-gender="m">
-      <div class="review-card__stars">★★★★★</div>
+      <div class="review-card__badge">✓ 100% 실제 후기</div>
       <div class="review-card__profile">
         <div class="profile-icon profile-icon--m">
           <img src="assets/images/reviews/man.jpg" alt="남성 회원"/>
