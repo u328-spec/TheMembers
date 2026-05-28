@@ -39,7 +39,8 @@ TheMembers/
 │   ├── design_handoff_hero_section.md      # index.html Hero 섹션 핸드오프
 │   ├── design_handoff_problem_section.md   # index.html Problem 섹션 핸드오프
 │   ├── design_handoff_quality_section.md   # index.html Quality 섹션 핸드오프
-│   └── design_handoff_member_reviews/      # reviews.html 캐러셀 핸드오프
+│   ├── design_handoff_member_reviews/      # reviews.html 캐러셀 핸드오프
+│   └── support_certification_content.md    # support.html 인증 기준·FAQ·챗봇 응답 콘텐츠
 ├── AGENT.md
 └── CLAUDE.md
 ```

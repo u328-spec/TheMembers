@@ -137,7 +137,7 @@ body{font-family:var(--font);background:var(--white);color:var(--para)}
 
 /* ── 챗봇 열기 배너 ── */
 .chatbot-banner{
-  background:var(--dark);padding:36px 40px;
+  background:var(--dark);padding:36px 40px;border-radius:20px;
   display:flex;align-items:center;justify-content:space-between;
   gap:24px;margin-top:48px;flex-wrap:wrap;cursor:pointer;
   transition:opacity .15s;
@@ -158,7 +158,7 @@ body{font-family:var(--font);background:var(--white);color:var(--para)}
   flex-shrink:0;
   background:var(--white);color:var(--dark);
   font-size:13px;font-weight:700;letter-spacing:0.02em;
-  padding:11px 28px;transition:opacity .15s;
+  padding:11px 28px;border-radius:999px;transition:opacity .15s;
 }
 
 /* ════════════════════════════════════
@@ -232,23 +232,26 @@ body{font-family:var(--font);background:var(--white);color:var(--para)}
 .msg--bot .msg__bubble{
   background:var(--bg);color:var(--headline);
   border:1px solid var(--border);
+  border-radius:4px 16px 16px 16px;
 }
 .msg--user .msg__bubble{
   background:var(--dark);color:var(--white);
+  border-radius:16px 4px 16px 16px;
 }
 .msg__time{font-size:10px;color:var(--light);flex-shrink:0;margin-bottom:2px}
 
 /* 빠른 선택 버튼 */
 .quick-replies{
   display:flex;flex-wrap:wrap;gap:6px;
-  padding:0 20px 16px;
+  padding:0 20px 12px;
 }
+.quick-replies:empty{padding:0;}
 .quick-reply{
   font-size:12px;font-weight:500;
   padding:7px 14px;
-  border:1px solid var(--border2);
+  border:1px solid var(--border2);border-radius:999px;
   color:var(--para);background:var(--white);
-  cursor:pointer;transition:border-color .15s,background .15s;
+  cursor:pointer;transition:border-color .15s,background .15s,color .15s;
   letter-spacing:-0.01em;
 }
 .quick-reply:hover{border-color:var(--headline);background:var(--bg);color:var(--headline)}
@@ -261,7 +264,7 @@ body{font-family:var(--font);background:var(--white);color:var(--para)}
 }
 .chat-input{
   flex:1;resize:none;height:40px;max-height:100px;
-  border:1px solid var(--border);
+  border:1px solid var(--border);border-radius:10px;
   padding:10px 12px;font-family:var(--font);
   font-size:13px;color:var(--headline);
   outline:none;transition:border-color .15s;
@@ -271,7 +274,7 @@ body{font-family:var(--font);background:var(--white);color:var(--para)}
 .chat-input::placeholder{color:var(--light)}
 .chat-send{
   width:40px;height:40px;flex-shrink:0;
-  background:var(--dark);
+  background:var(--dark);border-radius:10px;
   display:flex;align-items:center;justify-content:center;
   transition:opacity .15s;
 }
@@ -279,7 +282,7 @@ body{font-family:var(--font);background:var(--white);color:var(--para)}
 .chat-send svg{width:16px;height:16px;stroke:var(--white);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 
 /* 타이핑 인디케이터 */
-.typing{display:flex;gap:4px;padding:12px 14px;background:var(--bg);border:1px solid var(--border);width:56px}
+.typing{display:flex;gap:4px;padding:12px 14px;background:var(--bg);border:1px solid var(--border);border-radius:4px 16px 16px 16px;width:56px}
 .typing span{width:6px;height:6px;border-radius:50%;background:var(--light);animation:dot 1.2s infinite}
 .typing span:nth-child(2){animation-delay:.2s}
 .typing span:nth-child(3){animation-delay:.4s}
@@ -440,7 +443,7 @@ body{font-family:var(--font);background:var(--white);color:var(--para)}
 
       <div class="faq-item" data-cat="join">
         <div class="faq-q"><span class="faq-q__mark">Q</span><span class="faq-q__text">남성과 여성의 가입 조건이 다른가요?</span><span class="faq-q__chevron"><svg viewBox="0 0 12 12"><polyline points="2,4 6,8 10,4"/></svg></span></div>
-        <div class="faq-a"><div class="faq-a__inner"><p class="faq-a__content">네, 차이가 있습니다. 남성은 직업·소득·자산·차량 중 하나 이상의 경제력 인증이 필수입니다. 여성은 경제력 인증 또는 매력 인증(사진·인플루언서·셀럽) 중 하나만으로도 가입이 가능합니다.</p></div></div>
+        <div class="faq-a"><div class="faq-a__inner"><p class="faq-a__content">네, 차이가 있습니다. 남성은 직업·소득·자산·차량 중 하나 이상의 경제력 인증이 필수입니다. 여성은 경제력 인증 또는 매력 인증(매력·인플루언서·셀럽) 중 하나만으로도 가입이 가능합니다. 가입 가능 연령은 여성 만 25세 이상, 남성 만 30세 이상입니다.</p></div></div>
       </div>
 
       <div class="faq-item" data-cat="join">
@@ -454,19 +457,63 @@ body{font-family:var(--font);background:var(--white);color:var(--para)}
       </div>
 
       <div class="faq-item" data-cat="join">
-        <div class="faq-q"><span class="faq-q__mark">Q</span><span class="faq-q__text">홈텍스 소득 조회는 어떻게 진행되나요?</span><span class="faq-q__chevron"><svg viewBox="0 0 12 12"><polyline points="2,4 6,8 10,4"/></svg></span></div>
-        <div class="faq-a"><div class="faq-a__inner"><p class="faq-a__content">소득 인증의 경우 홈텍스에서 발급한 소득 확인서 또는 근로소득 원천징수 영수증을 제출하시면 됩니다. 더멤버스 인증팀이 직접 공공 데이터와 대조하여 실제 수치를 확인합니다. 자동화가 아닌 사람이 직접 검토하는 방식입니다.</p></div></div>
+        <div class="faq-q"><span class="faq-q__mark">Q</span><span class="faq-q__text">소득 인증에 필요한 서류는 무엇인가요?</span><span class="faq-q__chevron"><svg viewBox="0 0 12 12"><polyline points="2,4 6,8 10,4"/></svg></span></div>
+        <div class="faq-a"><div class="faq-a__inner"><div class="faq-a__content">
+          <p>소득 인증에는 두 가지 방법이 있습니다.</p>
+          <div style="margin-top:16px">
+            <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
+              <strong>⚡ 간편인증</strong>
+              <span style="font-size:11px;font-weight:700;background:var(--accent);color:#fff;padding:2px 8px;border-radius:999px;letter-spacing:0.01em">추천</span>
+            </div>
+            <p>홈텍스에서 소득 정보를 직접 조회하는 방식으로, 별도 서류 없이 빠르고 간편하게 인증이 완료됩니다.</p>
+            <p style="color:var(--muted);font-size:12px;margin-top:6px;line-height:1.7">※ 홈택스의 서류 처리 시점에 따라 확인되는 소득 기간은 일부 달라질 수 있습니다. 간편 인증 시 소득 정보는 홈택스 기준과 동일하며, 소득 관련 문의는 홈택스로 부탁드립니다.</p>
+            <div style="display:flex;gap:20px;flex-wrap:wrap;margin-top:14px">
+              <div>
+                <p style="font-size:12px;font-weight:600;color:var(--headline);margin-bottom:6px">근로 소득 (근로소득지급명세서)</p>
+                <table style="border-collapse:collapse;font-size:12px">
+                  <thead><tr>
+                    <th style="border:1px solid var(--border2);padding:7px 16px;background:var(--bg2);color:var(--headline);font-weight:600;text-align:left">인증 시점</th>
+                    <th style="border:1px solid var(--border2);padding:7px 16px;background:var(--bg2);color:var(--headline);font-weight:600;text-align:left">소득 기간</th>
+                  </tr></thead>
+                  <tbody>
+                    <tr><td style="border:1px solid var(--border2);padding:7px 16px;color:var(--para)">1 ~ 5월</td><td style="border:1px solid var(--border2);padding:7px 16px;color:var(--para)">전전년도</td></tr>
+                    <tr><td style="border:1px solid var(--border2);padding:7px 16px;color:var(--para)">6 ~ 12월</td><td style="border:1px solid var(--border2);padding:7px 16px;color:var(--para)">전년도</td></tr>
+                  </tbody>
+                </table>
+              </div>
+              <div>
+                <p style="font-size:12px;font-weight:600;color:var(--headline);margin-bottom:6px">종합 소득 (소득금액증명원)</p>
+                <table style="border-collapse:collapse;font-size:12px">
+                  <thead><tr>
+                    <th style="border:1px solid var(--border2);padding:7px 16px;background:var(--bg2);color:var(--headline);font-weight:600;text-align:left">인증 시점</th>
+                    <th style="border:1px solid var(--border2);padding:7px 16px;background:var(--bg2);color:var(--headline);font-weight:600;text-align:left">소득 기간</th>
+                  </tr></thead>
+                  <tbody>
+                    <tr><td style="border:1px solid var(--border2);padding:7px 16px;color:var(--para)">1 ~ 7월</td><td style="border:1px solid var(--border2);padding:7px 16px;color:var(--para)">전전년도</td></tr>
+                    <tr><td style="border:1px solid var(--border2);padding:7px 16px;color:var(--para)">8 ~ 12월</td><td style="border:1px solid var(--border2);padding:7px 16px;color:var(--para)">전년도</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <p style="color:var(--muted);font-size:12px;margin-top:10px;line-height:1.7">※ 최근 소득으로 가입을 원하실 경우 증빙 서류와 함께 서류인증을 이용해 주세요.</p>
+          </div>
+          <div style="margin-top:20px;padding-top:20px;border-top:1px solid var(--border)">
+            <strong>서류인증</strong>
+            <p style="margin-top:8px">아래 서류 중 하나를 제출해 주세요.<br>· 근로소득자: 원천징수영수증 또는 연봉계약서<br>· 자영업자: 소득금액증명원</p>
+            <p style="color:var(--muted);font-size:12px;margin-top:6px">※ 성함, 생년월일, 근무기간, 연소득이 반드시 표시되어야 합니다.</p>
+          </div>
+        </div></div></div>
       </div>
 
       <!-- 매칭 & 만남 -->
       <div class="faq-item" data-cat="meet">
         <div class="faq-q"><span class="faq-q__mark">Q</span><span class="faq-q__text">가입 후 얼마나 빨리 첫 매칭이 이루어지나요?</span><span class="faq-q__chevron"><svg viewBox="0 0 12 12"><polyline points="2,4 6,8 10,4"/></svg></span></div>
-        <div class="faq-a"><div class="faq-a__inner"><p class="faq-a__content">가입 승인 후 평균 약 1주일 이내에 첫 매칭이 시작됩니다. 매일 4명의 프로필을 소개받으며, 매주 1~2명과의 실제 만남을 보장합니다. 조건 설정에 따라 기간은 다소 달라질 수 있습니다.</p></div></div>
+        <div class="faq-a"><div class="faq-a__inner"><p class="faq-a__content">가입 승인 후 평균 7일 이내에 첫 매칭이 시작됩니다. 매일 4명의 프로필을 소개받으며, 내게 호감을 먼저 표시한 회원의 프로필을 추가로 더 받아보실 수 있습니다.</p></div></div>
       </div>
 
       <div class="faq-item" data-cat="meet">
         <div class="faq-q"><span class="faq-q__mark">Q</span><span class="faq-q__text">만남 장소와 일정은 누가 정하나요?</span><span class="faq-q__chevron"><svg viewBox="0 0 12 12"><polyline points="2,4 6,8 10,4"/></svg></span></div>
-        <div class="faq-a"><div class="faq-a__inner"><p class="faq-a__content">전담 매니저가 양측의 일정과 선호 지역을 반영하여 장소와 시간을 모두 조율합니다. 회원님은 YES 또는 NO만 응답하시면 됩니다. 레스토랑 예약까지 매니저가 처리하므로 직접 준비하실 것이 없습니다.</p></div></div>
+        <div class="faq-a"><div class="faq-a__inner"><p class="faq-a__content">전담 매니저가 양측의 일정과 선호 지역을 반영하여 장소와 시간을 모두 조율합니다. 회원님은 YES 또는 NO만 응답하시면 됩니다. 식당은 매니저가 추천해 드리지만, 실제 예약은 회원님이 직접 진행하셔야 합니다.</p></div></div>
       </div>
 
       <div class="faq-item" data-cat="meet">
@@ -474,27 +521,29 @@ body{font-family:var(--font);background:var(--white);color:var(--para)}
         <div class="faq-a"><div class="faq-a__inner"><p class="faq-a__content">프로필 평점과 서비스 활동 점수를 종합하여 우수 회원을 더블랙으로 선정합니다. 별도 신청 없이 자동으로 선정되며, 선정 즉시 전담 매칭 매니저가 1:1로 배정됩니다. 추가 비용은 없습니다.</p></div></div>
       </div>
 
-      <div class="faq-item" data-cat="meet">
-        <div class="faq-q"><span class="faq-q__mark">Q</span><span class="faq-q__text">마음에 드는 조건을 구체적으로 설정할 수 있나요?</span><span class="faq-q__chevron"><svg viewBox="0 0 12 12"><polyline points="2,4 6,8 10,4"/></svg></span></div>
-        <div class="faq-a"><div class="faq-a__inner"><p class="faq-a__content">네, 나이대·직업·소득·거주 지역·라이프스타일 등 세부 조건을 앱에서 직접 설정하실 수 있습니다. 더블랙 회원의 경우 매니저와의 직접 상담을 통해 더욱 세밀하게 조정할 수 있습니다.</p></div></div>
-      </div>
 
       <!-- 비용 & 환급 -->
       <div class="faq-item" data-cat="meet">
         <div class="faq-q"><span class="faq-q__mark">Q</span><span class="faq-q__text">만남 보장 환급은 어떻게 받을 수 있나요?</span><span class="faq-q__chevron"><svg viewBox="0 0 12 12"><polyline points="2,4 6,8 10,4"/></svg></span></div>
-        <div class="faq-a"><div class="faq-a__inner"><p class="faq-a__content">약속된 기간 내 실제 만남이 성사되지 않은 경우, 고객 지원 챗봇 또는 앱 내 문의 기능을 통해 환급을 신청하실 수 있습니다. 신청 후 영업일 기준 5~7일 이내에 결제 수단으로 전액 환급됩니다.</p></div></div>
+        <div class="faq-a"><div class="faq-a__inner"><p class="faq-a__content">상대 사유로 만남이 성사되지 않은 경우 만남 티켓을 100% 환급해 드립니다.<br><br>담당 매니저가 상대방과의 취소 사유를 확인한 후 진행되며, 이 과정은 영업일 기준 최대 3~5일 정도 소요될 수 있습니다.</p></div></div>
+      </div>
+
+      <div class="faq-item" data-cat="meet">
+        <div class="faq-q"><span class="faq-q__mark">Q</span><span class="faq-q__text">앱스토어(애플) 결제 환불은 어떻게 하나요?</span><span class="faq-q__chevron"><svg viewBox="0 0 12 12"><polyline points="2,4 6,8 10,4"/></svg></span></div>
+        <div class="faq-a"><div class="faq-a__inner"><p class="faq-a__content">앱스토어 결제 환불은 아래 순서로 진행해 주세요.<br><br>① 더멤버스로 앱스토어 결제 내역 전달<br>② 티켓 회수 진행<br>③ 아래 방법 중 하나로 애플에 직접 환불 접수<br>④ 환불 완료<br><br><span style="color:var(--muted);font-size:12px">※ 환불이 거절된 경우 한 번 더 애플에 환불 요청을 접수해 주세요. 두 번 거절된 경우, 거절 확인 자료와 함께 더멤버스로 문의하시면 티켓을 재지급해 드립니다.</span><br><br><strong>[방법 1] 애플 문제 신고 링크로 접수</strong><br>· <a href="https://support.apple.com/ko-kr/118223" target="_blank" rel="noopener">애플 문제 신고 바로가기</a><br>· 알맞은 사유 선택 후 제출 → 애플 검토 후 환불 진행<br><br><strong>[방법 2] 애플 지원센터 전화</strong><br>· 080-333-4000 (매일 오전 9시 ~ 오후 9시)<br>· 숫자 4번 → 상담원 연결 후 환불 요청</p></div></div>
+      </div>
+
+      <div class="faq-item" data-cat="meet">
+        <div class="faq-q"><span class="faq-q__mark">Q</span><span class="faq-q__text">구글 플레이 결제 환불은 어떻게 하나요?</span><span class="faq-q__chevron"><svg viewBox="0 0 12 12"><polyline points="2,4 6,8 10,4"/></svg></span></div>
+        <div class="faq-a"><div class="faq-a__inner"><p class="faq-a__content">구글 플레이 결제 환불은 <strong>결제일로부터 7일 이내, 티켓을 사용하지 않은 경우</strong>에만 신청 가능합니다.<br><br>환불 신청 시 아래 3가지 정보를 함께 문의 접수 시 전달해 주세요.<br><br>① 환불 사유<br>② 구매 영수증<br>③ 카드 승인 내역이 확인되는 문자 자료 (통신사 결제 내역, 카카오페이 등)<br><br>위 정보를 함께 전달해 주시면 환불 처리 및 안내를 도와드립니다.</p></div></div>
       </div>
 
       <div class="faq-item" data-cat="meet">
         <div class="faq-q"><span class="faq-q__mark">Q</span><span class="faq-q__text">서비스 비용은 언제, 어떻게 발생하나요?</span><span class="faq-q__chevron"><svg viewBox="0 0 12 12"><polyline points="2,4 6,8 10,4"/></svg></span></div>
-        <div class="faq-a"><div class="faq-a__inner"><p class="faq-a__content">가입 및 프로필 소개는 완전히 무료입니다. 서비스 이용 비용은 실제 만남 진행 단계에서 발생하며, 구체적인 금액은 선택하시는 서비스 플랜에 따라 다릅니다. 자세한 내용은 챗봇 또는 앱 내 요금 안내를 확인해 주세요.</p></div></div>
+        <div class="faq-a"><div class="faq-a__inner"><p class="faq-a__content">가입 및 프로필 소개는 완전히 무료입니다. 서비스 이용 비용은 실제 만남 진행 단계에서 발생하며, 구체적인 금액은 선택하시는 만남 방법에 따라 달라집니다.</p></div></div>
       </div>
 
       <!-- 개인정보 & 보안 -->
-      <div class="faq-item" data-cat="privacy">
-        <div class="faq-q"><span class="faq-q__mark">Q</span><span class="faq-q__text">개인 연락처가 상대방에게 공개되나요?</span><span class="faq-q__chevron"><svg viewBox="0 0 12 12"><polyline points="2,4 6,8 10,4"/></svg></span></div>
-        <div class="faq-a"><div class="faq-a__inner"><p class="faq-a__content">아니요. 만남의 전 과정이 전담 매니저를 통해 진행되므로 개인 연락처는 상대방에게 공개되지 않습니다. 전화번호, 카카오톡 ID 등 개인정보는 회원님이 직접 공유하기 전까지 보호됩니다.</p></div></div>
-      </div>
 
       <div class="faq-item" data-cat="privacy">
         <div class="faq-q"><span class="faq-q__mark">Q</span><span class="faq-q__text">제출한 서류는 어떻게 관리되나요?</span><span class="faq-q__chevron"><svg viewBox="0 0 12 12"><polyline points="2,4 6,8 10,4"/></svg></span></div>
@@ -503,7 +552,7 @@ body{font-family:var(--font);background:var(--white);color:var(--para)}
 
       <div class="faq-item" data-cat="privacy">
         <div class="faq-q"><span class="faq-q__mark">Q</span><span class="faq-q__text">탈퇴하면 모든 정보가 삭제되나요?</span><span class="faq-q__chevron"><svg viewBox="0 0 12 12"><polyline points="2,4 6,8 10,4"/></svg></span></div>
-        <div class="faq-a"><div class="faq-a__inner"><p class="faq-a__content">회원 탈퇴 시 관계 법령에서 정한 보관 기간을 제외한 모든 개인정보는 즉시 파기됩니다. 탈퇴는 앱 내 설정에서 직접 하실 수 있으며, 탈퇴 후 재가입은 30일 이후 가능합니다.</p></div></div>
+        <div class="faq-a"><div class="faq-a__inner"><p class="faq-a__content">회원 탈퇴 시 관계 법령에서 정한 보관 기간을 제외한 모든 개인정보는 즉시 파기됩니다. 탈퇴는 앱 내 설정에서 직접 하실 수 있으며, 탈퇴 후 재가입은 7일 이후 가능합니다.</p></div></div>
       </div>
 
     </div><!-- /faq-list -->
@@ -520,7 +569,7 @@ body{font-family:var(--font);background:var(--white);color:var(--para)}
     <div class="chat-header">
       <div class="chat-header__info">
         <div class="chat-header__avatar">
-          <img src="스크린샷/m_logo.jpg" alt="더멤버스" style="width:100%;height:100%;object-fit:cover"/>
+          <img src="assets/applogo.png" alt="더멤버스" style="width:100%;height:100%;object-fit:cover"/>
         </div>
         <div>
           <p class="chat-header__name">더멤버스 고객지원</p>
@@ -663,28 +712,28 @@ let chatStarted = false;
 // 봇 응답 데이터
 const RESPONSES = {
   '가입 조건이 궁금해요': {
-    text: '가입 조건을 안내드릴게요 😊\n\n남성은 직업·소득·자산·차량 중 하나 이상의 경제력 인증이 필수입니다.\n\n여성은 경제력 인증 또는 매력 인증(사진·인플루언서·셀럽) 중 하나만으로 가입 가능합니다.\n\n더 궁금한 인증 항목이 있으신가요?',
-    replies: ['직업 인증 조건', '소득 인증 조건', '자산 인증 조건', '매력 인증 조건 (여성)']
+    text: '가입하려면 아래 5가지 인증 항목 중 1개 이상을 반드시 완료해야 합니다.\n\n• 직업 인증 — 전문직·대기업·공기업·공무원·사업가·명문대\n• 소득 인증 — 고소득·억대연봉·2억+ 연봉\n• 자산 인증 — 자가 보유·고액자산·초고액자산\n• 차량 인증 — 고급차·억대차·슈퍼카\n• 매력 인증 — 매력·인플루언서·셀럽 (여성 전용)\n\n남성은 만 30세 이상, 직업·소득·자산·차량 중 1개 이상 필수입니다.\n여성은 만 25세 이상, 위 4가지 또는 매력 인증 중 하나로 가입 가능합니다.\n\n가입 후에는 부모님 노후·학교·직장·혼인 인증을 선택적으로 추가할 수 있습니다.',
+    replies: ['직업 인증 조건', '소득 인증 조건', '자산 인증 조건', '차량 인증 조건', '매력 인증 조건 (여성)']
   },
   '직업 인증 조건': {
-    text: '직업 인증 가능 항목입니다.\n\n• 전문직 — 의사, 변호사, 치과의사, 검사 등\n• 사업가 — 연매출 50억 이상 기업 대표\n• 대기업 — 재계순위 52위 이내 및 계열사\n• 공기업 — 내규에 따른 대한민국 공기업\n• 공무원 — 7급 이상\n• 명문대 — 서울대·연세대·고려대·KAIST·아이비리그',
-    replies: ['가입 심사 기간', '소득 인증 조건', '처음으로 돌아가기']
+    text: '직업 인증 항목입니다.\n\n📌 명문대\n· 기준: 서울대·연세대·고려대·카이스트·아이비리그 등 학부 졸업\n· 서류: 졸업증명서 (성함, 학교명, 학부 필수 노출)\n\n📌 전문직\n· 기준: 의사·치과의사·한의사·약사·판사·검사·변호사·회계사·세무사·군의관·변리사·수의사 등\n· 서류: 전문직 자격증 (성함, 사진, 면허번호 필수) / 조교수는 재직증명서 또는 교수임명장 / 실물 명함\n\n📌 사업가\n· 기준: 연 매출 50억 원 이상 기업 대표\n· 서류: 연 매출 50억 이상 공식 서류 + 사업자등록증 (성함, 상호, 과세기간, 매출과세표준 필수)\n\n📌 대기업\n· 기준: 재계 52위 이내 대기업 및 계열사 재직자\n· 서류: 실물 명함 또는 재직증명서 (성함, 소속 필수)\n\n📌 공무원\n· 기준: 7급 이상 공무원\n· 서류: 공무원증 또는 명함 (성함, 소속 필수)\n\n📌 공기업\n· 기준: 더멤버스 내규에 따른 공기업·공사 재직자\n· 서류: 실물 명함 또는 재직증명서 (성함, 소속 필수)',
+    replies: ['소득 인증 조건', '처음으로 돌아가기']
   },
   '소득 인증 조건': {
-    text: '소득 인증 기준입니다.\n\n• 고소득 — 20~30대 6,000만원 이상 / 40대 7,000만원 이상\n• 억대 연봉 — 연 소득 1억원 이상\n• 2억대+ 연봉 — 연 소득 2억원 이상\n\n홈텍스 소득 확인서 또는 원천징수 영수증으로 인증합니다.',
-    replies: ['자산 인증 조건', '차량 인증 조건', '처음으로 돌아가기']
+    text: '소득 인증 항목입니다.\n\n⚡ 간편인증 — 홈택스 연동으로 서류 없이 1분만에 모바일로 인증 완료!\n\n📌 고소득\n· 20~30대: 연 소득 6,000만 원 이상\n· 40대: 연 소득 7,000만 원 이상\n\n📌 억대연봉 — 연 소득 1억 원 이상\n\n📌 2억+ 억대연봉 — 연 소득 2억 원 이상\n\n서류인증 시 필요 서류\n· 근로소득자: 원천징수영수증 또는 연봉계약서\n· 자영업자: 소득금액증명원\n※ 성함, 생년월일, 근무기간, 연소득 필수 노출',
+    replies: ['간편인증 더 알아보기', '자산 인증 조건', '차량 인증 조건', '처음으로 돌아가기']
   },
   '자산 인증 조건': {
-    text: '자산 인증 기준입니다.\n\n• 자가 보유 — 서울 7억, 그 외 5억 이상 아파트\n• 고액 자산 — 금융·부동산 총 5억원 이상\n• 초고액 자산 — 20억 / 50억 / 100억원 이상',
-    replies: ['차량 인증 조건', '직업 인증 조건', '처음으로 돌아가기']
+    text: '자산 인증 항목입니다.\n\n📌 자가 보유\n· 기준: 서울 7억 원 이상 / 서울 외 5억 원 이상 아파트\n· 서류: 부동산 등기서류 + 네이버부동산 실거래가 캡처\n※ 성함, 부동산 소재지, 거주지 이름 및 동 필수 노출\n\n📌 고액자산 — 금융·부동산 등 개인자산 5억 원 이상\n\n📌 초고액자산 — 20억 / 50억 / 100억 이상\n\n증빙 서류 (고액·초고액 공통)\n· 부동산 등기서류 및 실거래가 캡처\n· 시중 은행 발행 잔고·잔액증명서\n※ 본인 성함 표시, 1개월 이내 발행본 필수',
+    replies: ['차량 인증 조건', '직업 인증 조건', '가입 후 선택 인증이 궁금해요', '처음으로 돌아가기']
   },
   '차량 인증 조건': {
-    text: '차량 인증 기준입니다.\n\n• 고급 차량 — 출시 5년 이내, 5,000만원 이상\n• 억대 차량 — 출시 3년 이내, 1억원 이상\n• 슈퍼카 — 출시 3년 이내, 2억원 이상\n\n소유 또는 리스 차량 모두 인정됩니다.',
-    replies: ['가입 심사 기간', '처음으로 돌아가기']
+    text: '차량 인증 항목입니다.\n\n📌 고급차량 — 출시 5년 이내, 5,000만 원 이상\n📌 억대차량 — 출시 3년 이내, 1억 원 이상\n📌 슈퍼카 — 출시 3년 이내, 2억 원 이상\n\n리스 차량 포함 가능\n\n증빙 서류\n· 소유 차량: 자동차등록증\n· 리스 차량: 자동차보험증권 또는 리스계약서\n※ 성함, 차명, 연식 필수 노출\n⚠️ 자동차등록증 제출 시 주민등록번호 뒷자리 반드시 제거',
+    replies: ['소득 인증 조건', '자산 인증 조건', '처음으로 돌아가기']
   },
   '매력 인증 조건 (여성)': {
-    text: '여성 전용 매력 인증 항목입니다.\n\n• 매력 사진 — 셀카, 우아한 일상, 여행 사진\n• 인플루언서 — 인스타그램 2만+ / 유튜브 10만+\n• 셀럽 — 미스코리아 수상 / 인스타 10만+ / 유튜브 50만+\n\n경제력 인증 없이 매력 인증 하나만으로도 가입 가능합니다.',
-    replies: ['가입 심사 기간', '처음으로 돌아가기']
+    text: '여성 전용 매력 인증 항목입니다.\n\n📌 매력\n· 기준: 프로필 평가 3.5점 이상\n· 서류: 별도 서류 없음 (프로필 사진으로 평가)\n\n📌 셀럽 (명성)\n· 기준: 유튜브 50만+ / 인스타그램 10만+ / 사회적 명성 있는 연예인·공인\n· 서류 (유튜브): 채널 캡처본 + 본인 얼굴 확인 영상\n· 서류 (인스타): 더멤버스 계정 DM 발송 + 본인 얼굴·팔로워 수 확인 사진\n\n📌 인플루언서 (명성)\n· 기준: 유튜브 10만+ / 인스타그램 5만+ / 미스코리아 등 수상\n· 서류 (미스코리아): 본인 이름·사진이 기재된 기사 캡처\n· 서류 (유튜브): 채널 캡처본 + 본인 얼굴 확인 영상\n· 서류 (인스타): 더멤버스 계정 DM 발송 + 본인 얼굴 확인 자료\n\n경제력 인증 없이 매력 인증 하나만으로도 가입 가능합니다.',
+    replies: ['가입 심사 기간이 얼마나 걸리나요?', '처음으로 돌아가기']
   },
   '가입 심사 기간이 얼마나 걸리나요?': {
     text: '가입 심사는 평균 1~3일 이내 완료됩니다.\n\n제출 서류가 충분하면 더 빠르게 처리되며, 보완이 필요한 경우 추가 자료를 요청드릴 수 있습니다.\n\n결과는 앱 푸시 알림과 문자 메시지로 안내드립니다.',
@@ -695,16 +744,20 @@ const RESPONSES = {
     replies: ['가입 조건이 궁금해요', '처음으로 돌아가기']
   },
   '어떤 서류를 준비해야 하나요?': {
-    text: '인증 항목에 따라 필요 서류가 다릅니다.\n\n• 직업 인증 — 재직증명서, 사업자등록증, 학위증명서 등\n• 소득 인증 — 홈텍스 소득 확인서, 원천징수 영수증\n• 자산 인증 — 부동산 등기부등본, 금융 자산 증명서\n• 차량 인증 — 자동차 등록증, 리스 계약서\n\n자세한 내용은 앱 내 가입 화면에서 확인 가능합니다.',
+    text: '인증 항목에 따라 필요 서류가 다릅니다.\n\n• 직업 인증 — 전문직 자격증, 졸업증명서, 재직증명서, 명함 등\n• 소득 인증 — 원천징수영수증, 연봉계약서, 소득금액증명원 중 1가지\n• 자산 인증 — 부동산 등기서류, 실거래가 캡처, 은행 잔고증명서 등\n• 차량 인증 — 자동차등록증 또는 자동차보험증권·리스계약서\n• 매력 인증 — 셀럽·인플루언서의 경우 채널 캡처본 및 본인 확인 자료\n\n자세한 내용은 앱 내 가입 화면에서 확인 가능합니다.',
     replies: ['가입 심사 기간이 얼마나 걸리나요?', '처음으로 돌아가기']
   },
   '만남 보장 환급은 어떻게 받나요?': {
-    text: '만남 미성사 시 100% 환급해 드립니다.\n\n약속된 기간 내 실제 만남이 성사되지 않은 경우, 이 채팅창 또는 앱 내 문의 기능으로 환급 신청을 해주세요.\n\n신청 후 영업일 기준 5~7일 이내에 결제 수단으로 전액 환급됩니다.',
-    replies: ['환급 조건이 더 궁금해요', '처음으로 돌아가기']
+    text: '상대 사유로 만남이 성사되지 않은 경우 만남 티켓을 100% 환급해 드립니다.\n\n담당 매니저가 상대방과의 취소 사유를 확인한 후 진행되며, 이 과정은 영업일 기준 최대 3~5일 정도 소요될 수 있습니다.',
+    replies: ['앱스토어(애플) 환불 방법', '처음으로 돌아가기']
   },
-  '환급 조건이 더 궁금해요': {
-    text: '환급은 아래 조건을 충족할 때 신청 가능합니다.\n\n• 서비스 이용 기간 내 단 한 번의 만남도 성사되지 않은 경우\n• 회원님의 귀책 사유(일방적 거절, 연락 두절 등)가 없는 경우\n\n구체적인 기간 조건은 선택하신 서비스 플랜에 따라 다르며, 앱 내 이용약관에서 확인하실 수 있습니다.',
-    replies: ['처음으로 돌아가기']
+  '앱스토어(애플) 환불 방법': {
+    text: '앱스토어 결제 환불은 아래 순서로 진행해 주세요.\n\n① 더멤버스로 앱스토어 결제 내역 전달\n② 티켓 회수 진행\n③ 애플에 직접 환불 접수\n④ 환불 완료\n\n⚠️ 환불이 거절된 경우 한 번 더 애플에 요청해 주세요. 두 번 거절 시 거절 확인 자료와 함께 문의하시면 티켓을 재지급해 드립니다.\n\n[방법 1] 애플 문제 신고 링크\nhttps://support.apple.com/ko-kr/118223\n알맞은 사유 선택 후 제출\n\n[방법 2] 애플 지원센터 전화\n080-333-4000 (매일 오전 9시 ~ 오후 9시)\n숫자 4번 → 상담원 연결 후 환불 요청',
+    replies: ['구글 플레이 환불 방법', '만남 보장 환급은 어떻게 받나요?', '처음으로 돌아가기']
+  },
+  '구글 플레이 환불 방법': {
+    text: '구글 플레이 결제 환불은 결제일로부터 7일 이내, 티켓을 사용하지 않은 경우에만 신청 가능합니다.\n\n환불 신청 시 아래 3가지 정보를 함께 전달해 주세요.\n\n① 환불 사유\n② 구매 영수증\n③ 카드 승인 내역이 확인되는 문자 자료\n   (통신사 결제 내역, 카카오페이 등)\n\n위 정보를 함께 문의 접수해 주시면 환불 처리 및 안내를 도와드립니다.',
+    replies: ['앱스토어(애플) 환불 방법', '만남 보장 환급은 어떻게 받나요?', '처음으로 돌아가기']
   },
   '더블랙은 어떻게 선정되나요?': {
     text: '더블랙은 별도 신청 없이 자동으로 선정됩니다.\n\n프로필 평점과 서비스 활동 점수를 종합하여 우수 회원을 더블랙으로 선정합니다.\n\n선정 즉시 전담 매칭 매니저 1명이 배정되며, 추가 비용은 없습니다.',
@@ -719,8 +772,16 @@ const RESPONSES = {
     replies: ['탈퇴하면 정보가 삭제되나요?', '처음으로 돌아가기']
   },
   '탈퇴하면 정보가 삭제되나요?': {
-    text: '네, 탈퇴 즉시 개인정보를 파기합니다.\n\n관계 법령에서 정한 보관 기간을 제외한 모든 정보가 삭제됩니다. 탈퇴는 앱 설정에서 직접 하실 수 있으며, 탈퇴 후 30일 이후 재가입이 가능합니다.',
+    text: '네, 탈퇴 즉시 개인정보를 파기합니다.\n\n관계 법령에서 정한 보관 기간을 제외한 모든 정보가 삭제됩니다. 탈퇴는 앱 설정에서 직접 하실 수 있으며, 탈퇴 후 7일 이후 재가입이 가능합니다.',
     replies: ['처음으로 돌아가기']
+  },
+  '가입 후 선택 인증이 궁금해요': {
+    text: '가입 완료 후 선택적으로 추가할 수 있는 인증 항목입니다.\n\n📌 부모님 노후 인증\n· 기준: 월 300만 원 이상 수입 또는 10억 원 이상 자산\n· 서류: 가족관계증명서 + 자산 서류 또는 통장 내역\n\n📌 학교 인증\n· 서류: 본인 이름이 포함된 졸업증명서 또는 재학 증명 자료\n\n📌 직장 인증\n· 서류: 사원증, 명함, 사업자등록증 등 재직 증명 자료\n\n📌 혼인 인증 ⚡ 간편인증 가능\n· 모바일로 서류 없이 1분만에 인증 가능\n· 서류인증 시: 본인 이름, 생년월일이 포함된 혼인관계증명서(상세)\n\n이 항목들은 가입 조건이 아닌 프로필 보완용 선택 인증입니다.',
+    replies: ['간편인증 더 알아보기', '가입 조건이 궁금해요', '처음으로 돌아가기']
+  },
+  '간편인증 더 알아보기': {
+    text: '⚡ 간편인증으로 서류 없이 1분만에 모바일로 인증하세요!\n\n소득과 혼인 여부는 서류 제출 없이 간편하게 인증하실 수 있습니다.\n\n📌 소득 간편인증\n홈택스와 연동하여 소득 정보를 직접 조회합니다.\n별도 서류 없이 바로 인증 완료.\n\n📌 혼인 간편인증\n행정정보 연동으로 혼인 여부를 확인합니다.\n별도 서류 없이 바로 인증 완료.\n\n앱 내 인증 화면에서 간편인증 버튼을 선택하시면 됩니다.',
+    replies: ['소득 인증 조건', '가입 후 선택 인증이 궁금해요', '처음으로 돌아가기']
   },
   '처음으로 돌아가기': {
     text: '무엇을 도와드릴까요? 아래 항목을 선택하거나 직접 질문을 입력해 주세요.',
@@ -729,6 +790,40 @@ const RESPONSES = {
 };
 
 const DEFAULT_REPLIES = ['가입 조건이 궁금해요', '가입 심사 기간이 얼마나 걸리나요?', '만남 보장 환급은 어떻게 받나요?', '더블랙은 어떻게 선정되나요?', '개인정보는 안전한가요?'];
+
+const KEYWORDS = {
+  '가입 조건이 궁금해요':            ['가입', '조건', '기준', '자격', '인증', '남성', '여성', '경제력', '나이', '연령', '나이대', '몇 살', '만 25', '만 30'],
+  '직업 인증 조건':                   ['직업', '직장', '전문직', '의사', '변호사', '대기업', '공기업', '공무원', '사업가', '명문대'],
+  '간편인증 더 알아보기':             ['간편인증', '간편', '홈택스', '1분', '빠른 인증', '서류없이', '모바일 인증'],
+  '소득 인증 조건':                   ['소득', '연봉', '연소득', '억대', '홈텍스', '원천징수', '급여'],
+  '자산 인증 조건':                   ['자산', '부동산', '아파트', '금융', '자가', '재산'],
+  '가입 후 선택 인증이 궁금해요':     ['부모님', '노후', '학교', '직장', '혼인', '선택', '추가'],
+  '차량 인증 조건':                   ['차량', '차', '자동차', '슈퍼카', '리스'],
+  '매력 인증 조건 (여성)':            ['매력', '여성', '인플루언서', '셀럽', '사진', '인스타', '유튜브', '미스코리아'],
+  '가입 심사 기간이 얼마나 걸리나요?': ['심사', '기간', '얼마', '걸리', '시간', '처리'],
+  '반려되면 재신청 가능한가요?':       ['반려', '거절', '재신청', '탈락', '불합격', '사유'],
+  '어떤 서류를 준비해야 하나요?':     ['서류', '준비', '제출', '문서', '증명서', '등기'],
+  '만남 보장 환급은 어떻게 받나요?':  ['환급', '환불', '보장', '만남', '미성사'],
+  '앱스토어(애플) 환불 방법':         ['앱스토어', '애플', '아이폰', 'apple', '환불', '티켓', '지원센터'],
+  '구글 플레이 환불 방법':            ['구글', '플레이', 'google', '안드로이드', '갤럭시', '환불'],
+  '더블랙은 어떻게 선정되나요?':      ['더블랙', '블랙', '선정', '등급', '평점', '자동'],
+  '더블랙 혜택이 뭔가요?':            ['더블랙', '블랙', '혜택', '매니저', '전담', '배정'],
+  '개인정보는 안전한가요?':           ['개인정보', '정보', '안전', '보안', '보호', '연락처'],
+  '탈퇴하면 정보가 삭제되나요?':      ['탈퇴', '삭제', '파기', '재가입'],
+};
+
+function findBestMatch(text) {
+  const tokens = text.split(/\s+/).filter(Boolean);
+  let best = null, bestScore = 0;
+  Object.keys(KEYWORDS).forEach(key => {
+    let score = 0;
+    tokens.forEach(token => {
+      if (KEYWORDS[key].some(kw => kw.includes(token) || token.includes(kw))) score++;
+    });
+    if (score > bestScore) { bestScore = score; best = key; }
+  });
+  return bestScore > 0 ? best : null;
+}
 
 function now() {
   return new Date().toLocaleTimeString('ko-KR', { hour: '2-digit', minute: '2-digit' });
@@ -739,7 +834,7 @@ function addMsg(text, type) {
   msg.className = `msg msg--${type}`;
   if (type === 'bot') {
     msg.innerHTML = `
-      <div class="msg__avatar"><img src="스크린샷/m_logo.jpg" alt="" style="width:100%;height:100%;object-fit:cover"/></div>
+      <div class="msg__avatar"><img src="assets/applogo.png" alt="" style="width:100%;height:100%;object-fit:cover"/></div>
       <div>
         <div class="msg__bubble">${text.replace(/\n/g, '<br>')}</div>
       </div>
@@ -757,7 +852,7 @@ function showTyping() {
   const t = document.createElement('div');
   t.className = 'msg msg--bot';
   t.id = 'typing';
-  t.innerHTML = `<div class="msg__avatar"><img src="스크린샷/m_logo.jpg" alt="" style="width:100%;height:100%;object-fit:cover"/></div><div class="typing"><span></span><span></span><span></span></div>`;
+  t.innerHTML = `<div class="msg__avatar"><img src="assets/applogo.png" alt="" style="width:100%;height:100%;object-fit:cover"/></div><div class="typing"><span></span><span></span><span></span></div>`;
   messages.appendChild(t);
   messages.scrollTop = messages.scrollHeight;
 }
@@ -776,6 +871,9 @@ function setReplies(arr) {
     btn.addEventListener('click', () => handleInput(r));
     qreplies.appendChild(btn);
   });
+  if (arr.length) {
+    requestAnimationFrame(() => { messages.scrollTop = messages.scrollHeight; });
+  }
 }
 
 function handleInput(text) {
@@ -784,12 +882,13 @@ function handleInput(text) {
   showTyping();
   setTimeout(() => {
     removeTyping();
-    const resp = RESPONSES[text];
+    const key  = RESPONSES[text] ? text : findBestMatch(text);
+    const resp = key ? RESPONSES[key] : null;
     if (resp) {
       addMsg(resp.text, 'bot');
       setReplies(resp.replies);
     } else {
-      addMsg('죄송합니다, 해당 내용은 담당자를 통해 안내드리겠습니다.\n\n아래 항목 중 선택하시거나 앱을 통해 추가 문의해 주세요.', 'bot');
+      addMsg('죄송합니다. 해당 내용은 담당자를 통해 안내드리겠습니다. help@themembers.kr로 문의 메일 부탁드립니다.', 'bot');
       setReplies(DEFAULT_REPLIES);
     }
   }, 800);
@@ -830,7 +929,7 @@ function sendMessage() {
 }
 document.getElementById('chatSend').addEventListener('click', sendMessage);
 inputEl.addEventListener('keydown', e => {
-  if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendMessage(); }
+  if (e.key === 'Enter' && !e.shiftKey && !e.isComposing) { e.preventDefault(); sendMessage(); }
 });
 inputEl.addEventListener('input', function() {
   this.style.height = '40px';
