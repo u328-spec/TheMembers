@@ -582,13 +582,9 @@ body{font-family:var(--font);background:var(--white);color:var(--body)}
 .logo-marquee__track{
   display:flex;
   align-items:center;
+  justify-content:center;
   gap:0;
-  width:max-content;
-  animation:marquee 28s linear infinite;
-}
-@keyframes marquee{
-  from{transform:translateX(0)}
-  to{transform:translateX(-50%)}
+  width:100%;
 }
 .logo-marquee__item{
   flex-shrink:0;
@@ -639,6 +635,7 @@ body{font-family:var(--font);background:var(--white);color:var(--body)}
 </defs>
 </svg></a>
     <div class="nav__links" id="navLinks">
+      <a href="index.html" class="nav__link active">서비스 소개</a>
       <a href="join.html" class="nav__link">가입 절차</a>
       <a href="reviews.html" class="nav__link">회원 리뷰</a>
       <a href="support.html" class="nav__link">고객 지원</a>
@@ -676,11 +673,6 @@ body{font-family:var(--font);background:var(--white);color:var(--body)}
 <!-- LOGO MARQUEE -->
 <div class="logo-marquee">
   <div class="logo-marquee__track">
-      <div class="logo-marquee__item"><img src="assets/images/partners/partnership1.png" alt="ISMS-P 인증"/></div>
-      <div class="logo-marquee__item"><img src="assets/images/partners/partnership2.png" alt="Noblesse"/></div>
-      <div class="logo-marquee__item"><img src="assets/images/partners/partnership3.png" alt="HYPHEN"/></div>
-      <div class="logo-marquee__item"><img src="assets/images/partners/partnership4.png" alt="NICE 평가정보"/></div>
-      <div class="logo-marquee__item"><img src="assets/images/partners/partnership5.png" alt="KSBA 2024"/></div>
       <div class="logo-marquee__item"><img src="assets/images/partners/partnership1.png" alt="ISMS-P 인증"/></div>
       <div class="logo-marquee__item"><img src="assets/images/partners/partnership2.png" alt="Noblesse"/></div>
       <div class="logo-marquee__item"><img src="assets/images/partners/partnership3.png" alt="HYPHEN"/></div>
