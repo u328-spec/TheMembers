@@ -76,365 +76,213 @@ body{font-family:var(--font);background:var(--white);color:var(--body);word-brea
 .nav__ham span{display:block;width:20px;height:1.5px;background:var(--headline)}
 
 /* ─────────────────────────────────────
-   PAGE HEADER
+   HERO
 ───────────────────────────────────── */
-.page-header{
+.hero{
   background:var(--white);
-  padding:64px 48px 56px;
+  padding:0 48px;
+  overflow:hidden;
 }
-.page-header__inner{
+.hero__inner{
   max-width:var(--max);margin:0 auto;
-  display:flex;justify-content:center;
+  display:flex;flex-direction:column;align-items:center;
   text-align:center;
+  padding:64px 0 0;
 }
-.page-header__breadcrumb{
-  display:flex;align-items:center;gap:8px;
-  font-size:11px;font-weight:500;letter-spacing:0.08em;
-  color:var(--light);text-transform:uppercase;
-  margin-bottom:18px;
+.hero__title{
+  font-size:46px;font-weight:800;letter-spacing:-0.04em;
+  line-height:1.16;color:var(--headline);margin-bottom:32px;
 }
-.page-header__breadcrumb-sep{font-size:10px;color:var(--border2)}
-.page-header__breadcrumb-current{color:var(--muted)}
-.page-header__title{
-  font-size:46px;font-weight:800;
-  letter-spacing:-0.035em;line-height:1.15;
-  color:var(--headline);margin-bottom:12px;
+.hero__media{
+  width:100%;max-width:960px;
+  aspect-ratio:16/9;
+  overflow:hidden;
+  border-radius:20px;
+  margin:0 auto;
+  background:var(--bg2);
 }
-.page-header__desc{
-  font-size:15px;font-weight:400;line-height:1.75;
-  letter-spacing:-0.01em;color:var(--body);
-  max-width:520px;
-}
-.page-header__meta{
-  display:flex;flex-direction:column;align-items:flex-end;gap:8px;
-  flex-shrink:0;
-}
-.page-header__meta-item{
-  display:flex;align-items:center;gap:8px;
-  font-size:12px;color:var(--muted);
-}
-.page-header__meta-dot{
-  width:5px;height:5px;border-radius:50%;
-  background:var(--border2);
+.hero__media img{
+  width:100%;height:100%;
+  object-fit:cover;
+  display:block;
 }
 
 /* ─────────────────────────────────────
-   LAYOUT
+   SECTION STRUCTURE
 ───────────────────────────────────── */
-.page-body{
-  max-width:var(--max);margin:0 auto;
-  padding:0 48px 0;
-  display:grid;
-  grid-template-columns:220px 1fr;
-  gap:64px;
-  align-items:start;
-}
+.section{padding:100px 0;background:var(--white)}
+.section--bg{background:var(--bg)}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 48px}
 
 /* ─────────────────────────────────────
-   SIDEBAR NAV
+   SECTION HEADER
 ───────────────────────────────────── */
-.sidebar{
-  position:sticky;
-  top:80px;
-  padding-top:52px;
-}
-.sidebar__title{
-  font-size:10px;font-weight:700;letter-spacing:0.16em;
-  text-transform:uppercase;color:var(--light);
-  margin-bottom:12px;padding-bottom:12px;
-}
-.sidebar__list{display:flex;flex-direction:column;gap:0}
-.sidebar__item{
-  display:flex;align-items:center;gap:10px;
-  padding:11px 0;
-  border-bottom:1px solid var(--border);
-  cursor:pointer;transition:color 0.15s;
-}
-.sidebar__item:last-child{border-bottom:none}
-.sidebar__item-num{
-  font-size:11px;font-weight:700;letter-spacing:0.04em;
-  color:var(--light);min-width:18px;
-  transition:color 0.15s;
-}
-.sidebar__item-label{
-  font-size:13px;font-weight:400;color:var(--muted);
-  transition:color 0.15s;line-height:1.4;
-}
-.sidebar__item:hover .sidebar__item-label,
-.sidebar__item:hover .sidebar__item-num{color:var(--headline)}
-.sidebar__item.active .sidebar__item-num{color:var(--red)}
-.sidebar__item.active .sidebar__item-label{color:var(--headline);font-weight:600}
-
-.sidebar__cta{
-  margin-top:28px;
-  background:var(--red);color:var(--white);
-  display:block;text-align:center;
-  font-size:13px;font-weight:700;letter-spacing:0.02em;
-  padding:13px 0;
-  transition:opacity 0.15s;
-}
-.sidebar__cta:hover{opacity:0.85}
-
-/* ─────────────────────────────────────
-   MAIN CONTENT
-───────────────────────────────────── */
-.main{padding-top:52px}
-
-/* ── section block ── */
-.content-section{
-  padding-bottom:80px;
-  margin-bottom:80px;
-}
-.content-section:last-child{margin-bottom:0;padding-bottom:0}
-
-.cs-header{margin-bottom:40px}
+.cs-header{margin-bottom:52px;text-align:center}
 .cs-num{
-  font-size:11px;font-weight:700;letter-spacing:0.14em;
-  text-transform:uppercase;color:var(--light);
-  margin-bottom:8px;
+  display:inline-flex;align-items:center;gap:10px;
+  font-size:20px;font-weight:700;letter-spacing:0.04em;
+  text-transform:uppercase;color:var(--red);margin-bottom:12px;
 }
 .cs-title{
-  font-size:26px;font-weight:700;letter-spacing:-0.025em;
-  line-height:1.25;color:var(--headline);
-  margin-bottom:10px;
+  font-size:34px;font-weight:800;letter-spacing:-0.03em;
+  line-height:1.22;color:var(--headline);margin-bottom:14px;
 }
 .cs-desc{
-  font-size:14px;font-weight:400;line-height:1.85;
-  color:var(--body);max-width:600px;
+  font-size:15px;font-weight:400;line-height:1.65;
+  color:var(--body);max-width:600px;margin:0 auto;
 }
+
+/* ── 2-column step layout ── */
+.step-two-col{display:grid;grid-template-columns:1fr 1.4fr;gap:80px;align-items:center}
+.step-two-col__text .cs-desc{margin:0;max-width:none}
 
 /* ─────────────────────────────────────
    STEP 1 — 앱 다운로드
 ───────────────────────────────────── */
-.highlight-blocks{
-  display:flex;gap:16px;max-width:800px;
+
+.step1-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;max-width:720px;margin:0 auto}
+
+.step1-qr-card{
+  background:var(--bg);border-radius:20px;
+  padding:36px 40px;
+  display:flex;flex-direction:column;align-items:center;text-align:center;
 }
-.highlight-block{
-  flex:1;border-radius:24px;
-  padding:28px 24px 32px;
-  display:flex;flex-direction:column;align-items:flex-start;
-  position:relative;overflow:hidden;min-height:180px;
+.step1-qr-label{
+  font-size:13px;color:var(--muted);
+  letter-spacing:-0.01em;margin-bottom:2px;
 }
-.highlight-block:nth-child(1){background:#D9E8F5;}
-.highlight-block:nth-child(2){background:#F5EDD0;}
-.highlight-block:nth-child(3){background:#DCECe2;}
-.hb-illust{
-  position:absolute;right:18px;top:18px;
-  width:60px;height:60px;
-  display:flex;align-items:center;justify-content:center;
+.step1-qr-cta{
+  font-size:20px;font-weight:700;letter-spacing:-0.02em;
+  color:var(--headline);margin-bottom:28px;
 }
-.hb-label{
-  font-size:13px;font-weight:500;
-  color:rgba(0,0,0,0.45);
-  margin-bottom:auto;padding-bottom:20px;
+.step1-qr-img{
+  width:140px;height:140px;
+  display:block;image-rendering:pixelated;
 }
-.hb-value{
-  font-size:46px;font-weight:700;letter-spacing:-0.04em;
-  line-height:1;color:var(--headline);
+
+.step1-stats{display:flex;flex-direction:column;gap:12px}
+.step1-stat{
+  background:var(--bg);border-radius:16px;
+  padding:24px 32px;flex:1;text-align:center;
+}
+.step1-stat__label{
+  font-size:13px;color:var(--muted);
+  letter-spacing:-0.01em;margin-bottom:4px;
+}
+.step1-stat__value{
+  font-size:36px;font-weight:800;letter-spacing:-0.04em;
+  line-height:1.1;color:var(--headline);
 }
 
 /* ─────────────────────────────────────
    STEP 2 — 인증 탭
 ───────────────────────────────────── */
 .cert-tabs{
-  display:flex;flex-direction:row;
-  border:none;border-bottom:2px solid var(--border);
-  margin-bottom:24px;border-radius:0;overflow:visible;
+  display:flex;flex-direction:row;align-items:center;
+  background:var(--bg2);border-radius:999px;
+  padding:5px;gap:4px;
+  border:none;margin-bottom:24px;overflow:visible;
+  max-width:560px;margin-left:auto;margin-right:auto;
 }
 .cert-tab{
-  flex:1;padding:14px 8px;
+  flex:1;padding:10px 8px;
   font-size:14px;font-weight:600;color:var(--muted);
-  border:none;border-bottom:2px solid transparent;
+  border:none;border-radius:999px;
   background:transparent;cursor:pointer;text-align:center;
-  transition:color 0.15s,border-color 0.15s;
-  margin-bottom:-2px;letter-spacing:-0.01em;
+  transition:color 0.18s,background 0.18s;
+  letter-spacing:-0.01em;white-space:nowrap;
 }
 .cert-tab:hover{color:var(--headline)}
-.cert-tab.on{color:var(--headline);border-bottom-color:var(--headline)}
+.cert-tab.on{background:var(--dark);color:var(--white);font-weight:700}
 
 /* cert panels */
-.cert-panels{display:block}
+.cert-panels{display:block;max-width:560px;margin:0 auto}
 .cert-panel{display:none;padding:0}
 .cert-panel.on{display:block}
 
 /* cert list */
-.cert-list{display:flex;flex-direction:column}
+.cert-list{display:flex;flex-direction:column;gap:10px}
 .cert-item{
   display:flex;align-items:flex-start;gap:16px;
-  padding:18px 0;
-  border-bottom:1px solid var(--border);
+  padding:20px 24px;
+  background:var(--white);border-radius:16px;
+  border-bottom:none;
 }
 .cert-item:last-child{border-bottom:none}
 .cert-item__icon{
-  width:52px;height:52px;border-radius:50%;
-  background:#F2F6FA;flex-shrink:0;
+  width:36px;height:36px;flex-shrink:0;
   display:flex;align-items:center;justify-content:center;
   font-size:26px;line-height:1;
 }
 .cert-item__body{flex:1;min-width:0}
-.cert-item__title{font-size:15px;font-weight:700;color:var(--headline);margin-bottom:3px}
-.cert-item__crit{font-size:13px;color:var(--body);line-height:1.55;margin-bottom:3px}
-.cert-item__doc{font-size:12px;color:var(--muted);line-height:1.5}
+.cert-item__title{font-size:18px;font-weight:800;color:var(--headline);margin-bottom:5px}
+.cert-item__crit{font-size:15px;font-weight:600;color:var(--body);line-height:1.55;margin-bottom:4px}
+.cert-item__doc{font-size:13px;font-weight:500;color:var(--muted);line-height:1.5}
 
 .cert-note{
   margin-top:16px;padding:14px 18px;
-  background:#F2F6FA;border-radius:12px;
-  font-size:13px;line-height:1.7;color:var(--body);
+  background:#E4E4E4;border-radius:12px;
+  font-size:13px;line-height:1.55;color:var(--body);
 }
-.cert-note--accent{background:var(--accent-pale);color:var(--body)}
+.cert-note--accent{background:#E4E4E4;color:var(--body)}
 
 /* ─────────────────────────────────────
-   STEP 3 — 심사 프로세스
+   STEP 3 — 심사&승인
 ───────────────────────────────────── */
-.process-rows{
-  border:1px solid var(--border);
-  border-radius:12px;overflow:hidden;
+.step3-layout{display:grid;grid-template-columns:1fr 1.2fr;gap:80px;align-items:start}
+.step3-left{position:sticky;top:80px}
+.step3-left .cs-title{text-align:left;font-size:40px}
+.step3-left .cs-desc{text-align:left;margin:0;max-width:none}
+.step3-cards{display:flex;flex-direction:column;gap:0;position:relative}
+.step3-cards::before{
+  content:'';position:absolute;
+  left:15px;top:16px;bottom:0;
+  border-left:2px dashed var(--border2);
+  z-index:0;
 }
-.process-row{
-  display:grid;
-  grid-template-columns:56px 1fr auto;
-  border-bottom:1px solid var(--border);
-  transition:background 0.15s;
-}
-.process-row:last-child{border-bottom:none}
-.process-row:hover{background:var(--bg)}
-.process-row__num{
+.step3-card-row{display:flex;gap:20px;align-items:flex-start;padding-bottom:16px}
+.step3-card-row:last-child{padding-bottom:0}
+.step3-card-num{
+  width:32px;height:32px;border-radius:50%;
+  background:var(--headline);color:var(--white);
   display:flex;align-items:center;justify-content:center;
-  padding:24px 0;
-  border-right:1px solid var(--border);
-  font-size:11px;font-weight:700;letter-spacing:0.06em;color:var(--light);
+  font-size:13px;font-weight:700;flex-shrink:0;
+  margin-top:0;position:relative;z-index:1;
 }
-.process-row__body{padding:24px 28px}
-.process-row__title{
-  font-size:14px;font-weight:600;letter-spacing:-0.015em;
-  color:var(--headline);margin-bottom:5px;
+.step3-card{flex:1;background:var(--bg);border-radius:20px;overflow:hidden;display:flex;flex-direction:column;padding-top:40px}
+.step3-card__img{width:70%;display:block;object-fit:cover;margin:0 auto}
+
+/* step3 push notification overlay */
+.step3-card-row:nth-child(2) .step3-card,
+.step3-card-row:nth-child(3) .step3-card{position:relative}
+.push-notif{
+  position:absolute;top:0;left:50%;
+  transform:translateX(-50%) translateY(-120%);
+  width:72%;
+  animation:pushSlideIn 5s ease-in-out infinite;
 }
-.process-row__desc{font-size:13px;line-height:1.7;color:var(--body)}
-.process-row__tag{
-  display:flex;align-items:center;padding:24px 20px 24px 0;
+@keyframes pushSlideIn{
+  0%   {transform:translateX(-50%) translateY(-120%)}
+  15%  {transform:translateX(-50%) translateY(16px)}
+  55%  {transform:translateX(-50%) translateY(16px)}
+  70%  {transform:translateX(-50%) translateY(-120%)}
+  100% {transform:translateX(-50%) translateY(-120%)}
 }
-.tag{
-  font-size:10px;font-weight:600;letter-spacing:0.06em;
-  padding:4px 10px;white-space:nowrap;border-radius:999px;
-}
-.tag-dark{background:var(--headline);color:var(--white)}  /* 핵심 강조만 */
-.tag-muted{background:var(--bg2);color:var(--muted);border:1px solid var(--border)}
+
+.step3-card-row:nth-child(2) .step3-card__img,
+.step3-card-row:nth-child(3) .step3-card__img{width:42%}
+.step3-card__placeholder{width:100%;height:240px;background:var(--bg2);display:flex;align-items:center;justify-content:center;color:var(--light);font-size:12px}
+.step3-card__text{padding:24px 36px 32px;text-align:center}
+.step3-card__sub{font-size:13px;color:var(--muted);letter-spacing:-0.01em;margin-bottom:4px}
+.step3-card__title{font-size:24px;font-weight:800;letter-spacing:-0.03em;color:var(--headline)}
 
 /* ─────────────────────────────────────
-   STEP 4 — 활동 안내
+   STEP 4 — 목업 이미지
 ───────────────────────────────────── */
+#step4{padding-bottom:0}
 .members-card-mockup{
-  width:100%;max-width:320px;
-  display:block;border-radius:12px;
-  margin:0 auto;
+  width:30%;display:block;border-radius:16px;margin:0 auto;
 }
-.theblack-mockup{
-  width:100%;max-width:320px;
-  display:block;border-radius:12px;
-  margin:0 auto;
-}
-
-/* ─────────────────────────────────────
-   STEP 5 — 더블랙
-───────────────────────────────────── */
-/* ─────────────────────────────────────
-   STEP 5 — The Black
-───────────────────────────────────── */
-.the-black-card{
-  background:#111;border-radius:16px;
-  padding:48px;overflow:hidden;
-}
-.the-black-title{
-  font-size:40px;font-weight:800;letter-spacing:-0.03em;
-  line-height:1.2;margin-bottom:24px;
-  background:linear-gradient(135deg,#AA8563,#E6D2AB,#91714E);
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
-  background-clip:text;
-}
-.the-black-desc{
-  font-size:14px;line-height:1.9;color:rgba(255,255,255,0.85);
-  margin-bottom:36px;max-width:480px;
-}
-.the-black-divider{
-  border:none;border-top:3px solid #666666;margin-bottom:0;
-}
-.the-black-benefits{display:flex;flex-direction:column;}
-.the-black-benefit{
-  display:flex;justify-content:space-between;align-items:flex-start;
-  padding:20px 0 28px;border-bottom:1px solid #666666;gap:16px;
-}
-.the-black-benefit:last-child{border-bottom:none;padding-bottom:0;}
-.the-black-benefit__label{
-  font-size:12px;font-weight:500;letter-spacing:0.1em;
-  color:var(--white);flex-shrink:0;padding-top:4px;
-}
-.the-black-benefit__text{
-  font-size:22px;font-weight:800;letter-spacing:-0.025em;
-  color:var(--white);text-align:right;line-height:1.35;
-}
-
-/* ─────────────────────────────────────
-   STEP 6 — 만남 보장
-───────────────────────────────────── */
-.guarantee-box{
-  border:1px solid var(--border);
-  overflow:hidden;
-}
-.guarantee-box__top{
-  display:grid;grid-template-columns:1fr 1fr 1fr;
-  background:var(--bg);border-bottom:1px solid var(--border);
-}
-.g-stat{
-  padding:28px 24px;
-  border-right:1px solid var(--border);
-  display:flex;flex-direction:column;gap:4px;
-  transition:background 0.15s;
-}
-.g-stat:last-child{border-right:none}
-.g-stat:hover{background:var(--bg2)}
-.g-num{
-  font-size:32px;font-weight:800;letter-spacing:-0.04em;
-  line-height:1;color:var(--headline);
-}
-.g-label{font-size:12px;font-weight:500;color:var(--headline);margin-bottom:2px}
-.g-sub{font-size:11px;color:var(--muted);line-height:1.5}
-
-/* 핵심 보장 항목 — 여기만 레드 사용 */
-.guarantee-box__promise{
-  padding:28px 32px;
-  border-bottom:1px solid var(--border);
-  display:flex;align-items:center;gap:16px;
-}
-.promise-icon{
-  width:36px;height:36px;background:var(--red);
-  display:flex;align-items:center;justify-content:center;
-  flex-shrink:0;font-size:14px;color:var(--white);
-}
-.promise-text strong{
-  display:block;font-size:15px;font-weight:700;
-  color:var(--headline);margin-bottom:3px;
-}
-.promise-text p{font-size:13px;color:var(--body);line-height:1.6}
-
-.guarantee-box__items{
-  display:grid;grid-template-columns:1fr 1fr;
-}
-.g-item{
-  padding:22px 28px;
-  border-right:1px solid var(--border);
-  border-top:1px solid var(--border);
-  display:flex;align-items:flex-start;gap:12px;
-  transition:background 0.15s;
-}
-.g-item:nth-child(even){border-right:none}
-.g-item:hover{background:var(--bg)}
-.g-item__check{
-  width:18px;height:18px;border:1px solid var(--border2);
-  display:flex;align-items:center;justify-content:center;
-  flex-shrink:0;margin-top:2px;font-size:9px;color:var(--headline);font-weight:700;
-}
-.g-item__text{font-size:13px;line-height:1.65;color:var(--body)}
-.g-item__text strong{font-weight:600;color:var(--headline);display:block;margin-bottom:2px}
 
 /* ─────────────────────────────────────
    BOTTOM CTA
@@ -472,14 +320,13 @@ body{font-family:var(--font);background:var(--white);color:var(--body);word-brea
 ───────────────────────────────────── */
 @media(max-width:1279px){
   .nav__inner{padding:0 32px}
-  .page-header{padding:52px 32px 44px}
-  .page-body{padding:0 32px 0;grid-template-columns:180px 1fr;gap:40px}
-  .page-header__title{font-size:38px}
-  .highlight-blocks{max-width:100%}
-  .hb-value{font-size:44px}
-  .guarantee-box__top{grid-template-columns:1fr 1fr}
-  .g-stat:last-child{border-right:none;border-top:1px solid var(--border);grid-column:1/-1}
-  .bottom-cta{padding:32px}
+  .hero{padding:0 32px}
+  .hero__title{font-size:38px}
+  .wrap{padding:0 32px}
+  .section{padding:80px 0}
+  .step-two-col{gap:48px}
+  .step3-left{text-align:center}
+  .step3-left .cs-title,.step3-left .cs-desc{text-align:center}
 }
 
 /* ─────────────────────────────────────
@@ -490,49 +337,24 @@ body{font-family:var(--font);background:var(--white);color:var(--body);word-brea
   .nav__links{display:none;flex-direction:column;gap:16px;position:absolute;top:60px;left:0;right:0;background:var(--white);border-bottom:1px solid var(--border);padding:20px;box-shadow:0 8px 20px rgba(0,0,0,0.05)}
   .nav__links.open{display:flex}
   .nav__ham{display:flex}
-
-  .page-header{padding:36px 20px 32px}
-  .page-header__inner{grid-template-columns:1fr}
-  .page-header__meta{display:none}
-  .page-header__title{font-size:28px}
-
-  .page-body{
-    padding:0 20px 0;
-    grid-template-columns:1fr;
-    gap:0;
-  }
-  .sidebar{position:static;padding-top:32px;padding-bottom:8px}
-  .sidebar__list{display:flex;flex-direction:row;overflow-x:auto;gap:0;border:1px solid var(--border)}
-  .sidebar__item{
-    flex-shrink:0;flex-direction:column;align-items:center;gap:4px;
-    padding:12px 16px;border-bottom:none;border-right:1px solid var(--border);
-    text-align:center;
-  }
-  .sidebar__item:last-child{border-right:none}
-  .sidebar__item-num{min-width:auto}
-  .sidebar__item-label{font-size:11px}
-  .sidebar__cta{display:none}
-
-  .main{padding-top:32px}
-  .highlight-blocks{max-width:100%;gap:12px}
-  .highlight-block{padding:24px 18px 28px;border-radius:18px;min-height:150px}
-  .hb-illust{width:48px;height:48px;right:14px;top:14px}
-  .hb-value{font-size:38px}
-
-
-  .the-black-card{padding:32px 24px;}
-  .the-black-title{font-size:30px;}
-  .the-black-benefit__text{font-size:18px;}
-  .guarantee-box__top{grid-template-columns:1fr}
-  .g-stat{border-right:none;border-bottom:1px solid var(--border)}
-  .g-stat:last-child{border-bottom:none}
-  .guarantee-box__items{grid-template-columns:1fr}
-  .g-item:nth-child(even){border-right:none}
-  .g-item{border-right:none}
+  .hero{padding:0 20px}
+  .hero__inner{padding:40px 0 0}
+  .hero__title{font-size:28px}
+  .wrap{padding:0 20px}
+  .section{padding:64px 0}
+  .cs-header{margin-bottom:36px}
+  .cs-title{font-size:26px}
+  .step-two-col{grid-template-columns:1fr;gap:36px}
+  .step1-grid{grid-template-columns:1fr}
+  .step1-stat__value{font-size:28px}
+  .step3-layout{grid-template-columns:1fr;gap:32px}
+  .step3-left{position:static;text-align:center}
+  .step3-left .cs-title,.step3-left .cs-desc{text-align:center}
+  .step3-left .cs-title{font-size:30px}
+  .step3-cards::before{display:none}
+  .step3-card-num{display:none}
   .process-row{grid-template-columns:44px 1fr}
   .process-row__tag{display:none}
-  .bottom-cta{flex-direction:column;gap:20px;padding:28px 20px}
-  .bottom-cta__btn{width:100%;text-align:center;display:block}
 }
 
 /* ── QR MODAL ── */
@@ -748,104 +570,58 @@ body{font-family:var(--font);background:var(--white);color:var(--body);word-brea
 </div>
 
 
-<!-- ══ PAGE HEADER ══ -->
-<div class="page-header">
-  <div class="page-header__inner">
-    <div>
-      <h1 class="page-header__title">가입비 없이, 전화 상담 없이,<br>앱에서 간편하게.</h1>
+<!-- ══ HERO ══ -->
+<section class="hero">
+  <div class="hero__inner">
+    <h1 class="hero__title">가입비 없이, 전화 상담 없이,<br>앱에서 간편하게.</h1>
+    <div class="hero__media reveal">
+      <img src="assets/images/mockups/phone_woman.jpg" alt="더멤버스 앱을 사용하는 회원"/>
     </div>
   </div>
-</div>
+</section>
 
-<!-- ══ BODY ══ -->
-<div class="page-body">
+<!-- ══ STEPS ══ -->
 
-  <!-- ── SIDEBAR ── -->
-  <aside class="sidebar">
-<div class="sidebar__list">
-      <div class="sidebar__item active" data-target="step1">
-        <span class="sidebar__item-num">01</span>
-        <span class="sidebar__item-label">앱 다운로드 & 가입</span>
-      </div>
-      <div class="sidebar__item" data-target="step2">
-        <span class="sidebar__item-num">02</span>
-        <span class="sidebar__item-label">프로필 & 인증</span>
-      </div>
-      <div class="sidebar__item" data-target="step3">
-        <span class="sidebar__item-num">03</span>
-        <span class="sidebar__item-label">가입 심사</span>
-      </div>
-      <div class="sidebar__item" data-target="step4">
-        <span class="sidebar__item-num">04</span>
-        <span class="sidebar__item-label">활동 시작</span>
-      </div>
-      <div class="sidebar__item" data-target="step5">
-        <span class="sidebar__item-num">05</span>
-        <span class="sidebar__item-label">더블랙 혜택</span>
-      </div>
-      <div class="sidebar__item" data-target="step6">
-        <span class="sidebar__item-num">06</span>
-        <span class="sidebar__item-label">더블랙 만남 보장</span>
-      </div>
+<!-- STEP 1 -->
+<section class="section" id="step1">
+  <div class="wrap">
+    <div class="cs-header reveal">
+      <p class="cs-num">STEP 1</p>
+      <h2 class="cs-title">앱 다운로드 & 무료 가입 신청</h2>
+      <p class="cs-desc">더멤버스는 가입비 없이, 온라인 100%로 진행됩니다.<br>전화 상담이나 방문 없이 앱에서 간편하게 무료 가입을 신청하실 수 있습니다.</p>
     </div>
-  </aside>
-
-  <!-- ── MAIN ── -->
-  <main class="main">
-
-    <!-- STEP 1 -->
-    <div class="content-section reveal" id="step1">
-      <div class="cs-header">
-        <p class="cs-num" style="color:var(--red)">STEP 01</p>
-        <h2 class="cs-title">앱 다운로드 & 무료 가입 신청</h2>
-        <p class="cs-desc">더멤버스는 가입비 없이, 온라인 100%로 진행됩니다.<br>전화 상담이나 방문 없이 앱에서 간편하게 무료 가입을 신청하실 수 있습니다.</p>
+    <div class="step1-grid reveal">
+      <div class="step1-qr-card">
+        <p class="step1-qr-label">QR코드로 간편하게</p>
+        <p class="step1-qr-cta">앱 다운로드</p>
+        <img class="step1-qr-img" src="assets/themembers_onelink_qr.svg" alt="앱 다운로드 QR 코드"/>
       </div>
-      <div class="highlight-blocks">
-        <div class="highlight-block">
-          <div class="hb-illust">
-            <svg width="56" height="56" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <rect width="56" height="56" rx="16" fill="rgba(255,255,255,0.55)"/>
-              <path d="M16 22a3 3 0 0 1 3-3h18a3 3 0 0 1 3 3v2H16v-2z" fill="#4A86BE"/>
-              <rect x="16" y="24" width="24" height="16" rx="3" fill="#4A86BE"/>
-              <circle cx="35" cy="32" r="2.5" fill="white"/>
-            </svg>
-          </div>
-          <p class="hb-label">가입비</p>
-          <p class="hb-value">0원</p>
+      <div class="step1-stats">
+        <div class="step1-stat">
+          <p class="step1-stat__label">가입비</p>
+          <p class="step1-stat__value">0원</p>
         </div>
-        <div class="highlight-block">
-          <div class="hb-illust">
-            <svg width="56" height="56" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <rect width="56" height="56" rx="16" fill="rgba(255,255,255,0.55)"/>
-              <rect x="19" y="13" width="18" height="30" rx="4" fill="#B89240"/>
-              <path d="M24 37h8" stroke="white" stroke-width="2" stroke-linecap="round"/>
-              <path d="M24 25l3 3 6-6" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </div>
-          <p class="hb-label">온라인</p>
-          <p class="hb-value">100%</p>
+        <div class="step1-stat">
+          <p class="step1-stat__label">온라인</p>
+          <p class="step1-stat__value">100%</p>
         </div>
-        <div class="highlight-block">
-          <div class="hb-illust">
-            <svg width="56" height="56" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <rect width="56" height="56" rx="16" fill="rgba(255,255,255,0.55)"/>
-              <circle cx="28" cy="28" r="12" stroke="#4E8F66" stroke-width="2.5" fill="none"/>
-              <path d="M28 21v7l4.5 4.5" stroke="#4E8F66" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </div>
-          <p class="hb-label">걸리는 시간</p>
-          <p class="hb-value">10분</p>
+        <div class="step1-stat">
+          <p class="step1-stat__label">걸리는 시간</p>
+          <p class="step1-stat__value">10분</p>
         </div>
       </div>
     </div>
+  </div>
+</section>
 
-    <!-- STEP 2 -->
-    <div class="content-section reveal" id="step2">
-      <div class="cs-header">
-        <p class="cs-num" style="color:var(--red)">STEP 02</p>
-        <h2 class="cs-title">프로필 등록 & 인증</h2>
-        <p class="cs-desc">남성은 만 30세 이상, 직업·소득·자산·차량 인증 중 1개 이상이 필수입니다.<br>여성은 만 25세 이상, 경제력 인증 또는 매력 인증 하나만으로 가입이 가능합니다.</p>
-      </div>
+<!-- STEP 2 -->
+<section class="section section--bg" id="step2">
+  <div class="wrap">
+    <div class="cs-header reveal">
+      <p class="cs-num">STEP 02</p>
+      <h2 class="cs-title">프로필 등록 & 인증</h2>
+      <p class="cs-desc">남성은 만 30세 이상, 직업·소득·자산·차량 인증 중 1개 이상이 필수입니다.<br>여성은 만 25세 이상, 경제력 인증 또는 매력 인증 하나만으로 가입이 가능합니다.</p>
+    </div>
 
       <!-- 수평 탭 -->
       <div class="cert-tabs" id="certTabs">
@@ -861,15 +637,15 @@ body{font-family:var(--font);background:var(--white);color:var(--body);word-brea
         <div class="cert-panel on" id="panel-job">
           <div class="cert-list">
             <div class="cert-item">
-              <div class="cert-item__icon">⚕️</div>
+              <div class="cert-item__icon"><svg width="30" height="30" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="9" y="6" width="14" height="3" rx="1.5" fill="#85C1E9"/><circle cx="9" cy="7.5" r="3" fill="#2E86C1"/><circle cx="23" cy="7.5" r="3" fill="#2E86C1"/><path d="M16 11 C16 18 24 18 24 23" stroke="#2E86C1" stroke-width="3" fill="none" stroke-linecap="round"/><circle cx="24" cy="26" r="3.5" fill="#2E86C1"/><circle cx="24" cy="26" r="1.5" fill="white"/></svg></div>
               <div class="cert-item__body">
                 <p class="cert-item__title">전문직</p>
-                <p class="cert-item__crit">의사, 치과의사, 한의사, 약사, 판사, 검사, 변호사, 회계사, 파일럿, 정교수·조교수 등</p>
+                <p class="cert-item__crit">의사, 치과의사, 한의사,판사, 검사, 변호사, 5급 공무원, 변리사, 수의사, 회계사, 세무사, 법무사, 노무사, 감평사, 파일럿 등 전문 자격증이 필요한 직종</p>
                 <p class="cert-item__doc">필요 서류: 전문직 자격증 (면허번호 필수) / 재직증명서·교수임명장 / 실물 명함</p>
               </div>
             </div>
             <div class="cert-item">
-              <div class="cert-item__icon">📊</div>
+              <div class="cert-item__icon"><svg width="30" height="30" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="3" y="20" width="7" height="9" rx="2" fill="#F0A500"/><rect x="12.5" y="14" width="7" height="15" rx="2" fill="#E08000"/><rect x="22" y="8" width="7" height="21" rx="2" fill="#C07000"/></svg></div>
               <div class="cert-item__body">
                 <p class="cert-item__title">사업가</p>
                 <p class="cert-item__crit">연 매출 50억 이상 기업 대표 및 사업가</p>
@@ -877,7 +653,7 @@ body{font-family:var(--font);background:var(--white);color:var(--body);word-brea
               </div>
             </div>
             <div class="cert-item">
-              <div class="cert-item__icon">🏢</div>
+              <div class="cert-item__icon"><svg width="30" height="30" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="2" y="8" width="16" height="22" rx="2" fill="#2E86C1"/><rect x="18" y="14" width="12" height="16" rx="2" fill="#5DADE2"/><rect x="5" y="12" width="4" height="4" rx="0.5" fill="white" opacity="0.85"/><rect x="11" y="12" width="4" height="4" rx="0.5" fill="white" opacity="0.85"/><rect x="5" y="19" width="4" height="4" rx="0.5" fill="white" opacity="0.85"/><rect x="11" y="19" width="4" height="4" rx="0.5" fill="white" opacity="0.85"/><rect x="21" y="18" width="4" height="4" rx="0.5" fill="white" opacity="0.85"/><rect x="21" y="24" width="4" height="3" rx="0.5" fill="white" opacity="0.85"/></svg></div>
               <div class="cert-item__body">
                 <p class="cert-item__title">대기업</p>
                 <p class="cert-item__crit">직전년도 재계순위 52위 이내 대기업 및 계열사</p>
@@ -885,7 +661,7 @@ body{font-family:var(--font);background:var(--white);color:var(--body);word-brea
               </div>
             </div>
             <div class="cert-item">
-              <div class="cert-item__icon">🏛️</div>
+              <div class="cert-item__icon"><svg width="30" height="30" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="5" y="9" width="22" height="19" rx="3" fill="#CB4335"/><rect x="11" y="5" width="10" height="7" rx="2.5" fill="#E85F4E"/><circle cx="16" cy="17" r="5" fill="white" opacity="0.9"/><rect x="9" y="24" width="14" height="2" rx="1" fill="white" opacity="0.6"/></svg></div>
               <div class="cert-item__body">
                 <p class="cert-item__title">공무원</p>
                 <p class="cert-item__crit">7급 이상 대한민국 공무원</p>
@@ -893,7 +669,7 @@ body{font-family:var(--font);background:var(--white);color:var(--body);word-brea
               </div>
             </div>
             <div class="cert-item">
-              <div class="cert-item__icon">⚡</div>
+              <div class="cert-item__icon"><svg width="30" height="30" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M20 2L8 17H16L12 30L24 15H16L20 2Z" fill="#F4D03F"/></svg></div>
               <div class="cert-item__body">
                 <p class="cert-item__title">공기업</p>
                 <p class="cert-item__crit">더멤버스 내규에 따른 대한민국 공기업 및 공사</p>
@@ -901,7 +677,7 @@ body{font-family:var(--font);background:var(--white);color:var(--body);word-brea
               </div>
             </div>
             <div class="cert-item">
-              <div class="cert-item__icon">🎓</div>
+              <div class="cert-item__icon"><svg width="30" height="30" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg"><polygon points="16,5 30,12 16,19 2,12" fill="#1A252F"/><path d="M8 15V22Q16 27 24 22V15" fill="#27AE60"/><rect x="28" y="12" width="2.5" height="9" rx="1.25" fill="#7F8C8D"/><circle cx="29.25" cy="22.5" r="2.5" fill="#E8A020"/></svg></div>
               <div class="cert-item__body">
                 <p class="cert-item__title">명문대</p>
                 <p class="cert-item__crit">서울대·연세대·고려대·KAIST·아이비리그 등에 준하는 명문대 학부 졸업</p>
@@ -914,7 +690,7 @@ body{font-family:var(--font);background:var(--white);color:var(--body);word-brea
         <div class="cert-panel" id="panel-income">
           <div class="cert-list">
             <div class="cert-item">
-              <div class="cert-item__icon">💰</div>
+              <div class="cert-item__icon"><img src="assets/images/badge%20icon/스크린샷/고소득.png" alt="고소득" width="36" height="36" style="object-fit:contain"></div>
               <div class="cert-item__body">
                 <p class="cert-item__title">고소득</p>
                 <p class="cert-item__crit">20~30대 연 소득 6,000만원 이상 / 40대 연 소득 7,000만원 이상</p>
@@ -922,7 +698,7 @@ body{font-family:var(--font);background:var(--white);color:var(--body);word-brea
               </div>
             </div>
             <div class="cert-item">
-              <div class="cert-item__icon">💵</div>
+              <div class="cert-item__icon"><img src="assets/images/badge%20icon/스크린샷/억대연봉.png" alt="억대연봉" width="36" height="36" style="object-fit:contain"></div>
               <div class="cert-item__body">
                 <p class="cert-item__title">억대 연봉</p>
                 <p class="cert-item__crit">연 소득 1억원 이상</p>
@@ -930,7 +706,7 @@ body{font-family:var(--font);background:var(--white);color:var(--body);word-brea
               </div>
             </div>
             <div class="cert-item">
-              <div class="cert-item__icon">💎</div>
+              <div class="cert-item__icon"><img src="assets/images/badge%20icon/스크린샷/2억대연봉.png" alt="2억대연봉" width="36" height="36" style="object-fit:contain"></div>
               <div class="cert-item__body">
                 <p class="cert-item__title">2억+ 억대연봉</p>
                 <p class="cert-item__crit">연 소득 2억원 이상</p>
@@ -944,7 +720,7 @@ body{font-family:var(--font);background:var(--white);color:var(--body);word-brea
         <div class="cert-panel" id="panel-asset">
           <div class="cert-list">
             <div class="cert-item">
-              <div class="cert-item__icon">🏠</div>
+              <div class="cert-item__icon"><svg width="30" height="30" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg"><polygon points="16,4 30,16 2,16" fill="#E67E22"/><rect x="4" y="15" width="24" height="15" rx="1.5" fill="#D35400"/><rect x="11" y="19" width="10" height="11" rx="1.5" fill="#E67E22"/></svg></div>
               <div class="cert-item__body">
                 <p class="cert-item__title">자가 보유</p>
                 <p class="cert-item__crit">서울 7억, 그 외 5억 이상 아파트</p>
@@ -952,7 +728,7 @@ body{font-family:var(--font);background:var(--white);color:var(--body);word-brea
               </div>
             </div>
             <div class="cert-item">
-              <div class="cert-item__icon">💼</div>
+              <div class="cert-item__icon"><svg width="30" height="30" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="2" y="13" width="28" height="17" rx="3" fill="#1ABC9C"/><path d="M11 13V9a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v4" stroke="#16A085" stroke-width="3" fill="none"/><rect x="1" y="18" width="30" height="4" fill="#16A085"/><rect x="14" y="17" width="4" height="6" rx="1" fill="white" opacity="0.8"/></svg></div>
               <div class="cert-item__body">
                 <p class="cert-item__title">고액 자산</p>
                 <p class="cert-item__crit">금융·부동산 총 5억원 이상</p>
@@ -960,7 +736,7 @@ body{font-family:var(--font);background:var(--white);color:var(--body);word-brea
               </div>
             </div>
             <div class="cert-item">
-              <div class="cert-item__icon">👑</div>
+              <div class="cert-item__icon"><svg width="30" height="30" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 23L5 11L11 19L16 7L21 19L27 11L30 23H2Z" fill="#F4D03F"/><rect x="2" y="23" width="28" height="5" rx="1.5" fill="#E8A020"/><circle cx="16" cy="10" r="2.5" fill="#FFF0A0"/><circle cx="5.5" cy="13.5" r="1.8" fill="#FFF0A0"/><circle cx="26.5" cy="13.5" r="1.8" fill="#FFF0A0"/></svg></div>
               <div class="cert-item__body">
                 <p class="cert-item__title">초고액 자산</p>
                 <p class="cert-item__crit">개인 자산 20억 / 50억 / 100억원 이상</p>
@@ -973,7 +749,7 @@ body{font-family:var(--font);background:var(--white);color:var(--body);word-brea
         <div class="cert-panel" id="panel-car">
           <div class="cert-list">
             <div class="cert-item">
-              <div class="cert-item__icon">🚗</div>
+              <div class="cert-item__icon"><svg width="30" height="30" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6 18 Q8 12 12 12H20Q24 12 26 18" fill="#5DADE2"/><rect x="2" y="18" width="28" height="5" rx="2" fill="#2E86C1"/><circle cx="9" cy="24" r="3.5" fill="#1A252F"/><circle cx="9" cy="24" r="1.7" fill="#B2C3D0"/><circle cx="23" cy="24" r="3.5" fill="#1A252F"/><circle cx="23" cy="24" r="1.7" fill="#B2C3D0"/><rect x="5" y="14" width="6" height="4" rx="1" fill="#AED6F1" opacity="0.9"/><rect x="24" y="15.5" width="4" height="2.5" rx="0.5" fill="#F39C12"/></svg></div>
               <div class="cert-item__body">
                 <p class="cert-item__title">고급 차량</p>
                 <p class="cert-item__crit">출시 5년 이내, 5,000만원 이상 소유·리스</p>
@@ -981,7 +757,7 @@ body{font-family:var(--font);background:var(--white);color:var(--body);word-brea
               </div>
             </div>
             <div class="cert-item">
-              <div class="cert-item__icon">🏎️</div>
+              <div class="cert-item__icon"><svg width="30" height="30" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 19 Q6 13 11 13H22Q27 13 28 19" fill="#E74C3C"/><rect x="2" y="19" width="28" height="4.5" rx="2" fill="#C0392B"/><circle cx="8.5" cy="24.5" r="3.5" fill="#1A252F"/><circle cx="8.5" cy="24.5" r="1.6" fill="#95A5A6"/><circle cx="23.5" cy="24.5" r="3.5" fill="#1A252F"/><circle cx="23.5" cy="24.5" r="1.6" fill="#95A5A6"/><rect x="5" y="14.5" width="7" height="4" rx="1" fill="#AED6F1" opacity="0.9"/><rect x="25" y="16" width="3.5" height="2" rx="0.5" fill="#F39C12"/></svg></div>
               <div class="cert-item__body">
                 <p class="cert-item__title">억대 차량</p>
                 <p class="cert-item__crit">출시 3년 이내, 1억원 이상 소유·리스</p>
@@ -989,7 +765,7 @@ body{font-family:var(--font);background:var(--white);color:var(--body);word-brea
               </div>
             </div>
             <div class="cert-item">
-              <div class="cert-item__icon">🏁</div>
+              <div class="cert-item__icon"><svg width="30" height="30" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 20 Q4 13 10 13H22Q28 13 30 20" fill="#34495E"/><rect x="1" y="20" width="30" height="4" rx="2" fill="#2C3E50"/><circle cx="8" cy="25" r="3.5" fill="#1A1A1A"/><circle cx="8" cy="25" r="1.6" fill="#95A5A6"/><circle cx="24" cy="25" r="3.5" fill="#1A1A1A"/><circle cx="24" cy="25" r="1.6" fill="#95A5A6"/><rect x="4" y="14.5" width="7" height="4.5" rx="1" fill="#AED6F1" opacity="0.8"/><rect x="24" y="16" width="4.5" height="2.5" rx="0.5" fill="#E74C3C"/></svg></div>
               <div class="cert-item__body">
                 <p class="cert-item__title">슈퍼카</p>
                 <p class="cert-item__crit">출시 3년 이내, 2억원 이상 소유·리스</p>
@@ -1003,7 +779,7 @@ body{font-family:var(--font);background:var(--white);color:var(--body);word-brea
         <div class="cert-panel" id="panel-charm">
           <div class="cert-list">
             <div class="cert-item">
-              <div class="cert-item__icon">✨</div>
+              <div class="cert-item__icon"><svg width="30" height="30" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M16 4L18.5 12H27L20.5 17L23 25L16 20L9 25L11.5 17L5 12H13.5Z" fill="#F1948A"/><path d="M25 5L26 8H29L26.5 9.5L27.5 12.5L25 11L22.5 12.5L23.5 9.5L21 8H24Z" fill="#FADBD8"/><circle cx="7" cy="23" r="2.5" fill="#FADBD8"/></svg></div>
               <div class="cert-item__body">
                 <p class="cert-item__title">매력</p>
                 <p class="cert-item__crit">프로필 평가 3.5점 이상</p>
@@ -1011,7 +787,7 @@ body{font-family:var(--font);background:var(--white);color:var(--body);word-brea
               </div>
             </div>
             <div class="cert-item">
-              <div class="cert-item__icon">📸</div>
+              <div class="cert-item__icon"><svg width="30" height="30" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="2" y="11" width="28" height="19" rx="3.5" fill="#2E86C1"/><path d="M10 11 L12 6 L20 6 L22 11" fill="#1A6A9A"/><circle cx="16" cy="20.5" r="6" fill="white" opacity="0.2"/><circle cx="16" cy="20.5" r="4" fill="white" opacity="0.25"/><circle cx="16" cy="20.5" r="2" fill="white" opacity="0.85"/><rect x="23" y="13" width="4" height="2.5" rx="1" fill="white" opacity="0.7"/></svg></div>
               <div class="cert-item__body">
                 <p class="cert-item__title">인플루언서</p>
                 <p class="cert-item__crit">미스코리아 수상 / 유튜브 구독자 10만+ / 인스타 팔로워 5만+</p>
@@ -1019,7 +795,7 @@ body{font-family:var(--font);background:var(--white);color:var(--body);word-brea
               </div>
             </div>
             <div class="cert-item">
-              <div class="cert-item__icon">⭐</div>
+              <div class="cert-item__icon"><svg width="30" height="30" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M9 8H23V20Q23 26 16 26Q9 26 9 20Z" fill="#F4D03F"/><path d="M9 10H5Q5 17 9 17" stroke="#E8A020" stroke-width="3" fill="none" stroke-linecap="round"/><path d="M23 10H27Q27 17 23 17" stroke="#E8A020" stroke-width="3" fill="none" stroke-linecap="round"/><path d="M16 11L17.2 14.5H21L18 16.5L19.2 20L16 18L12.8 20L14 16.5L11 14.5H14.8Z" fill="white" opacity="0.7"/><rect x="12" y="26" width="8" height="3" rx="0.5" fill="#E8A020"/><rect x="10" y="29" width="12" height="2.5" rx="1.5" fill="#E8A020"/></svg></div>
               <div class="cert-item__body">
                 <p class="cert-item__title">셀럽</p>
                 <p class="cert-item__crit">연예인·공인 / 유튜브 구독자 50만+ / 인스타 팔로워 10만+</p>
@@ -1030,92 +806,76 @@ body{font-family:var(--font);background:var(--white);color:var(--body);word-brea
           <p class="cert-note cert-note--accent">※ 매력 인증은 여성 전용 카테고리입니다. 남성은 직업·소득·자산·차량 인증 중 택 1이 필수입니다.</p>
         </div>
       </div>
-    </div>
+  </div>
+</section>
 
-    <!-- STEP 3 -->
-    <div class="content-section reveal" id="step3">
-      <div class="cs-header">
-        <p class="cs-num" style="color:var(--red)">STEP 03</p>
-        <h2 class="cs-title">가입 심사 및 결과 안내</h2>
-        <p class="cs-desc">더멤버스 인증팀이 가입 신청 내용을 직접 검토합니다.<br>심사에는 평균 1~3일 정도 소요될 수 있습니다.</p>
+<!-- STEP 3 -->
+<section class="section" id="step3">
+  <div class="wrap">
+    <div class="step3-layout reveal">
+      <div class="step3-left">
+        <p class="cs-num">STEP 3</p>
+        <h2 class="cs-title">가입 심사&amp;승인</h2>
+        <p class="cs-desc">더멤버스 인증팀이 여러분의 소중한 가입 신청을 검토하게 되며,
+1~3일 가량의 시간이 소요될 수 있습니다.
+가입 신청 자료가 미진할 경우, 보완 자료를 요청드릴 수 있습니다.
+여러분이 가지고 계신 매력을 더욱 발산시키기 위함이니
+적극 임하시어 귀중한 인연을 만들어 보세요!</p>
       </div>
-      <div class="process-rows">
-        <div class="process-row">
-          <div class="process-row__num">1</div>
-          <div class="process-row__body">
-            <p class="process-row__title">서류 제출 & 접수</p>
-            <p class="process-row__desc">앱에서 인증에 필요한 자료를 제출합니다. 인증팀이 직접 접수하여 검토를 시작합니다.</p>
+      <div class="step3-cards">
+        <div class="step3-card-row">
+          <div class="step3-card-num">1</div>
+          <div class="step3-card">
+            <img class="step3-card__img" src="assets/images/mockups/documents-check.png" alt="인증팀 서류 검토"/>
+            <div class="step3-card__text">
+              <p class="step3-card__sub">평균 1~3일 소요</p>
+              <h3 class="step3-card__title">인증팀 서류 검토</h3>
+            </div>
           </div>
         </div>
-        <div class="process-row">
-          <div class="process-row__num">2</div>
-          <div class="process-row__body">
-            <p class="process-row__title">자료 검토 & 보완 요청</p>
-            <p class="process-row__desc">제출 자료가 부족한 경우 보완 자료를 요청드릴 수 있습니다. 회원님의 장점과 매력을 더 잘 보여드리기 위한 과정입니다.</p>
+        <div class="step3-card-row">
+          <div class="step3-card-num">2</div>
+          <div class="step3-card">
+            <div class="step3-card__visual">
+              <img class="step3-card__img" src="assets/images/mockups/pending.png" alt="보완 요청"/>
+              <img class="push-notif" src="assets/images/mockups/Push Notification_pending.png" alt=""/>
+            </div>
+            <div class="step3-card__text">
+              <p class="step3-card__sub">제출 자료가 부족한 경우</p>
+              <h3 class="step3-card__title">보완 요청</h3>
+            </div>
           </div>
         </div>
-        <div class="process-row">
-          <div class="process-row__num">3</div>
-          <div class="process-row__body">
-            <p class="process-row__title">심사 결과 통보</p>
-            <p class="process-row__desc">심사 결과는 앱 푸시 알림 및 문자 메시지로 안내드립니다. 승인 즉시 서비스 이용이 가능합니다.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- STEP 4 -->
-    <div class="content-section reveal" id="step4">
-      <div class="cs-header">
-        <p class="cs-num" style="color:var(--red)">STEP 04</p>
-        <h2 class="cs-title">더멤버스 활동 시작</h2>
-        <p class="cs-desc">가입이 완료되면 바로 서비스를 이용할 수 있습니다.<br>매일 프로필 4장을 소개받으며 상위 1% 프라이빗 매칭을 경험하세요.</p>
-      </div>
-      <img src="assets/images/mockups/mockup_members card.png" alt="더멤버스 멤버스 카드 목업" class="members-card-mockup">
-    </div>
-
-    <!-- STEP 5 -->
-    <div class="content-section reveal" id="step5">
-      <div class="cs-header">
-        <p class="cs-num" style="color:var(--red)">STEP 05</p>
-        <h2 class="cs-title">더블랙 회원 혜택</h2>
-        <p class="cs-desc">가입 회원 중 프로필 평점과 활동 점수를 종합하여 상위권의 우수 회원은 '더블랙'에 초대됩니다.</p>
-      </div>
-      <div class="the-black-card">
-        <h3 class="the-black-title">The Black<br>Exclusive<br>Membership</h3>
-        <p class="the-black-desc">소개부터 약속잡기, 장소 정하기 등 매칭 상대와 개별 연락하지 않아도 만남이 이루어지도록 1:1 관리를 통해 품격있는 만남을 가지실 수 있습니다.</p>
-        <hr class="the-black-divider">
-        <div class="the-black-benefits">
-          <div class="the-black-benefit">
-            <span class="the-black-benefit__label">Benefit 01</span>
-            <p class="the-black-benefit__text"><span style="color:#F4E9C2">전담 매칭 매니저</span><br>1:1 배정</p>
-          </div>
-          <div class="the-black-benefit">
-            <span class="the-black-benefit__label">Benefit 02</span>
-            <p class="the-black-benefit__text"><span style="color:#F4E9C2">일정·장소·만남</span><br>전 과정 관리</p>
-          </div>
-          <div class="the-black-benefit">
-            <span class="the-black-benefit__label">Benefit 03</span>
-            <p class="the-black-benefit__text"><span style="color:#F4E9C2">완전한</span><br>프라이버시 보호</p>
+        <div class="step3-card-row">
+          <div class="step3-card-num">3</div>
+          <div class="step3-card">
+            <div class="step3-card__visual">
+              <img class="step3-card__img" src="assets/images/mockups/approve.png" alt="승인 안내"/>
+              <img class="push-notif" src="assets/images/mockups/Push Notification_approve.png" alt=""/>
+            </div>
+            <div class="step3-card__text">
+              <p class="step3-card__sub">앱 푸시를 통해</p>
+              <h3 class="step3-card__title">승인 안내</h3>
+            </div>
           </div>
         </div>
       </div>
     </div>
+  </div>
+</section>
 
-    <!-- STEP 6 -->
-    <div class="content-section reveal" id="step6" style="padding-bottom:0;margin-bottom:0">
-      <div class="cs-header">
-        <p class="cs-num" style="color:var(--red)">STEP 06</p>
-        <h2 class="cs-title">만남 100% 보장</h2>
-        <p class="cs-desc">더블랙에선 복잡한 연락 과정 없이 일정 조율, 장소 선정, 만남 진행까지 모두 관리해 드립니다.<br>만남이 성사되지 않을 경우 100% 환급됩니다.</p>
-      </div>
-      <img src="assets/images/mockups/mockup_theblackcard.png" alt="더블랙 카드 목업" class="theblack-mockup">
+<!-- STEP 4 -->
+<section class="section section--bg" id="step4">
+  <div class="wrap">
+    <div class="cs-header reveal">
+      <p class="cs-num">STEP 04</p>
+      <h2 class="cs-title">더멤버스 활동 시작</h2>
+      <p class="cs-desc">가입이 완료되면 바로 서비스를 이용할 수 있습니다.<br>매일 프로필 4장을 소개받으며 상위 1% 프라이빗 매칭을 경험하세요.</p>
     </div>
+    <img src="assets/images/mockups/mockup_members card.png" alt="더멤버스 멤버스 카드 목업" class="members-card-mockup reveal">
+  </div>
+</section>
 
-
-
-  </main>
-</div>
 
 
 
@@ -1175,32 +935,6 @@ document.querySelectorAll('.cert-tab').forEach(tab=>{
   });
 });
 
-/* ── Sidebar active on scroll ── */
-const sections = document.querySelectorAll('.content-section[id]');
-const sidebarItems = document.querySelectorAll('.sidebar__item');
-
-const sidebarMap = {};
-sidebarItems.forEach(item=>{
-  sidebarMap[item.dataset.target] = item;
-  item.addEventListener('click',()=>{
-    const target = document.getElementById(item.dataset.target);
-    if(target){
-      const top = target.getBoundingClientRect().top + window.scrollY - 80;
-      window.scrollTo({top, behavior:'smooth'});
-    }
-  });
-});
-
-const io = new IntersectionObserver(entries=>{
-  entries.forEach(e=>{
-    if(e.isIntersecting){
-      sidebarItems.forEach(i=>i.classList.remove('active'));
-      if(sidebarMap[e.target.id]) sidebarMap[e.target.id].classList.add('active');
-    }
-  });
-},{threshold:0.35});
-
-sections.forEach(s=>io.observe(s));
 
 /* ── Reveal ── */
 const revealObs = new IntersectionObserver(entries=>{
@@ -1240,17 +974,6 @@ document.querySelectorAll('.reveal').forEach(el=>revealObs.observe(el));
   });
 })();
 
-/* ── Story slider ── */
-(()=>{
-  const track = document.getElementById('storyTrack');
-  const SCROLL = 296;
-  document.getElementById('storyPrev').addEventListener('click',()=>{
-    track.scrollBy({left:-SCROLL,behavior:'smooth'});
-  });
-  document.getElementById('storyNext').addEventListener('click',()=>{
-    track.scrollBy({left:SCROLL,behavior:'smooth'});
-  });
-})();
 
 </script>
 </body>
