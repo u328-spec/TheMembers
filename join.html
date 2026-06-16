@@ -229,11 +229,10 @@ body{font-family:var(--font);background:var(--white);color:var(--body);word-brea
 /* ─────────────────────────────────────
    STEP 3 — 심사&승인
 ───────────────────────────────────── */
-.step3-layout{display:grid;grid-template-columns:1fr 1.2fr;gap:80px;align-items:start}
-.step3-left{position:sticky;top:80px}
+.step3-layout{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:80px;align-items:start}
 .step3-left .cs-title{text-align:left;font-size:40px}
 .step3-left .cs-desc{text-align:left;margin:0;max-width:none}
-.step3-cards{display:flex;flex-direction:column;gap:0;position:relative}
+.step3-cards{display:flex;flex-direction:column;gap:0;position:relative;min-width:0}
 .step3-cards::before{
   content:'';position:absolute;
   left:15px;top:16px;bottom:0;
@@ -251,6 +250,16 @@ body{font-family:var(--font);background:var(--white);color:var(--body);word-brea
 }
 .step3-card{flex:1;background:var(--bg);border-radius:20px;overflow:hidden;display:flex;flex-direction:column;padding-top:40px}
 .step3-card__img{width:70%;display:block;object-fit:cover;margin:0 auto}
+.step3-card__scroll-wrap{width:100%;overflow:hidden}
+.step3-card__scroll-track{
+  display:flex;gap:12px;width:max-content;
+  animation:scrollDocs 14s linear infinite;
+}
+.step3-card__scroll-track img{height:150px;width:auto;border-radius:10px;flex-shrink:0}
+@keyframes scrollDocs{
+  0%  {transform:translateX(0)}
+  100%{transform:translateX(-50%)}
+}
 
 /* step3 push notification overlay */
 .step3-card-row:nth-child(2) .step3-card,
@@ -637,7 +646,7 @@ body{font-family:var(--font);background:var(--white);color:var(--body);word-brea
         <div class="cert-panel on" id="panel-job">
           <div class="cert-list">
             <div class="cert-item">
-              <div class="cert-item__icon"><svg width="30" height="30" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="9" y="6" width="14" height="3" rx="1.5" fill="#85C1E9"/><circle cx="9" cy="7.5" r="3" fill="#2E86C1"/><circle cx="23" cy="7.5" r="3" fill="#2E86C1"/><path d="M16 11 C16 18 24 18 24 23" stroke="#2E86C1" stroke-width="3" fill="none" stroke-linecap="round"/><circle cx="24" cy="26" r="3.5" fill="#2E86C1"/><circle cx="24" cy="26" r="1.5" fill="white"/></svg></div>
+              <div class="cert-item__icon"><img src="assets/images/badge%20icon/전문직.png" alt="전문직" width="36" height="36" style="object-fit:contain"></div>
               <div class="cert-item__body">
                 <p class="cert-item__title">전문직</p>
                 <p class="cert-item__crit">의사, 치과의사, 한의사,판사, 검사, 변호사, 5급 공무원, 변리사, 수의사, 회계사, 세무사, 법무사, 노무사, 감평사, 파일럿 등 전문 자격증이 필요한 직종</p>
@@ -645,7 +654,7 @@ body{font-family:var(--font);background:var(--white);color:var(--body);word-brea
               </div>
             </div>
             <div class="cert-item">
-              <div class="cert-item__icon"><svg width="30" height="30" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="3" y="20" width="7" height="9" rx="2" fill="#F0A500"/><rect x="12.5" y="14" width="7" height="15" rx="2" fill="#E08000"/><rect x="22" y="8" width="7" height="21" rx="2" fill="#C07000"/></svg></div>
+              <div class="cert-item__icon"><img src="assets/images/badge%20icon/사업가.png" alt="사업가" width="36" height="36" style="object-fit:contain"></div>
               <div class="cert-item__body">
                 <p class="cert-item__title">사업가</p>
                 <p class="cert-item__crit">연 매출 50억 이상 기업 대표 및 사업가</p>
@@ -653,7 +662,7 @@ body{font-family:var(--font);background:var(--white);color:var(--body);word-brea
               </div>
             </div>
             <div class="cert-item">
-              <div class="cert-item__icon"><svg width="30" height="30" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="2" y="8" width="16" height="22" rx="2" fill="#2E86C1"/><rect x="18" y="14" width="12" height="16" rx="2" fill="#5DADE2"/><rect x="5" y="12" width="4" height="4" rx="0.5" fill="white" opacity="0.85"/><rect x="11" y="12" width="4" height="4" rx="0.5" fill="white" opacity="0.85"/><rect x="5" y="19" width="4" height="4" rx="0.5" fill="white" opacity="0.85"/><rect x="11" y="19" width="4" height="4" rx="0.5" fill="white" opacity="0.85"/><rect x="21" y="18" width="4" height="4" rx="0.5" fill="white" opacity="0.85"/><rect x="21" y="24" width="4" height="3" rx="0.5" fill="white" opacity="0.85"/></svg></div>
+              <div class="cert-item__icon"><img src="assets/images/badge%20icon/대기업.png" alt="대기업" width="36" height="36" style="object-fit:contain"></div>
               <div class="cert-item__body">
                 <p class="cert-item__title">대기업</p>
                 <p class="cert-item__crit">직전년도 재계순위 52위 이내 대기업 및 계열사</p>
@@ -661,7 +670,7 @@ body{font-family:var(--font);background:var(--white);color:var(--body);word-brea
               </div>
             </div>
             <div class="cert-item">
-              <div class="cert-item__icon"><svg width="30" height="30" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="5" y="9" width="22" height="19" rx="3" fill="#CB4335"/><rect x="11" y="5" width="10" height="7" rx="2.5" fill="#E85F4E"/><circle cx="16" cy="17" r="5" fill="white" opacity="0.9"/><rect x="9" y="24" width="14" height="2" rx="1" fill="white" opacity="0.6"/></svg></div>
+              <div class="cert-item__icon"><img src="assets/images/badge%20icon/공무원.png" alt="공무원" width="36" height="36" style="object-fit:contain"></div>
               <div class="cert-item__body">
                 <p class="cert-item__title">공무원</p>
                 <p class="cert-item__crit">7급 이상 대한민국 공무원</p>
@@ -669,7 +678,7 @@ body{font-family:var(--font);background:var(--white);color:var(--body);word-brea
               </div>
             </div>
             <div class="cert-item">
-              <div class="cert-item__icon"><svg width="30" height="30" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M20 2L8 17H16L12 30L24 15H16L20 2Z" fill="#F4D03F"/></svg></div>
+              <div class="cert-item__icon"><img src="assets/images/badge%20icon/공기업.png" alt="공기업" width="36" height="36" style="object-fit:contain"></div>
               <div class="cert-item__body">
                 <p class="cert-item__title">공기업</p>
                 <p class="cert-item__crit">더멤버스 내규에 따른 대한민국 공기업 및 공사</p>
@@ -677,7 +686,7 @@ body{font-family:var(--font);background:var(--white);color:var(--body);word-brea
               </div>
             </div>
             <div class="cert-item">
-              <div class="cert-item__icon"><svg width="30" height="30" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg"><polygon points="16,5 30,12 16,19 2,12" fill="#1A252F"/><path d="M8 15V22Q16 27 24 22V15" fill="#27AE60"/><rect x="28" y="12" width="2.5" height="9" rx="1.25" fill="#7F8C8D"/><circle cx="29.25" cy="22.5" r="2.5" fill="#E8A020"/></svg></div>
+              <div class="cert-item__icon"><img src="assets/images/badge%20icon/명문대.png" alt="명문대" width="36" height="36" style="object-fit:contain"></div>
               <div class="cert-item__body">
                 <p class="cert-item__title">명문대</p>
                 <p class="cert-item__crit">서울대·연세대·고려대·KAIST·아이비리그 등에 준하는 명문대 학부 졸업</p>
@@ -690,7 +699,7 @@ body{font-family:var(--font);background:var(--white);color:var(--body);word-brea
         <div class="cert-panel" id="panel-income">
           <div class="cert-list">
             <div class="cert-item">
-              <div class="cert-item__icon"><img src="assets/images/badge%20icon/스크린샷/고소득.png" alt="고소득" width="36" height="36" style="object-fit:contain"></div>
+              <div class="cert-item__icon"><img src="assets/images/badge%20icon/고소득.png" alt="고소득" width="36" height="36" style="object-fit:contain"></div>
               <div class="cert-item__body">
                 <p class="cert-item__title">고소득</p>
                 <p class="cert-item__crit">20~30대 연 소득 6,000만원 이상 / 40대 연 소득 7,000만원 이상</p>
@@ -698,7 +707,7 @@ body{font-family:var(--font);background:var(--white);color:var(--body);word-brea
               </div>
             </div>
             <div class="cert-item">
-              <div class="cert-item__icon"><img src="assets/images/badge%20icon/스크린샷/억대연봉.png" alt="억대연봉" width="36" height="36" style="object-fit:contain"></div>
+              <div class="cert-item__icon"><img src="assets/images/badge%20icon/억대연봉.png" alt="억대연봉" width="36" height="36" style="object-fit:contain"></div>
               <div class="cert-item__body">
                 <p class="cert-item__title">억대 연봉</p>
                 <p class="cert-item__crit">연 소득 1억원 이상</p>
@@ -706,7 +715,7 @@ body{font-family:var(--font);background:var(--white);color:var(--body);word-brea
               </div>
             </div>
             <div class="cert-item">
-              <div class="cert-item__icon"><img src="assets/images/badge%20icon/스크린샷/2억대연봉.png" alt="2억대연봉" width="36" height="36" style="object-fit:contain"></div>
+              <div class="cert-item__icon"><img src="assets/images/badge%20icon/2억대연봉.png" alt="2억대연봉" width="36" height="36" style="object-fit:contain"></div>
               <div class="cert-item__body">
                 <p class="cert-item__title">2억+ 억대연봉</p>
                 <p class="cert-item__crit">연 소득 2억원 이상</p>
@@ -720,7 +729,7 @@ body{font-family:var(--font);background:var(--white);color:var(--body);word-brea
         <div class="cert-panel" id="panel-asset">
           <div class="cert-list">
             <div class="cert-item">
-              <div class="cert-item__icon"><svg width="30" height="30" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg"><polygon points="16,4 30,16 2,16" fill="#E67E22"/><rect x="4" y="15" width="24" height="15" rx="1.5" fill="#D35400"/><rect x="11" y="19" width="10" height="11" rx="1.5" fill="#E67E22"/></svg></div>
+              <div class="cert-item__icon"><img src="assets/images/badge%20icon/자가보유.png" alt="자가보유" width="36" height="36" style="object-fit:contain"></div>
               <div class="cert-item__body">
                 <p class="cert-item__title">자가 보유</p>
                 <p class="cert-item__crit">서울 7억, 그 외 5억 이상 아파트</p>
@@ -728,7 +737,7 @@ body{font-family:var(--font);background:var(--white);color:var(--body);word-brea
               </div>
             </div>
             <div class="cert-item">
-              <div class="cert-item__icon"><svg width="30" height="30" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="2" y="13" width="28" height="17" rx="3" fill="#1ABC9C"/><path d="M11 13V9a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v4" stroke="#16A085" stroke-width="3" fill="none"/><rect x="1" y="18" width="30" height="4" fill="#16A085"/><rect x="14" y="17" width="4" height="6" rx="1" fill="white" opacity="0.8"/></svg></div>
+              <div class="cert-item__icon"><img src="assets/images/badge%20icon/고액자산.png" alt="고액자산" width="36" height="36" style="object-fit:contain"></div>
               <div class="cert-item__body">
                 <p class="cert-item__title">고액 자산</p>
                 <p class="cert-item__crit">금융·부동산 총 5억원 이상</p>
@@ -736,7 +745,7 @@ body{font-family:var(--font);background:var(--white);color:var(--body);word-brea
               </div>
             </div>
             <div class="cert-item">
-              <div class="cert-item__icon"><svg width="30" height="30" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 23L5 11L11 19L16 7L21 19L27 11L30 23H2Z" fill="#F4D03F"/><rect x="2" y="23" width="28" height="5" rx="1.5" fill="#E8A020"/><circle cx="16" cy="10" r="2.5" fill="#FFF0A0"/><circle cx="5.5" cy="13.5" r="1.8" fill="#FFF0A0"/><circle cx="26.5" cy="13.5" r="1.8" fill="#FFF0A0"/></svg></div>
+              <div class="cert-item__icon"><img src="assets/images/badge%20icon/초고액자산.png" alt="초고액자산" width="36" height="36" style="object-fit:contain"></div>
               <div class="cert-item__body">
                 <p class="cert-item__title">초고액 자산</p>
                 <p class="cert-item__crit">개인 자산 20억 / 50억 / 100억원 이상</p>
@@ -749,7 +758,7 @@ body{font-family:var(--font);background:var(--white);color:var(--body);word-brea
         <div class="cert-panel" id="panel-car">
           <div class="cert-list">
             <div class="cert-item">
-              <div class="cert-item__icon"><svg width="30" height="30" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6 18 Q8 12 12 12H20Q24 12 26 18" fill="#5DADE2"/><rect x="2" y="18" width="28" height="5" rx="2" fill="#2E86C1"/><circle cx="9" cy="24" r="3.5" fill="#1A252F"/><circle cx="9" cy="24" r="1.7" fill="#B2C3D0"/><circle cx="23" cy="24" r="3.5" fill="#1A252F"/><circle cx="23" cy="24" r="1.7" fill="#B2C3D0"/><rect x="5" y="14" width="6" height="4" rx="1" fill="#AED6F1" opacity="0.9"/><rect x="24" y="15.5" width="4" height="2.5" rx="0.5" fill="#F39C12"/></svg></div>
+              <div class="cert-item__icon"><img src="assets/images/badge%20icon/고급차량.png" alt="고급차량" width="36" height="36" style="object-fit:contain"></div>
               <div class="cert-item__body">
                 <p class="cert-item__title">고급 차량</p>
                 <p class="cert-item__crit">출시 5년 이내, 5,000만원 이상 소유·리스</p>
@@ -757,7 +766,7 @@ body{font-family:var(--font);background:var(--white);color:var(--body);word-brea
               </div>
             </div>
             <div class="cert-item">
-              <div class="cert-item__icon"><svg width="30" height="30" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 19 Q6 13 11 13H22Q27 13 28 19" fill="#E74C3C"/><rect x="2" y="19" width="28" height="4.5" rx="2" fill="#C0392B"/><circle cx="8.5" cy="24.5" r="3.5" fill="#1A252F"/><circle cx="8.5" cy="24.5" r="1.6" fill="#95A5A6"/><circle cx="23.5" cy="24.5" r="3.5" fill="#1A252F"/><circle cx="23.5" cy="24.5" r="1.6" fill="#95A5A6"/><rect x="5" y="14.5" width="7" height="4" rx="1" fill="#AED6F1" opacity="0.9"/><rect x="25" y="16" width="3.5" height="2" rx="0.5" fill="#F39C12"/></svg></div>
+              <div class="cert-item__icon"><img src="assets/images/badge%20icon/억대차량.png" alt="억대차량" width="36" height="36" style="object-fit:contain"></div>
               <div class="cert-item__body">
                 <p class="cert-item__title">억대 차량</p>
                 <p class="cert-item__crit">출시 3년 이내, 1억원 이상 소유·리스</p>
@@ -765,7 +774,7 @@ body{font-family:var(--font);background:var(--white);color:var(--body);word-brea
               </div>
             </div>
             <div class="cert-item">
-              <div class="cert-item__icon"><svg width="30" height="30" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 20 Q4 13 10 13H22Q28 13 30 20" fill="#34495E"/><rect x="1" y="20" width="30" height="4" rx="2" fill="#2C3E50"/><circle cx="8" cy="25" r="3.5" fill="#1A1A1A"/><circle cx="8" cy="25" r="1.6" fill="#95A5A6"/><circle cx="24" cy="25" r="3.5" fill="#1A1A1A"/><circle cx="24" cy="25" r="1.6" fill="#95A5A6"/><rect x="4" y="14.5" width="7" height="4.5" rx="1" fill="#AED6F1" opacity="0.8"/><rect x="24" y="16" width="4.5" height="2.5" rx="0.5" fill="#E74C3C"/></svg></div>
+              <div class="cert-item__icon"><img src="assets/images/badge%20icon/슈퍼카.png" alt="슈퍼카" width="36" height="36" style="object-fit:contain"></div>
               <div class="cert-item__body">
                 <p class="cert-item__title">슈퍼카</p>
                 <p class="cert-item__crit">출시 3년 이내, 2억원 이상 소유·리스</p>
@@ -779,7 +788,7 @@ body{font-family:var(--font);background:var(--white);color:var(--body);word-brea
         <div class="cert-panel" id="panel-charm">
           <div class="cert-list">
             <div class="cert-item">
-              <div class="cert-item__icon"><svg width="30" height="30" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M16 4L18.5 12H27L20.5 17L23 25L16 20L9 25L11.5 17L5 12H13.5Z" fill="#F1948A"/><path d="M25 5L26 8H29L26.5 9.5L27.5 12.5L25 11L22.5 12.5L23.5 9.5L21 8H24Z" fill="#FADBD8"/><circle cx="7" cy="23" r="2.5" fill="#FADBD8"/></svg></div>
+              <div class="cert-item__icon"><img src="assets/images/badge%20icon/매력.png" alt="매력" width="36" height="36" style="object-fit:contain"></div>
               <div class="cert-item__body">
                 <p class="cert-item__title">매력</p>
                 <p class="cert-item__crit">프로필 평가 3.5점 이상</p>
@@ -787,7 +796,7 @@ body{font-family:var(--font);background:var(--white);color:var(--body);word-brea
               </div>
             </div>
             <div class="cert-item">
-              <div class="cert-item__icon"><svg width="30" height="30" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="2" y="11" width="28" height="19" rx="3.5" fill="#2E86C1"/><path d="M10 11 L12 6 L20 6 L22 11" fill="#1A6A9A"/><circle cx="16" cy="20.5" r="6" fill="white" opacity="0.2"/><circle cx="16" cy="20.5" r="4" fill="white" opacity="0.25"/><circle cx="16" cy="20.5" r="2" fill="white" opacity="0.85"/><rect x="23" y="13" width="4" height="2.5" rx="1" fill="white" opacity="0.7"/></svg></div>
+              <div class="cert-item__icon"><img src="assets/images/badge%20icon/인플루언서.png" alt="인플루언서" width="36" height="36" style="object-fit:contain"></div>
               <div class="cert-item__body">
                 <p class="cert-item__title">인플루언서</p>
                 <p class="cert-item__crit">미스코리아 수상 / 유튜브 구독자 10만+ / 인스타 팔로워 5만+</p>
@@ -795,7 +804,7 @@ body{font-family:var(--font);background:var(--white);color:var(--body);word-brea
               </div>
             </div>
             <div class="cert-item">
-              <div class="cert-item__icon"><svg width="30" height="30" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M9 8H23V20Q23 26 16 26Q9 26 9 20Z" fill="#F4D03F"/><path d="M9 10H5Q5 17 9 17" stroke="#E8A020" stroke-width="3" fill="none" stroke-linecap="round"/><path d="M23 10H27Q27 17 23 17" stroke="#E8A020" stroke-width="3" fill="none" stroke-linecap="round"/><path d="M16 11L17.2 14.5H21L18 16.5L19.2 20L16 18L12.8 20L14 16.5L11 14.5H14.8Z" fill="white" opacity="0.7"/><rect x="12" y="26" width="8" height="3" rx="0.5" fill="#E8A020"/><rect x="10" y="29" width="12" height="2.5" rx="1.5" fill="#E8A020"/></svg></div>
+              <div class="cert-item__icon"><img src="assets/images/badge%20icon/셀럽.png" alt="셀럽" width="36" height="36" style="object-fit:contain"></div>
               <div class="cert-item__body">
                 <p class="cert-item__title">셀럽</p>
                 <p class="cert-item__crit">연예인·공인 / 유튜브 구독자 50만+ / 인스타 팔로워 10만+</p>
@@ -826,7 +835,20 @@ body{font-family:var(--font);background:var(--white);color:var(--body);word-brea
         <div class="step3-card-row">
           <div class="step3-card-num">1</div>
           <div class="step3-card">
-            <img class="step3-card__img" src="assets/images/mockups/documents-check.png" alt="인증팀 서류 검토"/>
+            <div class="step3-card__scroll-wrap">
+              <div class="step3-card__scroll-track">
+                <img src="assets/images/documents/document01.png" alt="">
+                <img src="assets/images/documents/document02.png" alt="">
+                <img src="assets/images/documents/document03.png" alt="">
+                <img src="assets/images/documents/document04.png" alt="">
+                <img src="assets/images/documents/document05.png" alt="">
+                <img src="assets/images/documents/document01.png" alt="">
+                <img src="assets/images/documents/document02.png" alt="">
+                <img src="assets/images/documents/document03.png" alt="">
+                <img src="assets/images/documents/document04.png" alt="">
+                <img src="assets/images/documents/document05.png" alt="">
+              </div>
+            </div>
             <div class="step3-card__text">
               <p class="step3-card__sub">평균 1~3일 소요</p>
               <h3 class="step3-card__title">인증팀 서류 검토</h3>
@@ -838,7 +860,7 @@ body{font-family:var(--font);background:var(--white);color:var(--body);word-brea
           <div class="step3-card">
             <div class="step3-card__visual">
               <img class="step3-card__img" src="assets/images/mockups/pending.png" alt="보완 요청"/>
-              <img class="push-notif" src="assets/images/mockups/Push Notification_pending.png" alt=""/>
+              <!-- <img class="push-notif" src="assets/images/mockups/Push Notification_pending.png" alt=""/> -->
             </div>
             <div class="step3-card__text">
               <p class="step3-card__sub">제출 자료가 부족한 경우</p>
