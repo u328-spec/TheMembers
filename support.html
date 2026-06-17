@@ -44,8 +44,11 @@ body{font-family:var(--font);background:var(--white);color:var(--para);word-brea
 .nav__link.active{color:var(--headline);font-weight:600}
 .nav__cta{margin-left:8px;background:var(--headline);color:var(--white);font-size:12px;font-weight:700;letter-spacing:0.04em;padding:9px 22px;border-radius:999px;transition:opacity .15s;cursor:pointer}
 .nav__cta:hover{opacity:.75}
-.nav__ham{display:none;flex-direction:column;gap:4px;padding:4px}
-.nav__ham span{display:block;width:20px;height:1.5px;background:var(--headline)}
+.nav__ham{display:none;flex-direction:column;gap:5px;padding:6px}
+.nav__ham span{display:block;width:24px;height:2px;background:var(--headline);transition:transform .22s,opacity .22s}
+.nav__ham.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.nav__ham.open span:nth-child(2){opacity:0}
+.nav__ham.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
 
 /* ── PAGE HEADER ── */
 .page-header{background:var(--white);padding:64px 48px 8px}
@@ -296,7 +299,7 @@ body{font-family:var(--font);background:var(--white);color:var(--para);word-brea
 .qr-modal__close{position:absolute;top:18px;right:20px;font-size:20px;color:var(--muted);cursor:pointer;line-height:1;padding:4px;transition:color .15s}
 .qr-modal__close:hover{color:var(--headline)}
 .qr-modal__title{font-size:22px;font-weight:800;letter-spacing:-0.03em;color:var(--headline);text-align:center;margin-bottom:8px}
-.qr-modal__desc{font-size:14px;color:var(--muted);text-align:center;letter-spacing:-0.01em;margin-bottom:32px}
+.qr-modal__desc{font-size:16px;color:#444;text-align:center;letter-spacing:-0.01em;margin-bottom:32px}
 .qr-modal__img{width:200px;height:200px;display:block;margin:0 auto 28px;image-rendering:pixelated}
 .qr-modal__stores{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .qr-modal__store{display:flex;align-items:center;justify-content:center;gap:8px;padding:11px 0;border:1px solid var(--border);font-size:12px;font-weight:600;color:var(--headline);letter-spacing:0.02em;transition:border-color .15s,background .15s;cursor:pointer}
@@ -322,7 +325,7 @@ body{font-family:var(--font);background:var(--white);color:var(--para);word-brea
 /* ── MOBILE ── */
 @media(max-width:799px){
   .nav__inner{padding:0 20px}
-  .nav__links{display:none;flex-direction:column;gap:16px;position:absolute;top:60px;left:0;right:0;background:var(--white);border-bottom:1px solid var(--border);padding:20px;box-shadow:0 8px 20px rgba(0,0,0,.05)}
+  .nav__links{display:none;flex-direction:column;gap:24px;position:absolute;top:60px;left:0;right:0;background:var(--white);border-bottom:1px solid var(--border);padding:28px 24px;box-shadow:0 8px 20px rgba(0,0,0,.05);font-size:16px}
   .nav__links.open{display:flex}
   .nav__ham{display:flex}
   .page-header{padding:36px 20px 8px}
@@ -652,19 +655,36 @@ body{font-family:var(--font);background:var(--white);color:var(--para);word-brea
 /* ══ NAV ══ */
 document.getElementById('navHam').addEventListener('click', () => {
   document.getElementById('navLinks').classList.toggle('open');
+  document.getElementById('navHam').classList.toggle('open');
 });
 
 /* ══ CTA → QR MODAL ══ */
 document.getElementById('navCta').addEventListener('click', () => {
-  document.getElementById('qrOverlay').classList.add('open');
-  document.body.style.overflow = 'hidden';
-});
-document.querySelectorAll('.btn-red').forEach(el => {
-  el.addEventListener('click', function(e){
-    e.preventDefault();
+  if(window.innerWidth <= 1279){
+    window.location.href = 'https://themembers.onelink.me/Croy/24o5nmo2';
+  } else {
     document.getElementById('qrOverlay').classList.add('open');
     document.body.style.overflow = 'hidden';
-  });
+  }
+});
+document.querySelectorAll('.btn-red').forEach(el => {
+  if(el.closest('.app-cta__actions')){
+    el.addEventListener('click', function(e){
+      e.preventDefault();
+      if(window.innerWidth <= 1279){
+        window.location.href = 'https://themembers.onelink.me/Croy/24o5nmo2';
+      } else {
+        document.getElementById('qrOverlay').classList.add('open');
+        document.body.style.overflow = 'hidden';
+      }
+    });
+  } else {
+    el.addEventListener('click', function(e){
+      e.preventDefault();
+      document.getElementById('qrOverlay').classList.add('open');
+      document.body.style.overflow = 'hidden';
+    });
+  }
 });
 document.getElementById('qrClose').addEventListener('click', () => {
   document.getElementById('qrOverlay').classList.remove('open');

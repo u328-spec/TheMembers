@@ -72,8 +72,11 @@ body{font-family:var(--font);background:var(--white);color:var(--body);word-brea
   transition:opacity 0.15s;
 }
 .nav__cta:hover{opacity:0.75}
-.nav__ham{display:none;flex-direction:column;gap:4px;padding:4px}
-.nav__ham span{display:block;width:20px;height:1.5px;background:var(--headline)}
+.nav__ham{display:none;flex-direction:column;gap:5px;padding:6px}
+.nav__ham span{display:block;width:24px;height:2px;background:var(--headline);transition:transform .22s,opacity .22s}
+.nav__ham.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.nav__ham.open span:nth-child(2){opacity:0}
+.nav__ham.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
 
 /* ─────────────────────────────────────
    HERO
@@ -386,7 +389,7 @@ body{font-family:var(--font);background:var(--white);color:var(--body);word-brea
 ───────────────────────────────────── */
 @media(max-width:799px){
   .nav__inner{padding:0 20px}
-  .nav__links{display:none;flex-direction:column;gap:16px;position:absolute;top:60px;left:0;right:0;background:var(--white);border-bottom:1px solid var(--border);padding:20px;box-shadow:0 8px 20px rgba(0,0,0,0.05)}
+  .nav__links{display:none;flex-direction:column;gap:24px;position:absolute;top:60px;left:0;right:0;background:var(--white);border-bottom:1px solid var(--border);padding:28px 24px;box-shadow:0 8px 20px rgba(0,0,0,0.05);font-size:16px}
   .nav__links.open{display:flex}
   .nav__ham{display:flex}
   .hero{padding:0 20px}
@@ -442,7 +445,7 @@ body{font-family:var(--font);background:var(--white);color:var(--body);word-brea
   color:#111;text-align:center;margin-bottom:8px;
 }
 .qr-modal__desc{
-  font-size:14px;color:#999;text-align:center;
+  font-size:16px;color:#444;text-align:center;
   letter-spacing:-0.01em;margin-bottom:32px;
 }
 .qr-modal__img{
@@ -680,7 +683,7 @@ body{font-family:var(--font);background:var(--white);color:var(--body);word-brea
     <div class="cs-header reveal">
       <p class="cs-num">STEP 02</p>
       <h2 class="cs-title">프로필 등록 & 서류 인증</h2>
-      <p class="cs-desc">남성은 만 30세 이상, 직업·소득·자산·차량 인증 중 1개 이상이 필수입니다.<br>여성은 만 25세 이상, 경제력 혹은 매력 인증 하나만으로 가입이 가능합니다.</p>
+      <p class="cs-desc">남성은 만 30세 이상, 직업·소득·자산·차량 인증 중 1개 이상이 필수입니다. 여성은 만 25세 이상, 경제력 혹은 매력 인증 하나만으로 가입이 가능합니다.</p>
     </div>
 
       <!-- 수평 탭 -->
@@ -877,10 +880,7 @@ body{font-family:var(--font);background:var(--white);color:var(--body);word-brea
         <p class="cs-num">STEP 3</p>
         <h2 class="cs-title">가입 심사&amp;승인</h2>
         <p class="cs-desc">더멤버스 인증팀이 여러분의 소중한 가입 신청을 검토하게 되며,
-1~3일 가량의 시간이 소요될 수 있습니다.
-가입 신청 자료가 미진할 경우, 보완 자료를 요청드릴 수 있습니다.
-여러분이 가지고 계신 매력을 더욱 발산시키기 위함이니
-적극 임하시어 귀중한 인연을 만들어 보세요!</p>
+1~3일 가량의 시간이 소요될 수 있습니다.</p>
       </div>
       <div class="step3-cards">
         <div class="step3-card-row">
@@ -997,6 +997,13 @@ body{font-family:var(--font);background:var(--white);color:var(--body);word-brea
 /* ── Nav ham ── */
 document.getElementById('navHam').addEventListener('click',()=>{
   document.getElementById('navLinks').classList.toggle('open');
+  document.getElementById('navHam').classList.toggle('open');
+});
+document.querySelectorAll('#navLinks a').forEach(a=>{
+  a.addEventListener('click',()=>{
+    document.getElementById('navLinks').classList.remove('open');
+    document.getElementById('navHam').classList.remove('open');
+  });
 });
 
 /* ── Cert card stagger ── */
@@ -1050,8 +1057,28 @@ document.querySelectorAll('.reveal').forEach(el=>revealObs.observe(el));
     document.body.style.overflow = 'hidden';
   }
 
-  document.querySelectorAll('.nav__cta, .btn-red, .sidebar__cta, .cta-strip__btn, .bottom-cta__btn, .b-btn, .btn-primary-w, .btn-white, .btn-cta-w, .app-cta__actions .btn-red').forEach(el => {
-    el.addEventListener('click', openModal);
+  document.querySelectorAll('.btn-red, .sidebar__cta, .cta-strip__btn, .bottom-cta__btn, .b-btn, .btn-primary-w, .btn-white, .btn-cta-w').forEach(el => {
+    if(!el.closest('.app-cta__actions')) el.addEventListener('click', openModal);
+  });
+  document.querySelectorAll('.app-cta__actions .btn-red').forEach(el => {
+    el.addEventListener('click', function(e){
+      e.preventDefault();
+      if(window.innerWidth <= 1279){
+        window.location.href = 'https://themembers.onelink.me/Croy/24o5nmo2';
+      } else {
+        openModal(e);
+      }
+    });
+  });
+  document.querySelectorAll('.nav__cta').forEach(el => {
+    el.addEventListener('click', function(e){
+      e.preventDefault();
+      if(window.innerWidth <= 1279){
+        window.location.href = 'https://themembers.onelink.me/Croy/24o5nmo2';
+      } else {
+        openModal(e);
+      }
+    });
   });
 
   function closeModal(){
