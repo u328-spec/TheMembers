@@ -143,30 +143,66 @@ body{font-family:var(--font);background:var(--white);color:var(--body);word-brea
 .step1-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;max-width:720px;margin:0 auto}
 
 .step1-qr-card{
-  background:var(--bg);border-radius:20px;
-  padding:36px 40px;
+  background:linear-gradient(145deg,#d0d4ec 0%,#f4f4f8 45%,#c8ddd5 100%);
+  border-radius:20px;
+  padding:32px 40px 36px;
   display:flex;flex-direction:column;align-items:center;text-align:center;
 }
-.step1-qr-label{
-  font-size:13px;color:var(--muted);
-  letter-spacing:-0.01em;margin-bottom:2px;
+.step1-qr-applogo{
+  width:64px;height:64px;border-radius:16px;
+  object-fit:cover;margin-bottom:10px;
+  box-shadow:0 4px 16px rgba(193,40,56,0.15);
 }
-.step1-qr-cta{
-  font-size:20px;font-weight:700;letter-spacing:-0.02em;
-  color:var(--headline);margin-bottom:28px;
+.step1-qr-brand{
+  font-size:18px;font-weight:800;letter-spacing:-0.03em;
+  color:var(--headline);margin-bottom:20px;
+}
+.step1-qr-box{
+  background:none;
+  padding:28px 32px 32px;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;
+  width:100%;flex:1;
 }
 .step1-qr-img{
-  width:140px;height:140px;
+  width:172px;height:172px;
   display:block;image-rendering:pixelated;
+  background:#ffffff;border-radius:12px;padding:6px;
+  box-sizing:border-box;margin-bottom:24px;
 }
+.step1-qr-label{
+  font-size:14px;color:var(--para);
+  letter-spacing:-0.01em;margin-bottom:4px;margin-top:auto;
+}
+.step1-qr-cta{
+  font-size:20px;font-weight:800;letter-spacing:-0.03em;
+  color:var(--headline);margin-bottom:0;
+}
+.step1-dl-box{
+  display:none;
+  flex-direction:column;width:100%;flex:1;min-height:280px;
+}
+.step1-dl-mockup{
+  flex:1;width:50%;min-height:0;
+  display:block;object-fit:contain;object-position:bottom;
+  margin:0 auto;
+}
+.step1-dl-actions{display:flex;flex-direction:column;gap:10px}
+.step1-dl-btn{
+  display:flex;align-items:center;justify-content:center;
+  padding:15px 0;background:var(--headline);color:#fff;
+  border-radius:999px;font-size:15px;font-weight:700;
+  letter-spacing:-0.02em;text-decoration:none;
+  transition:background .15s;
+}
+.step1-dl-btn:hover{background:var(--dark2)}
 
-.step1-stats{display:flex;flex-direction:column;gap:12px}
+.step1-stats{display:flex;flex-direction:column;gap:12px;height:100%}
 .step1-stat{
   background:var(--bg);border-radius:16px;
   padding:24px 32px;flex:1;text-align:center;
 }
 .step1-stat__label{
-  font-size:13px;color:var(--muted);
+  font-size:14px;color:var(--para);
   letter-spacing:-0.01em;margin-bottom:4px;
 }
 .step1-stat__value{
@@ -179,7 +215,7 @@ body{font-family:var(--font);background:var(--white);color:var(--body);word-brea
 ───────────────────────────────────── */
 .cert-tabs{
   display:flex;flex-direction:row;align-items:center;
-  background:var(--bg2);border-radius:999px;
+  background:var(--border);border-radius:999px;
   padding:5px;gap:4px;
   border:none;margin-bottom:24px;overflow:visible;
   max-width:560px;margin-left:auto;margin-right:auto;
@@ -207,6 +243,11 @@ body{font-family:var(--font);background:var(--white);color:var(--body);word-brea
   padding:20px 24px;
   background:var(--white);border-radius:16px;
   border-bottom:none;
+  opacity:0;transform:translateY(10px);
+}
+.cert-item.anim-in{
+  opacity:1;transform:none;
+  transition:opacity 0.35s ease var(--delay,0ms),transform 0.35s ease var(--delay,0ms);
 }
 .cert-item:last-child{border-bottom:none}
 .cert-item__icon{
@@ -282,7 +323,7 @@ body{font-family:var(--font);background:var(--white);color:var(--body);word-brea
 .step3-card-row:nth-child(3) .step3-card__img{width:42%}
 .step3-card__placeholder{width:100%;height:240px;background:var(--bg2);display:flex;align-items:center;justify-content:center;color:var(--light);font-size:12px}
 .step3-card__text{padding:24px 36px 32px;text-align:center}
-.step3-card__sub{font-size:13px;color:var(--muted);letter-spacing:-0.01em;margin-bottom:4px}
+.step3-card__sub{font-size:14px;color:var(--para);letter-spacing:-0.01em;margin-bottom:4px}
 .step3-card__title{font-size:24px;font-weight:800;letter-spacing:-0.03em;color:var(--headline)}
 
 /* ─────────────────────────────────────
@@ -336,6 +377,8 @@ body{font-family:var(--font);background:var(--white);color:var(--body);word-brea
   .step-two-col{gap:48px}
   .step3-left{text-align:center}
   .step3-left .cs-title,.step3-left .cs-desc{text-align:center}
+  .step1-qr-box{display:none}
+  .step1-dl-box{display:flex}
 }
 
 /* ─────────────────────────────────────
@@ -601,9 +644,17 @@ body{font-family:var(--font);background:var(--white);color:var(--body);word-brea
     </div>
     <div class="step1-grid reveal">
       <div class="step1-qr-card">
-        <p class="step1-qr-label">QR코드로 간편하게</p>
-        <p class="step1-qr-cta">앱 다운로드</p>
-        <img class="step1-qr-img" src="assets/themembers_onelink_qr.svg" alt="앱 다운로드 QR 코드"/>
+        <div class="step1-qr-box">
+          <img class="step1-qr-img" src="assets/themembers_onelink_qr.svg" alt="앱 다운로드 QR 코드"/>
+          <p class="step1-qr-label">QR코드로 간편하게</p>
+          <p class="step1-qr-cta">앱 다운로드</p>
+        </div>
+        <div class="step1-dl-box">
+          <img class="step1-dl-mockup" src="assets/images/mockups/mockup_members card.png" alt="멤버스 카드"/>
+          <div class="step1-dl-actions">
+            <a href="https://themembers.onelink.me/Croy/24o5nmo2" class="step1-dl-btn">다운로드하기</a>
+          </div>
+        </div>
       </div>
       <div class="step1-stats">
         <div class="step1-stat">
@@ -628,8 +679,8 @@ body{font-family:var(--font);background:var(--white);color:var(--body);word-brea
   <div class="wrap">
     <div class="cs-header reveal">
       <p class="cs-num">STEP 02</p>
-      <h2 class="cs-title">프로필 등록 & 인증</h2>
-      <p class="cs-desc">남성은 만 30세 이상, 직업·소득·자산·차량 인증 중 1개 이상이 필수입니다.<br>여성은 만 25세 이상, 경제력 인증 또는 매력 인증 하나만으로 가입이 가능합니다.</p>
+      <h2 class="cs-title">프로필 등록 & 서류 인증</h2>
+      <p class="cs-desc">남성은 만 30세 이상, 직업·소득·자산·차량 인증 중 1개 이상이 필수입니다.<br>여성은 만 25세 이상, 경제력 혹은 매력 인증 하나만으로 가입이 가능합니다.</p>
     </div>
 
       <!-- 수평 탭 -->
@@ -925,6 +976,7 @@ body{font-family:var(--font);background:var(--white);color:var(--body);word-brea
     <div class="footer__links">
       <a href="https://www.themembers.kr/" target="_blank" rel="noopener">개인정보 처리방침</a>
       <a href="https://goldspoon.notion.site/2023-09-11-e2b163aa248948bd9f658a4aed47ea4d" target="_blank" rel="noopener">이용약관</a>
+      <a href="mailto:help@themembers.kr">고객센터</a>
     </div>
     <p class="footer__info">
       (주)트리플콤마 | 대표 천우영 | 서울특별시 강남구 테헤란로 447, 13층(KB우준타워)<br>
@@ -947,13 +999,33 @@ document.getElementById('navHam').addEventListener('click',()=>{
   document.getElementById('navLinks').classList.toggle('open');
 });
 
+/* ── Cert card stagger ── */
+function staggerCards(panel){
+  const items=panel.querySelectorAll('.cert-item');
+  items.forEach((item,i)=>{
+    item.classList.remove('anim-in');
+    item.style.setProperty('--delay',i*70+'ms');
+  });
+  setTimeout(()=>items.forEach(item=>item.classList.add('anim-in')),16);
+}
+const certPanelsEl=document.querySelector('.cert-panels');
+const certPanelObs=new IntersectionObserver(entries=>{
+  if(entries[0].isIntersecting){
+    staggerCards(document.querySelector('.cert-panel.on'));
+    certPanelObs.unobserve(certPanelsEl);
+  }
+},{threshold:0.1,rootMargin:'0px 0px -30px 0px'});
+certPanelObs.observe(certPanelsEl);
+
 /* ── Cert tabs ── */
 document.querySelectorAll('.cert-tab').forEach(tab=>{
   tab.addEventListener('click',()=>{
     document.querySelectorAll('.cert-tab').forEach(t=>t.classList.remove('on'));
     document.querySelectorAll('.cert-panel').forEach(p=>p.classList.remove('on'));
     tab.classList.add('on');
-    document.getElementById('panel-'+tab.dataset.panel).classList.add('on');
+    const panel=document.getElementById('panel-'+tab.dataset.panel);
+    panel.classList.add('on');
+    staggerCards(panel);
   });
 });
 
