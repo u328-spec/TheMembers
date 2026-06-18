@@ -308,6 +308,7 @@ body{font-family:var(--font);background:var(--white);color:var(--body);word-brea
 /* step3 push notification overlay */
 .step3-card-row:nth-child(2) .step3-card,
 .step3-card-row:nth-child(3) .step3-card{position:relative}
+.step3-card-row:nth-child(3) .step3-card{overflow:visible}
 .push-notif{
   position:absolute;top:0;left:50%;
   transform:translateX(-50%) translateY(-120%);
@@ -410,6 +411,7 @@ body{font-family:var(--font);background:var(--white);color:var(--body);word-brea
   .step3-card-num{display:none}
   .process-row{grid-template-columns:44px 1fr}
   .process-row__tag{display:none}
+  .members-card-mockup{width:50%}
 }
 
 /* ── QR MODAL ── */
@@ -563,8 +565,19 @@ body{font-family:var(--font);background:var(--white);color:var(--body);word-brea
 .footer__links a:hover{color:#111;}
 .footer__info{font-size:12px;color:#999;line-height:2;margin-bottom:0;}
 .footer__copy{font-size:11px;color:#bbb;padding:16px 0 32px;border-top:1px solid #e8e8e8;margin-top:28px;}
-@media(max-width:1279px){.app-cta__inner,.footer__inner{padding:0 32px}}
-@media(max-width:799px){.app-cta__inner{grid-template-columns:1fr;gap:40px;padding:0 20px}.app-cta__visual{height:200px}.footer__inner{padding:0 20px}}
+@media(max-width:1279px){
+  .app-cta__inner{padding:0 32px;grid-template-columns:1fr;gap:40px}
+  .footer__inner{padding:0 32px}
+  .app-cta__copy{align-items:center;text-align:center}
+  .app-cta__title{font-size:26px}
+  .app-cta__actions{justify-content:center}
+  .app-cta__visual{justify-content:center}
+}
+@media(max-width:799px){
+  .app-cta__inner{padding:0 20px}
+  .app-cta__visual{height:200px}
+  .footer__inner{padding:0 20px}
+}
 </style>
 </head>
 <body>
@@ -643,7 +656,7 @@ body{font-family:var(--font);background:var(--white);color:var(--body);word-brea
     <div class="cs-header reveal">
       <p class="cs-num">STEP 1</p>
       <h2 class="cs-title">앱 다운로드 & 무료 가입 신청</h2>
-      <p class="cs-desc">더멤버스는 가입비 없이, 온라인 100%로 진행됩니다.<br>전화 상담이나 방문 없이 앱에서 간편하게 무료 가입을 신청하실 수 있습니다.</p>
+      <p class="cs-desc">더멤버스는 가입비 없이, 온라인 100%로 진행됩니다. 전화 상담이나 방문 없이 앱에서 간편하게 무료 가입을 신청하실 수 있습니다.</p>
     </div>
     <div class="step1-grid reveal">
       <div class="step1-qr-card">
@@ -836,7 +849,7 @@ body{font-family:var(--font);background:var(--white);color:var(--body);word-brea
               </div>
             </div>
           </div>
-          <p class="cert-note">소유 차량 → 자동차등록증 (주민번호 뒷자리 제거 필수, 성함·차명·연식 필수 노출) / 리스 차량 → 자동차보험증권 또는 리스계약서</p>
+
         </div>
 
         <div class="cert-panel" id="panel-charm">
@@ -974,7 +987,7 @@ body{font-family:var(--font);background:var(--white);color:var(--body);word-brea
   <div class="footer__inner">
     <img src="assets/Logo.svg" alt="더멤버스" class="footer__logo">
     <div class="footer__links">
-      <a href="https://www.themembers.kr/" target="_blank" rel="noopener">개인정보 처리방침</a>
+      <a href="https://goldspoon.notion.site/2023-09-11-d7c2abe8cb654882813e3c2c7359be3c" target="_blank" rel="noopener">개인정보 처리방침</a>
       <a href="https://goldspoon.notion.site/2023-09-11-e2b163aa248948bd9f658a4aed47ea4d" target="_blank" rel="noopener">이용약관</a>
       <a href="mailto:help@themembers.kr">고객센터</a>
     </div>

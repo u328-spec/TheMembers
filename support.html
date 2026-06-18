@@ -204,7 +204,7 @@ body{font-family:var(--font);background:var(--white);color:var(--para);word-brea
 .chat-header__name{font-size:13px;font-weight:700;color:var(--headline)}
 .chat-header__status{font-size:11px;color:var(--muted);display:flex;align-items:center;gap:4px}
 .chat-header__status-dot{width:5px;height:5px;border-radius:50%;background:#22c55e}
-.chat-header__close{font-size:20px;color:var(--muted);padding:4px;transition:color .15s;line-height:1}
+.chat-header__close{width:24px;height:24px;font-size:24px;color:var(--muted);display:flex;align-items:center;justify-content:center;transition:color .15s;line-height:1}
 .chat-header__close:hover{color:var(--headline)}
 
 /* chat messages */
@@ -315,7 +315,7 @@ body{font-family:var(--font);background:var(--white);color:var(--para);word-brea
   .nav__inner,.page-body{padding-left:32px;padding-right:32px}
   .page-header{padding:52px 32px 8px}
   .page-header__title{font-size:38px}
-  .info-cards{display:flex;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch;gap:14px;padding:16px 0;justify-content:center;margin-bottom:60px}
+  .info-cards{display:flex;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch;gap:14px;padding:16px 32px;justify-content:flex-start;margin-bottom:60px}
   .info-cards::-webkit-scrollbar{display:none}
   .info-card{flex:0 0 220px;min-height:240px}
   .info-card__title{font-size:19px}
@@ -324,6 +324,7 @@ body{font-family:var(--font);background:var(--white);color:var(--para);word-brea
 
 /* ── MOBILE ── */
 @media(max-width:799px){
+  .info-cards{padding:16px 20px}
   .nav__inner{padding:0 20px}
   .nav__links{display:none;flex-direction:column;gap:24px;position:absolute;top:60px;left:0;right:0;background:var(--white);border-bottom:1px solid var(--border);padding:28px 24px;box-shadow:0 8px 20px rgba(0,0,0,.05);font-size:16px}
   .nav__links.open{display:flex}
@@ -335,6 +336,12 @@ body{font-family:var(--font);background:var(--white);color:var(--para);word-brea
   .chat-overlay{width:100vw}
   .chatbot-banner{padding:24px 20px}
   .chatbot-banner__btn{width:100%;text-align:center}
+  .chat-header__name{font-size:14px}
+  .chat-header__status{font-size:12px}
+  .msg__bubble{font-size:14px}
+  .msg__time{font-size:11px}
+  .quick-reply{font-size:13px}
+  .chat-input{font-size:14px}
 }
 
 /* ─── APP CTA ─── */
@@ -357,8 +364,19 @@ body{font-family:var(--font);background:var(--white);color:var(--para);word-brea
 .footer__links a:hover{color:#111;}
 .footer__info{font-size:12px;color:#999;line-height:2;margin-bottom:0;}
 .footer__copy{font-size:11px;color:#bbb;padding:16px 0 32px;border-top:1px solid #e8e8e8;margin-top:28px;}
-@media(max-width:1279px){.app-cta__inner,.footer__inner{padding:0 32px}}
-@media(max-width:799px){.app-cta__inner{grid-template-columns:1fr;gap:40px;padding:0 20px}.app-cta__visual{height:200px}.footer__inner{padding:0 20px}}
+@media(max-width:1279px){
+  .app-cta__inner{padding:0 32px;grid-template-columns:1fr;gap:40px}
+  .footer__inner{padding:0 32px}
+  .app-cta__copy{align-items:center;text-align:center}
+  .app-cta__title{font-size:26px}
+  .app-cta__actions{justify-content:center}
+  .app-cta__visual{justify-content:center}
+}
+@media(max-width:799px){
+  .app-cta__inner{padding:0 20px}
+  .app-cta__visual{height:200px}
+  .footer__inner{padding:0 20px}
+}
 </style>
 </head>
 <body>
@@ -632,7 +650,7 @@ body{font-family:var(--font);background:var(--white);color:var(--para);word-brea
   <div class="footer__inner">
     <img src="assets/Logo.svg" alt="더멤버스" class="footer__logo">
     <div class="footer__links">
-      <a href="https://www.themembers.kr/" target="_blank" rel="noopener">개인정보 처리방침</a>
+      <a href="https://goldspoon.notion.site/2023-09-11-d7c2abe8cb654882813e3c2c7359be3c" target="_blank" rel="noopener">개인정보 처리방침</a>
       <a href="https://goldspoon.notion.site/2023-09-11-e2b163aa248948bd9f658a4aed47ea4d" target="_blank" rel="noopener">이용약관</a>
       <a href="mailto:help@themembers.kr">고객센터</a>
     </div>
@@ -948,6 +966,20 @@ inputEl.addEventListener('keydown', e => {
 inputEl.addEventListener('input', function() {
   this.style.height = '40px';
   this.style.height = Math.min(this.scrollHeight, 100) + 'px';
+});
+
+// 소프트 키보드 대응: 입력창이 키보드 바로 위에 오도록 오버레이 bottom 조정
+if (window.visualViewport) {
+  const adjustForKeyboard = () => {
+    const keyboardH = window.innerHeight - window.visualViewport.height - window.visualViewport.offsetTop;
+    overlay.style.bottom = keyboardH > 0 ? keyboardH + 'px' : '';
+    requestAnimationFrame(() => { messages.scrollTop = messages.scrollHeight; });
+  };
+  window.visualViewport.addEventListener('resize', adjustForKeyboard);
+  window.visualViewport.addEventListener('scroll', adjustForKeyboard);
+}
+inputEl.addEventListener('blur', () => {
+  setTimeout(() => { overlay.style.bottom = ''; }, 100);
 });
 
 // Reveal
