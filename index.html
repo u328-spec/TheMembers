@@ -491,23 +491,23 @@ body{font-family:var(--font);background:var(--white);color:var(--body);word-brea
   .quality-card .qc-img-wrap img{max-height:170px}
   .quality-card .qc-badge img{height:44px}
 
-  /* logo marquee 애니메이션 */
-  .logo-marquee__item--clone{ display:flex; }
-  .logo-marquee__track{ justify-content:flex-start; width:max-content; animation:logo-marquee-scroll 6s linear infinite; }
-  .logo-marquee:hover .logo-marquee__track{ animation-play-state:paused; }
-  .logo-marquee__item{ padding:0 36px; }
+  /* logo marquee 그리드 (태블릿/모바일 공통) */
+  .logo-marquee__item--clone{ display:none; }
+  .logo-marquee__track{ justify-content:center; width:100%; animation:none; flex-wrap:wrap; gap:0; }
+  .logo-marquee__item{ padding:0 16px; width:33.33%; box-sizing:border-box; }
 }
 
 /* ─── MOBILE ─── */
 @media(max-width:799px){
-  .logo-marquee__item--clone{ display:flex; }
-  .logo-marquee__track{ justify-content:flex-start; width:max-content; animation:logo-marquee-scroll 6s linear infinite; }
-  .logo-marquee__item{ padding:0 24px; }
+  .logo-marquee__item--clone{ display:none; }
+  .logo-marquee__track{ animation:none; }
+  .logo-marquee__item{ padding:0 8px; width:33.33%; box-sizing:border-box; }
   .logo-marquee__item img{ height:52px; }
   .nav__inner{padding:0 20px}
   .nav__links{display:none;flex-direction:column;gap:24px;position:absolute;top:60px;left:0;right:0;background:var(--white);border-bottom:1px solid var(--border);padding:28px 24px;box-shadow:0 8px 20px rgba(0,0,0,.05);font-size:16px}
   .nav__links.open{display:flex}
-  .nav__links .nav__link{font-size:18px}
+  .nav__links .nav__link{font-size:16px}
+  .nav__links .nav__cta{font-size:15px}
   .nav__ham{display:flex}
 
   .hero{padding:0 0}
@@ -1015,7 +1015,7 @@ body{font-family:var(--font);background:var(--white);color:var(--body);word-brea
 .kb-hl__pills{display:flex;align-items:center}
 .kb-hl__pill{width:32px;height:32px;border-radius:999px;border:2px solid #FFF;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;overflow:hidden}
 .kb-hl__pills .kb-hl__handle{margin-left:10px}
-.kb-hl--chat{padding:0;background:#ABC1D1;overflow:hidden}
+.kb-hl--chat{padding:0;background:#ABC1D1;overflow:clip}
 .kb-hl__chat-head{display:flex;align-items:center;gap:10px;padding:14px 16px;background:#ABC1D1;border-bottom:1px solid rgba(0,0,0,0.06);flex-shrink:0}
 .kb-hl__chat-avatar{width:32px;height:32px;border-radius:999px;overflow:hidden;flex-shrink:0;background:#fff}
 .kb-hl__chat-name{font-size:13px;font-weight:700;color:var(--headline);letter-spacing:-0.01em}
@@ -1046,7 +1046,7 @@ body{font-family:var(--font);background:var(--white);color:var(--body);word-brea
 @media(max-width:768px){
   .kb-section__title{font-size:24px}
   .kb-section__head{flex-direction:column;align-items:flex-start;padding:0 24px;margin-bottom:0}
-  .kb-track{padding:0 max(24px,calc((100vw - var(--max)) / 2 + 24px)) 40px;scroll-padding-left:max(24px,calc((100vw - var(--max)) / 2 + 24px))}
+  .kb-track{padding:0 max(24px,calc((100vw - var(--max)) / 2 + 24px)) 80px;scroll-padding-left:max(24px,calc((100vw - var(--max)) / 2 + 24px))}
   .kb-scene{flex:0 0 440px;height:auto;min-height:460px}
   .kb-photo{width:220px;height:400px}
   .kb-hl{width:260px;height:auto;min-height:380px;padding:22px 20px}

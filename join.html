@@ -412,6 +412,14 @@ body{font-family:var(--font);background:var(--white);color:var(--body);word-brea
   .process-row{grid-template-columns:44px 1fr}
   .process-row__tag{display:none}
   .members-card-mockup{width:50%}
+  .push-notif{transform:translateX(-50%) translateY(-200px)}
+  @keyframes pushSlideIn{
+    0%   {transform:translateX(-50%) translateY(-200px)}
+    15%  {transform:translateX(-50%) translateY(60px)}
+    55%  {transform:translateX(-50%) translateY(60px)}
+    70%  {transform:translateX(-50%) translateY(-200px)}
+    100% {transform:translateX(-50%) translateY(-200px)}
+  }
 }
 
 /* ── QR MODAL ── */
