@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /_archive/
+Disallow: /.claude/
+
+Sitemap: https://themembers.kr/sitemap.xml
