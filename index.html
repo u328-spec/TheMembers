@@ -83,12 +83,12 @@ body{font-family:var(--font);background:var(--white);color:var(--body);word-brea
 }
 .nav__logo{display:flex;align-items:center;height:100%}
 .nav__links{display:flex;align-items:center;gap:32px}
-.nav__link{font-size:13px;font-weight:400;color:var(--muted);letter-spacing:-0.01em;transition:color .15s}
+.nav__link{font-size:15px;font-weight:400;color:var(--muted);letter-spacing:-0.01em;transition:color .15s}
 .nav__link:hover{color:var(--headline)}
 .nav__link.active{color:var(--headline);font-weight:600}
 .nav__cta{
   margin-left:8px;background:var(--headline);color:var(--white);
-  font-size:12px;font-weight:700;letter-spacing:0.04em;
+  font-size:14px;font-weight:700;letter-spacing:0.04em;
   padding:9px 22px;border-radius:999px;transition:opacity .15s;
 }
 .nav__cta:hover{opacity:.75}
@@ -138,7 +138,7 @@ body{font-family:var(--font);background:var(--white);color:var(--body);word-brea
   max-width:var(--max);margin:0 auto;
   display:flex;flex-direction:column;align-items:center;
   text-align:center;
-  padding:24px 0 0;
+  padding:56px 0 0;
 }
 .hero__eyebrow{
   display:inline-flex;align-items:center;gap:10px;
@@ -472,6 +472,7 @@ body{font-family:var(--font);background:var(--white);color:var(--body);word-brea
   display:grid;grid-template-columns:1fr 1.4fr;gap:60px;align-items:stretch;
   position:relative;z-index:1;
 }
+.app-cta__copy{padding:80px 0;display:flex;flex-direction:column;justify-content:center}
 .app-cta__logo{
   width:48px;height:48px;border-radius:12px;overflow:hidden;margin-bottom:28px;
 }
@@ -513,8 +514,8 @@ body{font-family:var(--font);background:var(--white);color:var(--body);word-brea
   .hero__inner,.problem-inner,.quality-inner,.verify-inner,
   .guarantee-inner,.filter-inner,.pricing-inner,
   .footer__inner{padding:0 32px}
-  .app-cta__inner{padding:0 32px;grid-template-columns:1fr;gap:40px}
-  .app-cta__copy{align-items:center;text-align:center}
+  .app-cta__inner{padding:0 32px;grid-template-columns:1fr;gap:16px}
+  .app-cta__copy{align-items:center;text-align:center;padding:56px 0 0}
   .app-cta__title{font-size:36px}
   .app-cta__actions{justify-content:center}
   .app-cta__visual{justify-content:center}
@@ -544,7 +545,7 @@ body{font-family:var(--font);background:var(--white);color:var(--body);word-brea
   .nav__ham{display:flex}
 
   .hero{padding:0 0}
-  .hero__inner{padding:36px 20px 0}
+  .hero__inner{padding:48px 20px 0}
   .hero__title{font-size:28px}
   .problem-inner{padding:0 20px;gap:32px}
   .fc-grid{grid-template-columns:1fr}
@@ -556,11 +557,10 @@ body{font-family:var(--font);background:var(--white);color:var(--body);word-brea
   .fc-bar--members{height:72px}
   .verify-inner,
   .guarantee-inner,.filter-inner,.pricing-inner{grid-template-columns:1fr;gap:40px;padding:0 20px}
-  .app-cta__inner{padding:0 20px}
+  .app-cta__inner{padding:0 20px;gap:40px}
+  .app-cta__copy{padding:80px 0}
   .app-cta__title{font-size:32px}
   .filter__visual img,.verify__visual img{max-height:240px}
-  .app-cta__visual{height:200px}
-  .app-cta__visual{grid-template-columns:1fr 1fr}
 
   #quality{padding:64px 0 80px;min-height:auto}
   .quality-inner{padding:0 20px}
@@ -1369,7 +1369,7 @@ body{font-family:var(--font);background:var(--white);color:var(--body);word-brea
 <!-- ⑨ APP CTA -->
 <section class="app-cta" id="app-cta">
   <div class="app-cta__inner">
-    <div class="app-cta__copy reveal-l" style="padding:80px 0;display:flex;flex-direction:column;justify-content:center;">
+    <div class="app-cta__copy reveal-l">
       <div class="app-cta__logo">
         <img src="assets/applogo.png" alt="더멤버스 앱 로고">
       </div>
