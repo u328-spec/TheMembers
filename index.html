@@ -1018,8 +1018,9 @@ body{font-family:var(--font);background:var(--white);color:var(--body);word-brea
 .kb-section__nav button{width:44px;height:44px;border-radius:999px;background:var(--bg);border:0;color:var(--headline);display:inline-flex;align-items:center;justify-content:center;transition:background .15s ease,opacity .15s ease;cursor:pointer}
 .kb-section__nav button:hover:not(:disabled){background:var(--border2)}
 .kb-section__nav button:disabled{opacity:0.25;cursor:default}
-.kb-track{display:flex;gap:32px;overflow-x:auto;scroll-snap-type:x mandatory;padding:60px max(48px,calc((100vw - var(--max)) / 2 + 48px)) 100px;scrollbar-width:none;scroll-padding-left:max(48px,calc((100vw - var(--max)) / 2 + 48px))}
+.kb-track{display:flex;gap:32px;overflow-x:auto;scroll-snap-type:x mandatory;padding:60px max(48px,calc((100vw - var(--max)) / 2 + 48px)) 100px;scrollbar-width:none;scroll-padding-left:max(48px,calc((100vw - var(--max)) / 2 + 48px));cursor:grab}
 .kb-track::-webkit-scrollbar{display:none}
+.kb-track.dragging{cursor:grabbing;user-select:none}
 .kb-scene{flex:0 0 540px;scroll-snap-align:start;position:relative;height:auto;min-height:540px;display:flex;align-items:flex-start}
 .kb-photo{width:290px;height:480px;align-self:center;border-radius:14px;overflow:hidden;box-shadow:0 24px 60px -20px rgba(0,0,0,0.22);position:relative;z-index:1;flex-shrink:0}
 .kb-art{display:block;width:100%;height:100%;object-fit:cover;object-position:center}
@@ -1362,6 +1363,26 @@ body{font-family:var(--font);background:var(--white);color:var(--body);word-brea
     track.addEventListener('scroll',update,{passive:true});
     window.addEventListener('resize',update);
     update();
+
+    var isDragging=false, startX=0, startScrollLeft=0;
+    track.addEventListener('mousedown',function(e){
+      isDragging=true;
+      startX=e.pageX;
+      startScrollLeft=track.scrollLeft;
+      track.style.scrollSnapType='none';
+      track.classList.add('dragging');
+    });
+    window.addEventListener('mousemove',function(e){
+      if(!isDragging)return;
+      e.preventDefault();
+      track.scrollLeft=startScrollLeft-(e.pageX-startX);
+    });
+    window.addEventListener('mouseup',function(){
+      if(!isDragging)return;
+      isDragging=false;
+      track.style.scrollSnapType='x mandatory';
+      track.classList.remove('dragging');
+    });
   }
 })();
 </script>
